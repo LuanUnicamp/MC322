@@ -8,5 +8,5 @@
 target /
 build /
 . gradle /
-# macOS metadata
+# macOS metadata #
 . DS_Store
