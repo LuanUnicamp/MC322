@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Heroi h=new Heroi("Heroi", 40, 3);
-        Inimigo i = new Inimigo("Inimigo", 20, 0);
-        CartaDano cd= new CartaDano("carta dano 1", 1);
-        CartaEscudo ce=new CartaEscudo("carta escudo 1", 2);
+        Heroi h = new Heroi("Heroi", 40, 3); //instancia de heroi
+        Inimigo i = new Inimigo("Inimigo", 20, 0); //instancia de inimigo
+        CartaDano cd = new CartaDano("carta dano 1", 1); //instancia de uma carta de dano
+        CartaEscudo ce = new CartaEscudo("carta escudo 1", 2); //instancia de uma carta de escudo
 
         int leitura;
         Scanner entrada = new Scanner(System.in);

@@ -1,8 +1,10 @@
 public class Heroi {
+    //atributos do heroi
     private String nome;
     private int vida;
     private int escudo;
 
+    //construtor
     public Heroi(String nome, int vida, int escudo){
         this.nome=nome;
         this.vida=vida;

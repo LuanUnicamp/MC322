@@ -1,8 +1,10 @@
 public class Inimigo {
+    //atributos do inimigo
     private String nome;
     private int vida;
     private int escudo;
 
+    //construtor
     public Inimigo(String nome, int vida, int escudo){
         this.nome=nome;
         this.vida=vida;
@@ -19,7 +21,7 @@ public class Inimigo {
     }
 
     public String estaVivo(){
-        return "esta vivvo?";
+        return "esta vivo?";
     }
 
     public String getNome() {

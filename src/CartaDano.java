@@ -1,7 +1,9 @@
 public class CartaDano{
+    //atributos de CartaDano
     private String nome;
     private int custo;
 
+    //construtor de CartaDano
     public CartaDano(String nome, int custo){
         this.nome=nome;
         this.custo=custo;
