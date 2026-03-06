@@ -11,22 +11,37 @@ public class Heroi {
         this.escudo=escudo;
     }
 
-    public String recebeDano(int dano){
-        if(this.escudo>0){
-            this.escudo-=dano;
-        }else{
-            this.vida-=dano;
+    //metodo que desconta o dano recebido no heroi
+    public String receberDano(int dano){
+        int vida_inicial = vida;
+        //caso o heroi tenha escudo
+        if(escudo>0){
+            //verificando se o dano aplicado é maior que o escudo do heroi
+            if(escudo >= dano){
+                escudo -= dano;
+            } else {
+                vida -= (dano-escudo);
+            }
+        //caso não tenha escudo o dano é aplicado diretamente na vida do heroi
+        } else{
+            vida -= dano;
         }
-        
-        return "inimigo recebeu dano"+nome+vida+escudo;
+        return "heroi recebeu" + (vida_inicial-vida) + " de dano";
+    }
+    
+    //metodo que da escudo para o heroi
+    public String ganharEscudo(int qtd_escudo){
+        this.escudo = qtd_escudo;
+        return "heroi recebeu" +this.escudo+" de escudo";
     }
 
-    public String recebeEscudo(){
-        return "heroi recebeu escudo";
-    }
-
-    public String estaVivo(){
-        return "esta vivo?";
+    //metodo que verifica se o heroi esta vivo
+    public Boolean estaVivo(){
+        if(vida > 0){
+            return true;
+        } else{
+            return false;
+        }
     }
 
     public String getNome() {
