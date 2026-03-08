@@ -1,18 +1,46 @@
-## Getting Started
+# Naruto: Shinobi Legacy
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Descrição
+Naruto: Shinobi Legacy é um jogo simples desenvolvido em Java como projeto da disciplina **MC322 - Programação Orientada a Objetos**.
+No jogo, o usuário controla o protagonista do anime Naruto, **Naruto Uzumaki**, em uma batalha contra **Madara Uchiha**, maior vilão do anime.
+O objetivo é derrotar o inimigo utilizando cartas que representam habilidades do personagem.
+A cada turno, o jogador possui **3 pontos de chakra(energia)**, que são utilizados para ativar diferentes ataques ou o escudo:
 
-## Folder Structure
+* **Rasengan** – causa dano ao inimigo (custa 1 de chakra)
+* **Kurama** – causa grande dano ao inimigo (custa 2 de chakra)
+* **Clone das Sombras** – gera escudo para proteger o herói (custa 1 de chakra)
 
-The workspace contains two folders by default, where:
+Após o turno do jogador, caso ainda esteja vivo, Madara realiza um ataque automático.
+O jogo termina quando a vida de um dos personagens chega a zero.
+---
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Como compilar
+Clone ou baixe o repositório:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+git clone https://github.com/LuanUnicamp/MC322.git
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Acesse a pasta do projeto:
 
-## Dependency Management
+cd MC322
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Compile os arquivos Java:
+
+javac *.java
+---
+
+## Como executar
+Após a compilação, execute o jogo com o comando:
+
+java App
+
+O jogo será iniciado no terminal. Durante cada turno, o jogador deve digitar o número correspondente à carta que deseja utilizar.
+---
+
+## Requisitos
+* Java JDK 8 ou superior
+* Terminal ou prompt de comando
+---
+
+## Autores
+* **Luan Silva Ribeiro** - RA:259914
+* **João Vitor Vieira Lucio** - RA:282601
