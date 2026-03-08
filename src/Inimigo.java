@@ -14,8 +14,7 @@ public class Inimigo {
     }
 
     //metodo que desconta o dano recebido no inimigo
-    public String receberDano(int dano){
-        int vida_inicial = vida;
+    public void receberDano(int dano){
         //caso o inimigo tenha escudo
         if(escudo>0){
             //verificando se o dano aplicado é maior que o escudo do inimigo
@@ -28,13 +27,11 @@ public class Inimigo {
         } else{
             vida -= dano;
         }
-        return "inimigo recebeu" + (vida_inicial-vida) + " de dano";
     }
     
     //método que o inimigo faz um ataque ao heroi
-    public String atacar(Heroi h){
+    public void atacar(Heroi h){
         h.receberDano(dano);
-        return "inimigo atacou com "+ dano +" de dano";
     }
 
     //metodo que verifica se o heroi esta vivo
