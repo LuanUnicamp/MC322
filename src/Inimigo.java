@@ -46,6 +46,13 @@ public class Inimigo {
         }
     }
 
+    //metodo que não deixa o inimigo ficar com vida negativa no display
+    public void zeraVida(){
+        if(vida < 0){
+            vida = 0;
+        }
+    }
+
     public String getNome() {
         return nome;
     }
