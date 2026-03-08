@@ -21,6 +21,7 @@ public class Heroi {
                 escudo -= dano;
             } else {
                 vida -= (dano-escudo);
+                escudo = 0;
             }
         //caso não tenha escudo o dano é aplicado diretamente na vida do heroi
         } else{
@@ -31,7 +32,7 @@ public class Heroi {
     
     //metodo que da escudo para o heroi
     public String ganharEscudo(int qtd_escudo){
-        this.escudo = qtd_escudo;
+        this.escudo += qtd_escudo;
         return "heroi recebeu" +this.escudo+" de escudo";
     }
 
@@ -42,6 +43,18 @@ public class Heroi {
         } else{
             return false;
         }
+    }
+
+    //metodo que não deixa o heroi ficar com vida negativa no display
+    public void zeraVida(){
+        if(vida < 0){
+            vida = 0;
+        }
+    }
+
+    //metodo que zera o escudo do heroi a cada turno
+    public void zeraEscudo(){
+        escudo = 0;
     }
 
     public String getNome() {
