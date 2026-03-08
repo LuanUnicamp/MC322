@@ -12,8 +12,7 @@ public class Heroi {
     }
 
     //metodo que desconta o dano recebido no heroi
-    public String receberDano(int dano){
-        int vida_inicial = vida;
+    public void receberDano(int dano){
         //caso o heroi tenha escudo
         if(escudo>0){
             //verificando se o dano aplicado é maior que o escudo do heroi
@@ -27,13 +26,11 @@ public class Heroi {
         } else{
             vida -= dano;
         }
-        return "heroi recebeu" + (vida_inicial-vida) + " de dano";
     }
     
     //metodo que da escudo para o heroi
-    public String ganharEscudo(int qtd_escudo){
+    public void ganharEscudo(int qtd_escudo){
         this.escudo += qtd_escudo;
-        return "heroi recebeu" +this.escudo+" de escudo";
     }
 
     //metodo que verifica se o heroi esta vivo

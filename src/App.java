@@ -39,12 +39,15 @@ public class App {
         //o jogo acaba quando um dos dois oponentes tem estavivo() retornando false
         while(naruto.estaVivo() && madara.estaVivo()){
             int chakra = 3;
+            ///variável que indica quando o heroi não tem chackra suficiente para usar habilidade
             Boolean insuficiente = false;
             limparTela();
             display(naruto, madara, chakra);
 
+            //enquanto tiver chackra disponível e os dois estiverem vivos, o turno é o mesmo
             while(chakra>0 && naruto.estaVivo() && madara.estaVivo()){
                 leitura = entrada.nextInt();
+                //switch case para mapear a escolha do usuário
                 switch (leitura) {
                     case 1:
                         chakra--;
@@ -69,6 +72,8 @@ public class App {
                     default:
                         System.out.println("Opção Inválida!");
                 }
+                //caso o chackra seja insuficiente não vai limpar a tela e chamar display, para que a mensagem
+                //de que chackra não é suficiente para a habilidade apareça no terminal
                 if (!insuficiente) {
                     limparTela();
                     display(naruto, madara, chakra);
@@ -76,11 +81,14 @@ public class App {
                 insuficiente = false;
 
         }
+        //inimigo ataca automaticamente no final de cada turno, mas só se ele estiver vivo
         if (madara.getVida()>0) {
             madara.atacar(naruto);
         }
+        //escudo zerado depois de cada turno
         naruto.zeraEscudo();
     }
+    //quem permanecer vivo, vence a partida
     if(naruto.estaVivo()){
         System.out.println("Naruto Uzumaki venceu!");
     } else{
