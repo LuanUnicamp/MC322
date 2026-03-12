@@ -31,7 +31,7 @@ Compile os arquivos Java:
 ## Como executar
 Após a compilação, execute o jogo com o comando:
 
-java App
+`java App`
 
 O jogo será iniciado no terminal. Durante cada turno, o jogador deve digitar o número correspondente à carta que deseja utilizar.
 ---
