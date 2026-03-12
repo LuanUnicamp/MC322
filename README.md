@@ -21,11 +21,11 @@ git clone https://github.com/LuanUnicamp/MC322.git
 
 Acesse a pasta do projeto:
 
-cd MC322
+`cd MC322`
 
 Compile os arquivos Java:
 
-javac *.java
+`javac *.java`
 ---
 
 ## Como executar
@@ -37,7 +37,7 @@ O jogo será iniciado no terminal. Durante cada turno, o jogador deve digitar o 
 ---
 
 ## Requisitos
-* Java JDK 8 ou superior
+* Java JDK 25 ou superior
 * Terminal ou prompt de comando
 ---
 
