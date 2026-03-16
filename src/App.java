@@ -29,9 +29,9 @@ public class App {
     public static void main(String[] args) throws Exception {
         Heroi naruto = new Heroi("Naruto Uzumaki", 40, 0); //instancia de heroi
         Inimigo madara = new Inimigo("Madara Uchiha", 50, 0, 25); //instancia de inimigo
-        CartaDano razengan = new CartaDano("Razengan", 1, 12); //instancia de uma carta de dano
-        CartaDano kurama = new CartaDano("Kurama", 2, 20); //instancia de uma carta de dano
-        CartaEscudo clone = new CartaEscudo("Clone das sombras", 1, 10); //instancia de uma carta de escudo
+        CartaDano razengan = new CartaDano("Razengan","ataque razengan" ,1, 12); //instancia de uma carta de dano
+        CartaDano kurama = new CartaDano("Kurama","ataque kurama", 2, 20); //instancia de uma carta de dano
+        CartaEscudo clone = new CartaEscudo("Clone das sombras","escudo clone das sombras", 1, 10); //instancia de uma carta de escudo
 
         int leitura;
         Scanner entrada = new Scanner(System.in);
@@ -51,12 +51,12 @@ public class App {
                 switch (leitura) {
                     case 1:
                         chakra--;
-                        razengan.usar(madara);
+                        razengan.usar(naruto,madara);
                         break;
                     case 2:
                         if(chakra >= 2){
                             chakra -= 2;
-                            kurama.usar(madara);
+                            kurama.usar(naruto,madara);
                         } else{
                             System.out.println("Chakra insuficiente para invocar Kurama!");
                             insuficiente = true;
@@ -64,7 +64,7 @@ public class App {
                         break;
                     case 3:
                         chakra--;
-                        clone.usar(naruto);
+                        clone.usar(naruto,madara);
                         break;
                     case 4:
                         chakra = 0;
