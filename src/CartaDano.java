@@ -1,26 +1,16 @@
-public class CartaDano{
+public class CartaDano extends Carta{
     //atributos de CartaDano
-    private String nome;
-    private int custo;
     private int qtd_dano;
 
     //construtor de CartaDano
-    public CartaDano(String nome, int custo, int qtd_dano){
-        this.nome=nome;
-        this.custo=custo;
+    public CartaDano(String nome, String descricao, int custo, int qtd_dano) {
+        super(nome, descricao, custo);
         this.qtd_dano = qtd_dano;
     }
 
     //metodo que usa a carta de dano no inimigo
-    public void usar(Inimigo i){
+    @Override
+    public void usar(Heroi h,Inimigo i){
         i.receberDano(qtd_dano);
-    }
-
-    public String getNome(){
-        return nome;
-    }
-
-    public int getCusto(){
-        return custo;
     }
 }
