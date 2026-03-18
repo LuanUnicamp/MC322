@@ -10,7 +10,13 @@ public class CartaDano extends Carta{
 
     //metodo que usa a carta de dano no inimigo
     @Override
-    public void usar(Heroi h,Inimigo i){
+    public void usar_h(Heroi h,Inimigo i){
         i.receberDano(qtd_dano);
+    }
+
+    //metodo que usa a carta de dano no inimigo
+    @Override
+    public void usar_i(Inimigo i,Heroi h){
+        h.receberDano(qtd_dano);
     }
 }

@@ -11,8 +11,13 @@ public class CartaEscudo extends Carta{
 
     //metodo que usa a carta de escudo no heroi
     @Override
-    public void usar(Heroi h, Inimigo i){
+    public void usar_h(Heroi h, Inimigo i){
         h.ganharEscudo(qtd_escudo);
+    }
+
+    @Override
+    public void usar_i(Inimigo i, Heroi h){
+        i.vida += qtd_escudo;
     }
 
 }

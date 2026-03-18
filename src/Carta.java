@@ -12,7 +12,9 @@ public abstract class Carta{
     }
 
     //metodo que utiliza a carta
-    public abstract void usar(Heroi h, Inimigo i);
+    public abstract void usar_h(Heroi h, Inimigo i);
+
+    public abstract void usar_i(Inimigo i, Heroi h);
 
     public String getNome(){
         return nome;
