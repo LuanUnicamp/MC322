@@ -23,4 +23,7 @@ public abstract class Carta{
     public int getCusto(){
         return custo;
     }
+    public String getDescricao(){
+        return descricao;
+    }
 }
