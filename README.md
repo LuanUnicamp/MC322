@@ -2,6 +2,7 @@
 
 ## Descrição
 Naruto: Shinobi Legacy é um jogo simples desenvolvido em Java como projeto da disciplina **MC322 - Programação Orientada a Objetos**.No jogo, o usuário escolhe um herói do anime Naruto, para lutar contra os maiores vilões da saga! O objetivo é derrotar o inimigo utilizando cartas que representam habilidades do personagem.
+
 ---
 
 ## Mecânica
@@ -16,6 +17,7 @@ O jogador possui um **baralho de cartas** com habilidades de ataque e defesa. A 
 Após o turno do jogador, as cartas vão para a pilha de descarte e o inimigo realiza um ataque automático.
 Quando o baralho acaba a pilha de descarte é embaralhada e reutilizada.
 O jogo termina quando a vida de um dos personagens chega a zero.
+
 ---
 
 ## Como compilar
@@ -30,6 +32,7 @@ Acesse a pasta do projeto:
 Compile os arquivos Java:
 
 `javac *.java`
+
 ---
 
 ## Como executar
@@ -38,6 +41,7 @@ Após a compilação, execute o jogo com o comando:
 `java App`
 
 O jogo será iniciado no terminal. Durante cada turno, o jogador deve digitar o número correspondente à carta que deseja utilizar.
+
 ---
 
 ## Requisitos
