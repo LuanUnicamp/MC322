@@ -7,6 +7,8 @@ public class Inimigo extends Entidade{
         super(nome, vida, escudo);
         //this.dano=dano;
     }
+
+    public int vidaMaxima = vida;
     
     //método que o inimigo faz um ataque ao heroi
     /* 
