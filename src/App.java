@@ -18,6 +18,7 @@ public class App {
             System.out.println("[" + (j+1) + "] Usar carta " + maoJogador.get(j).getNome() + " (" + maoJogador.get(j).getCusto() + " de Chakra)");
         }
         System.out.println("[" + (maoJogador.size()+1) + "] Encerrar turno");
+        System.out.println("[" + (maoJogador.size()+2) + "] Menu das Cartas");
         System.out.println("O inimigo usará: "+ movimentosInimigo.get(0).getNome());
         System.out.println("Escolha: ");
         System.out.println("======----======----======----======----======----======");
@@ -30,6 +31,19 @@ public class App {
         }
     }
 
+    public static void menuCartas(ArrayList<Carta> maoJogador, Scanner leitura){
+        limparTela();
+        System.out.println("======----======----♣ Menu das Cartas ♣---======----======");
+        for(int j = 0; j < maoJogador.size(); j++){
+            System.out.println("[" + (j+1) + "]" + maoJogador.get(j).getNome());
+            System.out.println("Descrição: "+maoJogador.get(j).getDescricao());
+            System.out.println("Custo: "+maoJogador.get(j).getCusto());
+            System.out.println("_____________________________________________________");
+        }
+        System.out.println("Digite qualquer número para voltar:");
+        leitura.nextInt();
+        System.out.println("======----======----======----======----======----======");
+    }
     public static void main(String[] args) throws Exception {
         //declarando e instanciando arraylist de herois
         ArrayList<Heroi> heroisDisponiveis = new ArrayList<>();
@@ -141,6 +155,12 @@ public class App {
                         System.out.println("Chakra insuficiente para usar "+ cartaSelecionada.getNome() +"!");
                         insuficiente = true;
                     }
+                }
+                //caso o usuario chame o menu de cartas
+                else if(leitura == (maoJogador.size()+2)){
+                    menuCartas(maoJogador,entrada);
+                    limparTela();
+                    display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
                 }
                 else{
                     System.out.println("Opção Inválida!");
