@@ -5,28 +5,28 @@ public abstract class Entidade {
     protected String nome;
     protected int vida;
     protected int escudo;
-    private ArrayList<Efeito> listaEfeitos;
+    private ArrayList<Efeito> listaEfeitosEntidade;
 
     public Entidade(String nome, int vida, int escudo) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
-        this.listaEfeitos = new ArrayList<>();
+        this.listaEfeitosEntidade = new ArrayList<>();
     }
 
 
     public void aplicarEfeito(Efeito efeito){
-        for(int i=0;i<listaEfeitos.size();i++){
-            Efeito efeitolista =listaEfeitos.get(i);
+        for(int i=0;i<listaEfeitosEntidade.size();i++){
+            Efeito efeitolista =listaEfeitosEntidade.get(i);
             if(efeito.getNome().equals(efeitolista.getNome())){
                 efeitolista.adicionarAcumulos(efeito.getAcumulos());
                 return;
             }
         }
-        listaEfeitos.add(efeito);
+        listaEfeitosEntidade.add(efeito);
     }
 
-    //metodo que desconta o dano recebido
+    //metodo que descona o dano recebido
     public void receberDano(int dano){
         //caso o tenha escudo
         if(escudo>0){
@@ -84,7 +84,7 @@ public abstract class Entidade {
         return escudo;
     }
     public void removerEfeito(Efeito efeito){
-        listaEfeitos.remove(efeito);
+        listaEfeitosEntidade.remove(efeito);
     }
 
 }

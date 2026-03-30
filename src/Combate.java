@@ -3,25 +3,31 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Combate {
-    private ArrayList<Efeito> listaEfeitos;
+    private ArrayList<Efeito> listaEfeitosCombate;
 
     public Combate(){
-        listaEfeitos= new ArrayList<>();
+        listaEfeitosCombate= new ArrayList<>();
     }
 
     public void inscreverEfeito(Efeito efeito){
-        listaEfeitos.add(efeito);
+        for(int i=0;i<listaEfeitosCombate.size();i++){
+            Efeito efeitolista =listaEfeitosCombate.get(i);
+            if(efeito.getNome().equals(efeitolista.getNome())){       
+                return;
+            }
+        }
+        listaEfeitosCombate.add(efeito);
     } 
 
     private void avisar(int num){
-        for(int i=listaEfeitos.size()-1;i>=0;i--){
-            Efeito efeito =listaEfeitos.get(i);
-            efeito.avisado(num);
-
+        for(int i=listaEfeitosCombate.size()-1;i>=0;i--){
+            Efeito efeito =listaEfeitosCombate.get(i);
+            
             if(efeito.acabou()){
-                listaEfeitos.remove(i);
-
+                listaEfeitosCombate.remove(i);
                 efeito.getEntidade().removerEfeito(efeito);
+            }else{
+                efeito.avisado(num);
             }
 
         }
@@ -97,6 +103,9 @@ public class Combate {
                     App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
                     App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
                 }
+                else if(leitura == (maoJogador.size()+3)){
+                    App.menuVenenoAplicado(listaEfeitosCombate,entrada);
+                }
                 else{
                     System.out.println("Opção Inválida!");
                     //para não chamar o display
@@ -113,8 +122,7 @@ public class Combate {
 
             }
             
-            avisar(1);
-            
+           
             //no fim do turno as cartas da mão do jogador vao para a pilha de descarte
             for(int i = maoJogador.size()-1; i>=0; i--){
                 Carta cartaDescartada = maoJogador.remove(i);
@@ -126,6 +134,8 @@ public class Combate {
                 System.out.println(movimentosInimigo.get(0).getNome());
             }
 
+            avisar(1);
+            
 
             //escudo zerado depois de cada turno
             heroiEscolhido.zeraEscudo();

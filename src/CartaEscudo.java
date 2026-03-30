@@ -1,6 +1,6 @@
 public class CartaEscudo extends Carta{
     //atributos de cartaEscudo
-    private int qtd_escudo;
+    protected int qtd_escudo;
 
     //construtor de cartaEscudo
     public CartaEscudo(String nome, String descricao, int custo, int qtd_escudo) {

@@ -11,23 +11,24 @@ public class CartaDanoVeneno extends CartaDano{
     @Override
     public void usar_h(Heroi h,Inimigo i,Combate combate){
         i.receberDano(qtd_dano);
-        Veneno efeito=new Veneno("VENENO", i, this.veneno);
+        Veneno veneno_heroi=new Veneno("Vontade do Fogo", i, this.veneno);
 
-        combate.inscreverEfeito(efeito);
+        i.aplicarEfeito(veneno_heroi);
+        combate.inscreverEfeito(veneno_heroi);
 
-        System.out.println("O veneno"+efeito.getNome()+"foi aplicado!");
+        //App.venenoAplicado(veneno_heroi);
     }
 
     //metodo que usa a carta de dano no inimigo
     @Override
     public void usar_i(Inimigo i,Heroi h,Combate combate){
         h.receberDano(qtd_dano);
-        Veneno efeito = new Veneno("VENENO", h, this.veneno);
+        Veneno veneno_inimigo = new Veneno("Tsukuyomi Infinito", h, this.veneno);
 
-        //h.aplicarEfeito(veneno_inimigo);
-        combate.inscreverEfeito(efeito);
+        h.aplicarEfeito(veneno_inimigo);
+        combate.inscreverEfeito(veneno_inimigo);
 
-        System.out.println("O veneno"+efeito.getNome()+"foi aplicado!");
+        //App.venenoAplicado(veneno_inimigo);
     }
 
     public int getVeneno(){

@@ -9,18 +9,24 @@ public class CartaEscudoRegen extends CartaEscudo{
     //metodo que usa a carta de escudo no heroi
     @Override
     public void usar_h(Heroi h, Inimigo i,Combate combate){
-        super.usar_h(h, i, combate);
+        h.ganharEscudo(qtd_escudo);
         Regen regen_heroi= new Regen("Técnica das cem forças", h, this.regen);
+
+        h.aplicarEfeito(regen_heroi);
         combate.inscreverEfeito(regen_heroi);
-        System.out.println("O regen "+regen_heroi.getNome()+"foi aplicado!");
+
+        //App.regenAplicado(regen_heroi);
     }
 
     @Override
     public void usar_i(Inimigo i, Heroi h, Combate combate){
-        super.usar_i(i, h, combate);
+        i.ganharEscudo(qtd_escudo);
         Regen regen_inimigo= new Regen("Células do Hashirama", i, this.regen);
+
+        i.aplicarEfeito(regen_inimigo);
         combate.inscreverEfeito(regen_inimigo);
-        System.out.println("O regen "+regen_inimigo.getNome()+"foi aplicado!");
+        
+        //App.regenAplicado(regen_inimigo);
 
     }
     public int getRegen(){

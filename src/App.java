@@ -19,6 +19,8 @@ public class App {
         }
         System.out.println("[" + (maoJogador.size()+1) + "] Encerrar turno");
         System.out.println("[" + (maoJogador.size()+2) + "] Menu das Cartas");
+        System.out.println("[" + (maoJogador.size()+3) + "] Menu dos Efeitos");
+
         System.out.println("O inimigo usará: "+ movimentosInimigo.get(0).getNome());
         System.out.println("Escolha: ");
         System.out.println("======----======----======----======----======----======");
@@ -44,6 +46,28 @@ public class App {
         leitura.nextInt();
         System.out.println("======----======----======----======----======----======");
     }
+
+    public static void menuVenenoAplicado(ArrayList<Efeito> listaEfeitos,Scanner leitura){
+        
+        limparTela();
+        System.out.println("======----======----☠ Veneno e Regen ✚---======----======");
+        for(int j = 0; j < listaEfeitos.size(); j++){
+            System.out.println("[" + (j+1) + "]" + listaEfeitos.get(j).getNome());
+            System.out.println("Dono:"+listaEfeitos.get(j).getEntidade());
+            System.out.println(listaEfeitos.get(j).getString());
+            System.out.println("_____________________________________________________");
+        }
+        System.out.println("======----======----======----======----======----======");
+
+
+        System.out.println("Digite qualquer número para voltar:");
+
+        leitura.nextInt();
+
+        
+        
+    }
+    
     public static void main(String[] args) throws Exception {
 
         //declarando e instanciando arraylist de herois
