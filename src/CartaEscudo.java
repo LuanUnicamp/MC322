@@ -17,6 +17,13 @@ public class CartaEscudo extends Carta{
     @Override
     public void usar_i(Inimigo i, Heroi h, Combate combate){
         i.ganharEscudo(qtd_escudo);
+        
+        //se a regeneração passar da vida maxima, a vida se limita a vida maxima
+        if((i.vida + qtd_escudo) > i.vidaMaxima){
+            i.vida = i.vidaMaxima;
+        } else{
+            i.vida += qtd_escudo;
+        }
     }
 
 }

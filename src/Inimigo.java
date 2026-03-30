@@ -8,5 +8,7 @@ public class Inimigo extends Entidade{
         super(nome, vida, escudo);
     }
     
+    public int vidaMaxima = vida;
+    
 
 }
