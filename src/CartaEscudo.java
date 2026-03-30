@@ -1,6 +1,5 @@
 public class CartaEscudo extends Carta{
     //atributos de cartaEscudo
-
     private int qtd_escudo;
 
     //construtor de cartaEscudo
@@ -11,13 +10,13 @@ public class CartaEscudo extends Carta{
 
     //metodo que usa a carta de escudo no heroi
     @Override
-    public void usar_h(Heroi h, Inimigo i){
+    public void usar_h(Heroi h, Inimigo i,Combate combate){
         h.ganharEscudo(qtd_escudo);
     }
 
     @Override
-    public void usar_i(Inimigo i, Heroi h){
-        i.vida += qtd_escudo;
+    public void usar_i(Inimigo i, Heroi h, Combate combate){
+        i.ganharEscudo(qtd_escudo);
     }
 
 }

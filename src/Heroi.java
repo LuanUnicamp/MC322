@@ -1,3 +1,4 @@
+//import java.util.ArrayList;
 public class Heroi extends Entidade {
 
     //construtor
@@ -6,9 +7,9 @@ public class Heroi extends Entidade {
     }
 
     //metodo que zera o escudo do heroi a cada turno
-    public void zeraEscudo(){
+    /*public void zeraEscudo(){
         escudo = 0;
-    }
+    }*/
 
 
 }

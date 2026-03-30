@@ -1,13 +1,29 @@
+import java.util.ArrayList;
+
 public abstract class Entidade {
 
     protected String nome;
     protected int vida;
     protected int escudo;
+    private ArrayList<Efeito> listaEfeitos;
 
     public Entidade(String nome, int vida, int escudo) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
+        this.listaEfeitos = new ArrayList<>();
+    }
+
+
+    public void aplicarEfeito(Efeito efeito){
+        for(int i=0;i<listaEfeitos.size();i++){
+            Efeito efeitolista =listaEfeitos.get(i);
+            if(efeito.getNome().equals(efeitolista.getNome())){
+                efeitolista.adicionarAcumulos(efeito.getAcumulos());
+                return;
+            }
+        }
+        listaEfeitos.add(efeito);
     }
 
     //metodo que desconta o dano recebido
@@ -22,8 +38,12 @@ public abstract class Entidade {
                 escudo = 0;
             }
         //caso não tenha escudo o dano é aplicado diretamente na vida
-        } else{
-            vida -= dano;
+        }else{
+            if(vida - dano>=0){
+                vida-=dano;
+            }else{
+                vida=0;
+            }
         }
     }
 
@@ -49,6 +69,9 @@ public abstract class Entidade {
         }
     }
 
+    public void zeraEscudo() {
+        this.escudo = 0;
+    }
     public String getNome() {
         return nome;
     }
@@ -59,6 +82,9 @@ public abstract class Entidade {
 
     public int getEscudo() {
         return escudo;
+    }
+    public void removerEfeito(Efeito efeito){
+        listaEfeitos.remove(efeito);
     }
 
 }
