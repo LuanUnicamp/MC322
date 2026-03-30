@@ -10,7 +10,7 @@ public class CartaEscudoRegen extends CartaEscudo{
     @Override
     public void usar_h(Heroi h, Inimigo i,Combate combate){
         h.ganharEscudo(qtd_escudo);
-        Regen regen_heroi= new Regen("Técnica das cem forças", h, this.regen);
+        Regen regen_heroi= new Regen("Regen Técnica das cem forças", h, this.regen);
 
         h.aplicarEfeito(regen_heroi);
         combate.inscreverEfeito(regen_heroi);
@@ -21,7 +21,7 @@ public class CartaEscudoRegen extends CartaEscudo{
     @Override
     public void usar_i(Inimigo i, Heroi h, Combate combate){
         i.ganharEscudo(qtd_escudo);
-        Regen regen_inimigo= new Regen("Células do Hashirama", i, this.regen);
+        Regen regen_inimigo= new Regen("Regen Células do Hashirama", i, this.regen);
 
         i.aplicarEfeito(regen_inimigo);
         combate.inscreverEfeito(regen_inimigo);

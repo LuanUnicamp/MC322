@@ -13,7 +13,7 @@ public abstract class Efeito {
 
 
     public String getString(){
-        return "Efeito! Nome:"+this.nome+" Acumulos:"+this.acumulos;
+        return "Efeito! Nome:"+this.nome+" | Acumulos:"+this.acumulos;
     }
 
     public String getNome(){

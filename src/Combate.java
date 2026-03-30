@@ -5,10 +5,12 @@ import java.util.Scanner;
 public class Combate {
     private ArrayList<Efeito> listaEfeitosCombate;
 
+    //construtor
     public Combate(){
         listaEfeitosCombate= new ArrayList<>();
     }
 
+    //metodo que inscreve os efeitos na lista de efeitos do Combate
     public void inscreverEfeito(Efeito efeito){
         for(int i=0;i<listaEfeitosCombate.size();i++){
             Efeito efeitolista =listaEfeitosCombate.get(i);
@@ -19,6 +21,7 @@ public class Combate {
         listaEfeitosCombate.add(efeito);
     } 
 
+    //metodo que avisa todos os efeitos da lista de efeitos do combate sobre inicio ou fim de turno
     private void avisar(int num){
         for(int i=listaEfeitosCombate.size()-1;i>=0;i--){
             Efeito efeito =listaEfeitosCombate.get(i);
@@ -41,6 +44,7 @@ public class Combate {
         //o jogo acaba quando um dos dois oponentes tem estavivo() retornando false
         while(heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
    
+            //puvlisher avisando inicio do turno
             avisar(0);
     
             int chakra = 3;
@@ -77,7 +81,7 @@ public class Combate {
                 leitura = entrada.nextInt();
                 
                 //se a leitura for ultima opção, o chakra é zerado e o turno acaba
-                if(leitura == (maoJogador.size()+1)){
+                if(leitura == (maoJogador.size()+3)){
                     chakra = 0;
                 } 
 
@@ -97,14 +101,15 @@ public class Combate {
                     }
                 }
                 //caso o usuario chame o menu de cartas
-                else if(leitura == (maoJogador.size()+2)){
+                else if(leitura == (maoJogador.size()+1)){
                     App.menuCartas(maoJogador,entrada);
                     App.limparTela();
                     App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
                     App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
                 }
-                else if(leitura == (maoJogador.size()+3)){
-                    App.menuVenenoAplicado(listaEfeitosCombate,entrada);
+                //caso o usuario chame o menu de efeitos
+                else if(leitura == (maoJogador.size()+2)){
+                    App.menuVenenoRegen(listaEfeitosCombate,entrada);
                 }
                 else{
                     System.out.println("Opção Inválida!");
@@ -134,6 +139,7 @@ public class Combate {
                 System.out.println(movimentosInimigo.get(0).getNome());
             }
 
+            //publisher avisando o fim do turno
             avisar(1);
             
 

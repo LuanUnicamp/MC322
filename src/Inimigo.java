@@ -7,7 +7,8 @@ public class Inimigo extends Entidade{
     public Inimigo(String nome, int vida, int escudo){
         super(nome, vida, escudo);
     }
-    
+
+    //definininfo vida maxima
     public int vidaMaxima = vida;
     
 

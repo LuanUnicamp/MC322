@@ -17,9 +17,9 @@ public class App {
         for(int j = 0; j < maoJogador.size(); j++){
             System.out.println("[" + (j+1) + "] Usar carta " + maoJogador.get(j).getNome() + " (" + maoJogador.get(j).getCusto() + " de Chakra)");
         }
-        System.out.println("[" + (maoJogador.size()+1) + "] Encerrar turno");
-        System.out.println("[" + (maoJogador.size()+2) + "] Menu das Cartas");
-        System.out.println("[" + (maoJogador.size()+3) + "] Menu dos Efeitos");
+        System.out.println("[" + (maoJogador.size()+1) + "] Menu das Cartas");
+        System.out.println("[" + (maoJogador.size()+2) + "] Menu dos Efeitos");
+        System.out.println("[" + (maoJogador.size()+3) + "] Encerrar turno");
 
         System.out.println("O inimigo usará: "+ movimentosInimigo.get(0).getNome());
         System.out.println("Escolha: ");
@@ -33,6 +33,7 @@ public class App {
         }
     }
 
+    //metodo que apresenta o menu de cartas
     public static void menuCartas(ArrayList<Carta> maoJogador, Scanner leitura){
         limparTela();
         System.out.println("======----======----♣ Menu das Cartas ♣---======----======");
@@ -47,13 +48,14 @@ public class App {
         System.out.println("======----======----======----======----======----======");
     }
 
-    public static void menuVenenoAplicado(ArrayList<Efeito> listaEfeitos,Scanner leitura){
+    //metodo que apresenta o menu de efeitos
+    public static void menuVenenoRegen(ArrayList<Efeito> listaEfeitos,Scanner leitura){
         
         limparTela();
         System.out.println("======----======----☠ Veneno e Regen ✚---======----======");
         for(int j = 0; j < listaEfeitos.size(); j++){
             System.out.println("[" + (j+1) + "]" + listaEfeitos.get(j).getNome());
-            System.out.println("Dono:"+listaEfeitos.get(j).getEntidade());
+            System.out.println("Dono:"+listaEfeitos.get(j).getEntidade().getNome());
             System.out.println(listaEfeitos.get(j).getString());
             System.out.println("_____________________________________________________");
         }
@@ -127,6 +129,7 @@ public class App {
         Inimigo inimigoEscolhido = inimigosDisponiveis.get(leitura-1);
         Combate combate = new Combate();
         
+        //chama o metodo rodarCombate de combate que retorna o resultado do duelo
         System.out.println(combate.rodarCombate(heroiEscolhido, inimigoEscolhido, movimentosInimigo, pilhaCompra, maoJogador, pilhaDescarte));
 
 
