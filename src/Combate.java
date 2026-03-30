@@ -150,6 +150,7 @@ public class Combate {
         }
         App.limparTela();
         System.out.println("𖣘 FIM DE JOGO! 𖣘");
+        
         //quem permanecer vivo, vence a partida
         if(heroiEscolhido.estaVivo()){
             return heroiEscolhido.getNome() + " venceu!";

@@ -6,10 +6,5 @@ public class Heroi extends Entidade {
         super(nome, vida, escudo);
     }
 
-    //metodo que zera o escudo do heroi a cada turno
-    /*public void zeraEscudo(){
-        escudo = 0;
-    }*/
-
 
 }

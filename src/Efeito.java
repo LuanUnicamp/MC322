@@ -3,15 +3,17 @@ public abstract class Efeito {
     private String nome;
     private Entidade entidade;
     private int acumulos;
+    private String tipo;
 
-
-    public Efeito(String nome, Entidade entidade, int acumulos) {
+    //construtor
+    public Efeito(String nome, Entidade entidade, int acumulos,String tipo) {
         this.nome = nome;
         this.entidade = entidade;
         this.acumulos = acumulos;
+        this.tipo=tipo;
     }
 
-
+    //metodo usado no menu de efeitos
     public String getString(){
         return "Efeito! Nome:"+this.nome+" | Acumulos:"+this.acumulos;
     }
@@ -39,6 +41,10 @@ public abstract class Efeito {
     
     protected void adicionarAcumulos(int valor){
         acumulos += valor;
+    }
+    public String getTipo(){
+        return tipo;
+
     }
         
 }

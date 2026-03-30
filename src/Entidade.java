@@ -14,8 +14,9 @@ public abstract class Entidade {
         this.listaEfeitosEntidade = new ArrayList<>();
     }
 
-
+    //meetodo que inscreve o efeito na lista de efeitos da entidade
     public void aplicarEfeito(Efeito efeito){
+        
         for(int i=0;i<listaEfeitosEntidade.size();i++){
             Efeito efeitolista =listaEfeitosEntidade.get(i);
             if(efeito.getNome().equals(efeitolista.getNome())){
