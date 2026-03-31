@@ -6,11 +6,22 @@ Naruto: Shinobi Legacy é um jogo simples desenvolvido em Java como projeto da d
 ---
 
 ## Mecânica
-O jogador possui um **baralho de cartas** com habilidades de ataque e defesa. A cada turno, o jogador possui **3 pontos de chakra(energia)**, que são utilizados para ativar diferentes ataques ou o escudo, por exemplo:
+O jogador possui um baralho de cartas com habilidades de ataque e defesa. A cada turno, o jogador possui 3 pontos de chakra(energia), que são utilizados para ativar diferentes ataques ou o escudo, por exemplo:
 
 * **Rasengan** – causa dano ao inimigo (custa 1 de chakra) - Carta de ataque
 * **Kurama** – causa grande dano ao inimigo (custa 2 de chakra) - Carta de ataque
 * **Clone das Sombras** – gera escudo para proteger o herói (custa 1 de chakra) - Carta de defesa
+
+O jogador pode acessar o Menu de Cartas para ler a descrição e o custo das cartas na mão.
+
+**Sistema de efeitos**
+
+Algumas cartas aplicam efeitos especiais, tanto para o heroi, quanto para o inimigo:
+
+* **Veneno** - causa dano contínuo à entidade afetada no final de cada turno.
+* **Regen (Regeneração)** - gera pontos de escudo/vida no início de cada turno.
+
+O jogador pode acessar o Menu de Efeitos para visualizar os efeitos ativos (como Veneno e Regen) no herói e no inimigo, acompanhando a duração (acúmulos) de cada um.
 
 **Os inimigos também possuem diferentes cartas!**
 
