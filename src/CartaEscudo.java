@@ -26,4 +26,15 @@ public class CartaEscudo extends Carta{
         }
     }
 
+    @Override
+    public int getDano(){
+        return 0;
+
+    }
+
+    @Override
+    public int getEscudo(){
+        return qtd_escudo;
+    }
+
 }

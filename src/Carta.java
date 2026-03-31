@@ -15,6 +15,10 @@ public abstract class Carta{
     public abstract void usar_h(Heroi h, Inimigo i,Combate combate);
 
     public abstract void usar_i(Inimigo i, Heroi h,Combate combate);
+    
+    public abstract int getDano();
+
+    public abstract int getEscudo();
 
     //getters
     public String getNome(){
