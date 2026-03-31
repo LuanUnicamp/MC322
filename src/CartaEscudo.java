@@ -1,7 +1,6 @@
 public class CartaEscudo extends Carta{
     //atributos de cartaEscudo
-
-    private int qtd_escudo;
+    protected int qtd_escudo;
 
     //construtor de cartaEscudo
     public CartaEscudo(String nome, String descricao, int custo, int qtd_escudo) {
@@ -11,12 +10,14 @@ public class CartaEscudo extends Carta{
 
     //metodo que usa a carta de escudo no heroi
     @Override
-    public void usar_h(Heroi h, Inimigo i){
+    public void usar_h(Heroi h, Inimigo i,Combate combate){
         h.ganharEscudo(qtd_escudo);
     }
 
     @Override
-    public void usar_i(Inimigo i, Heroi h){
+    public void usar_i(Inimigo i, Heroi h, Combate combate){
+        i.ganharEscudo(qtd_escudo);
+        
         //se a regeneração passar da vida maxima, a vida se limita a vida maxima
         if((i.vida + qtd_escudo) > i.vidaMaxima){
             i.vida = i.vidaMaxima;

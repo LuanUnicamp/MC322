@@ -12,13 +12,15 @@ public class App {
         System.out.println(h.getNome()+" ("+h.getVida()+") de vida ("+h.getEscudo()+") de escudo");
         System.out.println("vs");
         System.out.println(i.getNome()+" ("+i.getVida()+") de vida ("+i.getEscudo()+") de escudo");
-        System.out.println(chakra + "/3 de Energia disponível");
+        System.out.println(chakra + "/3 de chakra disponível");
 
         for(int j = 0; j < maoJogador.size(); j++){
             System.out.println("[" + (j+1) + "] Usar carta " + maoJogador.get(j).getNome() + " (" + maoJogador.get(j).getCusto() + " de Chakra)");
         }
-        System.out.println("[" + (maoJogador.size()+1) + "] Encerrar turno");
-        System.out.println("[" + (maoJogador.size()+2) + "] Menu das Cartas");
+        System.out.println("[" + (maoJogador.size()+1) + "] Menu das Cartas");
+        System.out.println("[" + (maoJogador.size()+2) + "] Menu dos Efeitos");
+        System.out.println("[" + (maoJogador.size()+3) + "] Encerrar turno");
+
         System.out.println("O inimigo usará: "+ movimentosInimigo.get(0).getNome());
         System.out.println("Escolha: ");
         System.out.println("======----======----======----======----======----======");
@@ -31,6 +33,7 @@ public class App {
         }
     }
 
+    //metodo que apresenta o menu de cartas
     public static void menuCartas(ArrayList<Carta> maoJogador, Scanner leitura){
         limparTela();
         System.out.println("======----======----♣ Menu das Cartas ♣---======----======");
@@ -44,7 +47,31 @@ public class App {
         leitura.nextInt();
         System.out.println("======----======----======----======----======----======");
     }
+
+    //metodo que apresenta o menu de efeitos
+    public static void menuVenenoRegen(ArrayList<Efeito> listaEfeitos,Scanner leitura){
+        
+        limparTela();
+        System.out.println("======----======----☠ Veneno e Regen ✚---======----======");
+        for(int j = 0; j < listaEfeitos.size(); j++){
+            System.out.println("[" + (j+1) + "]" + listaEfeitos.get(j).getNome());
+            System.out.println("Dono:"+listaEfeitos.get(j).getEntidade().getNome());
+            System.out.println(listaEfeitos.get(j).getString());
+            System.out.println("_____________________________________________________");
+        }
+        System.out.println("======----======----======----======----======----======");
+
+
+        System.out.println("Digite qualquer número para voltar:");
+
+        leitura.nextInt();
+
+        
+        
+    }
+    
     public static void main(String[] args) throws Exception {
+
         //declarando e instanciando arraylist de herois
         ArrayList<Heroi> heroisDisponiveis = new ArrayList<>();
         heroisDisponiveis.add(new Heroi("Naruto Uzumaki", 100, 0));
@@ -52,22 +79,22 @@ public class App {
 
         //declarando e instanciando arraylist de inimigos
         ArrayList<Inimigo> inimigosDisponiveis = new ArrayList<>();
-        inimigosDisponiveis.add(new Inimigo("Madara Uchiha", 120, 0, 25));
-        inimigosDisponiveis.add(new Inimigo("Pain", 100, 0, 25));
+        inimigosDisponiveis.add(new Inimigo("Madara Uchiha", 120, 0));
+        inimigosDisponiveis.add(new Inimigo("Pain", 100, 0));
 
          
         //declarando e instanciando arraylist de movimentos do inimigo
         ArrayList<Carta> movimentosInimigo = new ArrayList<>();
-        movimentosInimigo.add(new CartaDano("Shinra Tensei", "Usa Shinra Tensei para atacar ", 0, 25));
+        movimentosInimigo.add(new CartaDanoVeneno("Shinra Tensei(aplica 5 de veneno)", "Usa Shinra Tensei para atacar ", 0, 25,5));
         movimentosInimigo.add(new CartaDano("Jutsu Bola de Fogo", "Usa Jutsu Bola de Fogo para atacar ", 0, 15));
-        movimentosInimigo.add(new CartaEscudo("Ninjutsu Médico", "Usa Ninjutsu médico para recuperar vida", 0, 15));
+        movimentosInimigo.add(new CartaEscudoRegen("Ninjutsu Médico(ganha 3 de regen)", "Usa Ninjutsu médico para recuperar vida", 0, 15,3));
 
 
         //declarando e instanciando a pilha de compra
         ArrayList<Carta> pilhaCompra = new ArrayList<>();
         pilhaCompra.add(new CartaDano("Razengan","Usa o Razengan para atacar o inimigo." ,1, 12));
-        pilhaCompra.add(new CartaDano("Kurama","Usa a Kurama para atacar o inimigo.", 2, 20));
-        pilhaCompra.add(new CartaEscudo("Clone das sombras","Usa o jutsu Clone das Sombras para ganhar escudo.", 1, 15));
+        pilhaCompra.add(new CartaDanoVeneno("Kurama (aplica 5 de veneno)","Usa a Kurama para atacar o inimigo.", 3, 20,5));
+        pilhaCompra.add(new CartaEscudoRegen("Clone das sombras (ganha 3 de regen)","Usa o jutsu Clone das Sombras para ganhar escudo.", 2, 15,3));
         pilhaCompra.add(new CartaDano("Sharingan","Usa Sharingan para atacar o inimigo", 2, 20));
         pilhaCompra.add(new CartaEscudo("Jutsu de Substituição","Usa jutsu de Substituição para ganhar escudo", 1, 10));
         //embaralhando pilha de compra
@@ -100,103 +127,11 @@ public class App {
         }
         leitura = entrada.nextInt();
         Inimigo inimigoEscolhido = inimigosDisponiveis.get(leitura-1);
+        Combate combate = new Combate();
         
-        //o jogo acaba quando um dos dois oponentes tem estavivo() retornando false
-        while(heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
-            int chakra = 3;
-            ///variável que indica quando o heroi não tem chackra suficiente para usar habilidade
-            Boolean insuficiente = false;
+        //chama o metodo rodarCombate de combate que retorna o resultado do duelo
+        System.out.println(combate.rodarCombate(heroiEscolhido, inimigoEscolhido, movimentosInimigo, pilhaCompra, maoJogador, pilhaDescarte));
 
-
-            for(int k = 0; k < 3; k++){
-                //se a pilha de compras estiver vazia e a pilha de descarte tiver cartas, as cartas são
-                //adicionadas à pilha de compras e embaralhadas
-                if(pilhaCompra.size()==0 && pilhaDescarte.size()>0){
-                    for (int j = pilhaDescarte.size() - 1; j >= 0; j--) {
-                        Carta cartaReciclada = pilhaDescarte.remove(j);
-                        pilhaCompra.add(cartaReciclada);
-                    }
-                Collections.shuffle(pilhaCompra);
-                }
-
-                //se tiver cartas na pilha de compras e não tiver 3 cartas na mão do jogador, ele adiciona até
-                //3 novas cartas conforme a necessidade
-                if(pilhaCompra.size()>0 && maoJogador.size()<3){
-                    Carta cartaComprada = pilhaCompra.remove(pilhaCompra.size() - 1);
-                    maoJogador.add(cartaComprada);
-                }
-            }
-            //decide o ataque do inimigo
-            Collections.shuffle(movimentosInimigo);
-
-            limparTela();
-            display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
-
-            //enquanto tiver chackra disponível e os dois estiverem vivos, o turno é o mesmo
-            while(chakra>0 && heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
-                leitura = entrada.nextInt();
-                
-                //se a leitura for ultima opção, o chakra é zerado e o turno acaba
-                if(leitura == (maoJogador.size()+1)){
-                    chakra = 0;
-                } 
-
-                //se a leitura estiver entre as opções de cartas a serem utilizadas
-                else if(leitura > 0 && leitura <= maoJogador.size()){
-                    Carta cartaSelecionada = maoJogador.get(leitura-1);
-
-                    //se tem chakra para a habilidade, usa a carta e a descarta depois
-                    if(chakra >= cartaSelecionada.getCusto()){
-                        chakra -= cartaSelecionada.getCusto();
-                        cartaSelecionada.usar_h(heroiEscolhido, inimigoEscolhido);
-                        Carta cartaDescartada = maoJogador.remove(leitura-1);
-                        pilhaDescarte.add(cartaDescartada);
-                    } else {
-                        System.out.println("Chakra insuficiente para usar "+ cartaSelecionada.getNome() +"!");
-                        insuficiente = true;
-                    }
-                }
-                //caso o usuario chame o menu de cartas
-                else if(leitura == (maoJogador.size()+2)){
-                    menuCartas(maoJogador,entrada);
-                    limparTela();
-                    display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
-                }
-                else{
-                    System.out.println("Opção Inválida!");
-                    //para não chamar o display
-                    insuficiente = true;
-                }
-
-                //caso o chackra seja insuficiente não vai limpar a tela e chamar display, para que a mensagem
-                //de que chackra não é suficiente para a habilidade apareça no terminal
-                if (!insuficiente) {
-                    limparTela();
-                    display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
-                }
-                insuficiente = false;
-
-        }
-
-        //no fim do turno as cartas da mão do jogador vao para a pilha de descarte
-        for(int i = maoJogador.size()-1; i>=0; i--){
-            Carta cartaDescartada = maoJogador.remove(i);
-            pilhaDescarte.add(cartaDescartada);
-        }
-
-        //inimigo ataca automaticamente no final de cada turno, mas só se ele estiver vivo
-        if (inimigoEscolhido.getVida()>0) {
-            movimentosInimigo.get(0).usar_i(inimigoEscolhido, heroiEscolhido);
-        }
-        //escudo zerado depois de cada turno
-        heroiEscolhido.zeraEscudo();
-    }
-    //quem permanecer vivo, vence a partida
-    if(heroiEscolhido.estaVivo()){
-        System.out.println(heroiEscolhido.getNome() + " venceu!");
-    } else{
-        System.out.println(inimigoEscolhido.getNome() + " venceu!");
-    }
 
     entrada.close();
 }

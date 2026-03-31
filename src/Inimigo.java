@@ -1,20 +1,14 @@
+//import java.util.ArrayList;
 public class Inimigo extends Entidade{
-    //atributos do inimigo
-    //private int dano;
+
 
     //construtor
-    public Inimigo(String nome, int vida, int escudo, int dano){
+    public Inimigo(String nome, int vida, int escudo){
         super(nome, vida, escudo);
-        //this.dano=dano;
     }
 
+    //definininfo vida maxima
     public int vidaMaxima = vida;
     
-    //método que o inimigo faz um ataque ao heroi
-    /* 
-    public void atacar(Heroi h){
-        h.receberDano(dano);
-    }
-    */
 
 }
