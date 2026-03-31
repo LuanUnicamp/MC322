@@ -41,6 +41,12 @@ public class App {
             System.out.println("[" + (j+1) + "]" + maoJogador.get(j).getNome());
             System.out.println("Descrição: "+maoJogador.get(j).getDescricao());
             System.out.println("Custo: "+maoJogador.get(j).getCusto());
+            if(maoJogador.get(j) instanceof CartaDano){
+                System.out.println("Dano: "+maoJogador.get(j).getDano());
+            }else if(maoJogador.get(j) instanceof CartaEscudo){
+                System.out.println("Escudo: "+maoJogador.get(j).getEscudo());
+            }
+
             System.out.println("_____________________________________________________");
         }
         System.out.println("Digite qualquer número para voltar:");

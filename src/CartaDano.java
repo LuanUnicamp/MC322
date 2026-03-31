@@ -19,4 +19,15 @@ public class CartaDano extends Carta{
     public void usar_i(Inimigo i,Heroi h,Combate combate){
         h.receberDano(qtd_dano);
     }
+
+    @Override
+    public int getDano(){
+        return qtd_dano;
+
+    }
+
+    @Override
+    public int getEscudo(){
+        return 0;
+    }
 }
