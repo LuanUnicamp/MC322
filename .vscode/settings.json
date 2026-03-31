@@ -1,5 +1,6 @@
 {
     "java.project.sourcePaths": [
+        "MC322/src",
         "src"
     ],
     "java.project.outputPath": "bin",
