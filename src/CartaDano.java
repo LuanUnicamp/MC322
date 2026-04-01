@@ -12,12 +12,16 @@ public class CartaDano extends Carta{
     @Override
     public void usar_h(Heroi h,Inimigo i,Combate combate){
         i.receberDano(qtd_dano);
+        System.out.println(h.getNome() + " atacou " + i.getNome() + " causando " + this.qtd_dano + " de dano!");
     }
 
     //metodo que usa a carta de dano no inimigo
     @Override
     public void usar_i(Inimigo i,Heroi h,Combate combate){
         h.receberDano(qtd_dano);
+
+        System.out.println(i.getNome() + " atacou " + h.getNome() + " causando " + this.qtd_dano + " de dano!");
+       
     }
 
     @Override
