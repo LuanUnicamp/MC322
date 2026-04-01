@@ -16,6 +16,8 @@ public class CartaEscudoRegen extends CartaEscudo{
         h.aplicarEfeito(regen_heroi);
         combate.inscreverEfeito(regen_heroi);
 
+        System.out.println(h.getNome()+" ganhou "+this.qtd_escudo+" de escudo e "+this.regen+" de regen!");
+
         
     }
 
@@ -27,6 +29,8 @@ public class CartaEscudoRegen extends CartaEscudo{
 
         i.aplicarEfeito(regen_inimigo);
         combate.inscreverEfeito(regen_inimigo);
+
+        System.out.println(i.getNome()+" ganhou "+this.qtd_escudo+" de escudo e "+this.regen+" de regen!");
         
 
     }

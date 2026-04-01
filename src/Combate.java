@@ -93,6 +93,11 @@ public class Combate {
                     if(chakra >= cartaSelecionada.getCusto()){
                         chakra -= cartaSelecionada.getCusto();
                         cartaSelecionada.usar_h(heroiEscolhido, inimigoEscolhido,this);
+
+                        System.out.println("\n[Pressione ENTER para continuar]");
+                        entrada.nextLine(); 
+                        entrada.nextLine();
+
                         Carta cartaDescartada = maoJogador.remove(leitura-1);
                         pilhaDescarte.add(cartaDescartada);
                     } else {
@@ -136,7 +141,9 @@ public class Combate {
             //inimigo ataca automaticamente no final de cada turno, mas só se ele estiver vivo
             if (inimigoEscolhido.getVida()>0) {
                 movimentosInimigo.get(0).usar_i(inimigoEscolhido, heroiEscolhido,this);
-                System.out.println(movimentosInimigo.get(0).getNome());
+                
+                System.out.println("\n[Pressione ENTER para seu próximo turno]");
+                entrada.nextLine();
             }
 
             //publisher avisando o fim do turno

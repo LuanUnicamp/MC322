@@ -12,11 +12,14 @@ public class CartaEscudo extends Carta{
     @Override
     public void usar_h(Heroi h, Inimigo i,Combate combate){
         h.ganharEscudo(qtd_escudo);
+        System.out.println(h.getNome()+" ganhou "+this.qtd_escudo+" de escudo!");
     }
 
     @Override
     public void usar_i(Inimigo i, Heroi h, Combate combate){
         i.ganharEscudo(qtd_escudo);
+        System.out.println(i.getNome()+" ganhou "+this.qtd_escudo+" de escudo!");
+        
         
         //se a regeneração passar da vida maxima, a vida se limita a vida maxima
         if((i.vida + qtd_escudo) > i.vidaMaxima){

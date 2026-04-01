@@ -17,6 +17,7 @@ public class CartaDanoVeneno extends CartaDano{
         i.aplicarEfeito(veneno_heroi);
         combate.inscreverEfeito(veneno_heroi);
 
+       System.out.println(h.getNome() + " atacou " + i.getNome() + " causando " + this.qtd_dano + " de dano e "+this.veneno+" de veneno!");
        
     }
 
@@ -29,6 +30,7 @@ public class CartaDanoVeneno extends CartaDano{
         h.aplicarEfeito(veneno_inimigo);
         combate.inscreverEfeito(veneno_inimigo);
 
+        System.out.println(i.getNome() + " atacou " + h.getNome() + " causando " + this.qtd_dano + " de dano e "+this.veneno+" de veneno!");
         
     }
 
