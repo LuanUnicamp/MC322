@@ -2,28 +2,53 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+
 public class App {
+
+    public static final String RESET = "\u001B[0m";
+    public static final String VERMELHO = "\u001B[31m";
+    public static final String VERDE = "\u001B[32m";
+    public static final String AMARELO = "\u001B[33m";
+    public static final String CIANO = "\u001B[36m";
+    public static final String ROXO = "\u001B[35m";
+    public static final String NEGRITO = "\033[1m";
 
     //metodo que contem o display que atualiza a cada nova entrada do usuário
     public static void display(Heroi h, Inimigo i, int chakra, ArrayList<Carta> maoJogador, ArrayList<Carta> movimentosInimigo){
         h.zeraVida();
         i.zeraVida();
-        System.out.println("======----======----======----======----======----======");
-        System.out.println(h.getNome()+" ("+h.getVida()+") de vida ("+h.getEscudo()+") de escudo");
-        System.out.println("vs");
-        System.out.println(i.getNome()+" ("+i.getVida()+") de vida ("+i.getEscudo()+") de escudo");
-        System.out.println(chakra + "/3 de chakra disponível");
+        
+        System.out.println(CIANO + "╔════════════════════════ SHINOBI LEGACY ════════════════════════╗" + RESET);
+        
+        // Status dos Combatentes Lado a Lado
+        System.out.printf("  %-30s %s %30s  \n", 
+            NEGRITO + h.getNome() + RESET, "vs", NEGRITO + i.getNome() + RESET);
+        
+        System.out.printf("  Vida: " + VERDE + "%-24d" + RESET + "      Vida: " + VERDE + "%d" + RESET + "  \n", 
+            h.getVida(), i.getVida());
+            
+        System.out.printf("  Escudo: " + CIANO + "%-22d" + RESET + "      Escudo: " + CIANO + "%d" + RESET + "  \n", 
+            h.getEscudo(), i.getEscudo());
 
+        System.out.println(CIANO + "╠════════════════════════════════════════════════════════════════╣" + RESET);
+        
+        // Chakra com destaque
+        String chakraBarra = "● ".repeat(chakra) + "○ ".repeat(3 - chakra);
+        System.out.println("  Energia: " + AMARELO + chakra + "/3 Chakra [" + chakraBarra + "]" + RESET);
+        System.out.println("  Próximo golpe do inimigo: " + VERMELHO + movimentosInimigo.get(0).getNome() + RESET);
+        System.out.println(CIANO + "╟────────────────────────────────────────────────────────────────╢" + RESET);
+
+        // Mão do Jogador Formatada
         for(int j = 0; j < maoJogador.size(); j++){
-            System.out.println("[" + (j+1) + "] Usar carta " + maoJogador.get(j).getNome() + " (" + maoJogador.get(j).getCusto() + " de Chakra)");
+            System.out.println("  [" + (j+1) + "] " + NEGRITO + maoJogador.get(j).getNome() + RESET + 
+                            " (" + AMARELO + maoJogador.get(j).getCusto() + " Chakra" + RESET + ")");
         }
-        System.out.println("[" + (maoJogador.size()+1) + "] Menu das Cartas");
-        System.out.println("[" + (maoJogador.size()+2) + "] Menu dos Efeitos");
-        System.out.println("[" + (maoJogador.size()+3) + "] Encerrar turno");
-
-        System.out.println("O inimigo usará: "+ movimentosInimigo.get(0).getNome());
-        System.out.println("Escolha: ");
-        System.out.println("======----======----======----======----======----======");
+        
+        System.out.println(CIANO + "╟────────────────────────────────────────────────────────────────╢" + RESET);
+        System.out.println("  [" + (maoJogador.size()+1) + "] ℹ️ Menu das Cartas | [" + (maoJogador.size()+2) + "] 🧪 Efeitos | [" + (maoJogador.size()+3) + "] ⌛ Encerrar Turno");
+        System.out.println(CIANO + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+        System.out.print("  Escolha sua ação: ");
     }
 
     //metodo que "limpa" o terminal para dar um efeito de que o status dos personagens está sendo atualizado
@@ -33,47 +58,49 @@ public class App {
         }
     }
 
-    //metodo que apresenta o menu de cartas
+    //metodo que mostra no display o menu das cartas
     public static void menuCartas(ArrayList<Carta> maoJogador, Scanner leitura){
         limparTela();
-        System.out.println("======----======----♣ Menu das Cartas ♣---======----======");
+        System.out.println(CIANO + "╔═══════════════════ ♣ BIBLIOTECA DE JUTSUS ♣ ══════════════════╗" + RESET);
         for(int j = 0; j < maoJogador.size(); j++){
-            System.out.println("[" + (j+1) + "]" + maoJogador.get(j).getNome());
-            System.out.println("Descrição: "+maoJogador.get(j).getDescricao());
-            System.out.println("Custo: "+maoJogador.get(j).getCusto());
-            if(maoJogador.get(j) instanceof CartaDano){
-                System.out.println("Dano: "+maoJogador.get(j).getDano());
-            }else if(maoJogador.get(j) instanceof CartaEscudo){
-                System.out.println("Escudo: "+maoJogador.get(j).getEscudo());
-            }
-
-            System.out.println("_____________________________________________________");
+            Carta c = maoJogador.get(j);
+            System.out.println(AMARELO + " [" + (j+1) + "] " + RESET + NEGRITO + c.getNome() + RESET);
+            System.out.println("     " + c.getDescricao());
+            System.out.println("     Custo: " + AMARELO + c.getCusto() + " Chakra" + RESET);
+            
+            if(c instanceof CartaDano) System.out.println("     Dano: " + VERMELHO + c.getDano() + RESET);
+            else if(c instanceof CartaEscudo) System.out.println("     Escudo: " + CIANO + c.getEscudo() + RESET);
+            
+            System.out.println(CIANO + "     ──────────────────────────────────────────────────" + RESET);
         }
-        System.out.println("Digite qualquer número para voltar:");
-        leitura.nextInt();
-        System.out.println("======----======----======----======----======----======");
+        System.out.print("\n Digite qualquer número para voltar ao combate: ");
+        leitura.next();
     }
 
-    //metodo que apresenta o menu de efeitos
-    public static void menuVenenoRegen(ArrayList<Efeito> listaEfeitos,Scanner leitura){
-        
+    //metodo que mostra no display o menu dos efeitos
+    public static void menuVenenoRegen(ArrayList<Efeito> listaEfeitos, Scanner leitura){
         limparTela();
-        System.out.println("======----======----☠ Veneno e Regen ✚---======----======");
-        for(int j = 0; j < listaEfeitos.size(); j++){
-            System.out.println("[" + (j+1) + "]" + listaEfeitos.get(j).getNome());
-            System.out.println("Dono:"+listaEfeitos.get(j).getEntidade().getNome());
-            System.out.println(listaEfeitos.get(j).getString());
-            System.out.println("_____________________________________________________");
+        System.out.println(ROXO + "╔═══════════════════ ☣ ESTADOS E ALTERAÇÕES ✚ ══════════════════╗" + RESET);
+        
+        if (listaEfeitos.isEmpty()) {
+            System.out.println(AMARELO + "      Nenhum efeito ativo no momento. O campo está limpo!" + RESET);
+        } else {
+            for(int j = 0; j < listaEfeitos.size(); j++){
+                Efeito e = listaEfeitos.get(j);
+                String corEfeito = e.getNome().contains("Veneno") ? ROXO : VERDE;
+                String icone = e.getNome().contains("Veneno") ? "☣" : "✚";
+                
+                System.out.println(corEfeito + "  [" + (j+1) + "] " + icone + " " + NEGRITO + e.getNome().toUpperCase() + RESET);
+                System.out.println("      Dono: " + NEGRITO + e.getEntidade().getNome() + RESET);
+                System.out.println("      Status: " + corEfeito + e.getString() + RESET);
+                System.out.println(ROXO + "      ──────────────────────────────────────────────────" + RESET);
+            }
         }
-        System.out.println("======----======----======----======----======----======");
-
-
-        System.out.println("Digite qualquer número para voltar:");
-
-        leitura.nextInt();
-
         
+        System.out.println(ROXO + "╚═══════════════════════════════════════════════════════════════╝" + RESET);
+        System.out.print("\n " + CIANO + "Digite qualquer número para voltar ao combate: " + RESET);
         
+        leitura.next(); 
     }
     
     public static void main(String[] args) throws Exception {
@@ -91,18 +118,38 @@ public class App {
          
         //declarando e instanciando arraylist de movimentos do inimigo
         ArrayList<Carta> movimentosInimigo = new ArrayList<>();
-        movimentosInimigo.add(new CartaDanoVeneno("Shinra Tensei(aplica 5 de veneno)", "Usa Shinra Tensei para atacar ", 0, 25,5));
-        movimentosInimigo.add(new CartaDano("Jutsu Bola de Fogo", "Usa Jutsu Bola de Fogo para atacar ", 0, 15));
-        movimentosInimigo.add(new CartaEscudoRegen("Ninjutsu Médico(ganha 3 de regen)", "Usa Ninjutsu médico para recuperar vida", 0, 15,3));
+        movimentosInimigo.add(new CartaDanoVeneno("Shinra Tensei(aplica 5 de veneno)", "Usa Shinra Tensei para atacar.", 0, 25,5));
+        movimentosInimigo.add(new CartaDano("Jutsu Bola de Fogo", "Usa Jutsu Bola de Fogo para atacar.", 0, 15));
+        movimentosInimigo.add(new CartaEscudoRegen("Ninjutsu Médico(ganha 3 de regen)", "Usa Ninjutsu médico para recuperar vida.", 0, 15,3));
+        movimentosInimigo.add(new CartaDano("Kirin", "Invoca um dragão feito de raios pra cima do inimigo.", 0, 20));
+        movimentosInimigo.add(new CartaDanoVeneno("Edo Tensei", "Traz shinobis incríveis do passado de volta a vida!", 0,20 ,5));
+        movimentosInimigo.add(new CartaEscudo("Rotação Hyuga", "Defesa absoluta dos Hyuga.", 0, 22));
+        movimentosInimigo.add(new CartaEscudoRegen("Manto de Chakra", "O chakra da Kurama protege e regenera.", 0, 15, 8));
+        movimentosInimigo.add(new CartaDano("Bijuudama", "Dispara uma esfera de chakra concentrado devastadora.", 3, 35));
+        movimentosInimigo.add(new CartaEscudoRegen("Caminho Naraka", "O Rei do Inferno restaura o corpo do usuário.", 0, 20, 5));
+        movimentosInimigo.add(new CartaDanoVeneno("Manda: Bote Venenoso", "A cobra gigante surge do solo para um ataque mortal.", 0, 22, 6));
+        
 
 
         //declarando e instanciando a pilha de compra
         ArrayList<Carta> pilhaCompra = new ArrayList<>();
-        pilhaCompra.add(new CartaDano("Razengan","Usa o Razengan para atacar o inimigo." ,1, 12));
+        pilhaCompra.add(new CartaDano("Rasengan","Usa o Razengan para atacar o inimigo." ,1, 12));
         pilhaCompra.add(new CartaDanoVeneno("Kurama (aplica 5 de veneno)","Usa a Kurama para atacar o inimigo.", 3, 20,5));
         pilhaCompra.add(new CartaEscudoRegen("Clone das sombras (ganha 3 de regen)","Usa o jutsu Clone das Sombras para ganhar escudo.", 2, 15,3));
-        pilhaCompra.add(new CartaDano("Sharingan","Usa Sharingan para atacar o inimigo", 2, 20));
-        pilhaCompra.add(new CartaEscudo("Jutsu de Substituição","Usa jutsu de Substituição para ganhar escudo", 1, 10));
+        pilhaCompra.add(new CartaDano("Sharingan","Usa Sharingan para atacar o inimigo.", 2, 20));
+        pilhaCompra.add(new CartaEscudo("Jutsu de Substituição","Usa jutsu de Substituição para ganhar escudo.", 1, 10));
+        pilhaCompra.add(new CartaDano("Chidori", "Um ataque perfurante de alta precisão, conhecido tam,bém como o golpe dos mil pássaros.", 1, 12));
+        pilhaCompra.add(new CartaDano("Jutsu Dragão de Água", "Estilo Água: Jutsu Dragao de Água!.", 2, 14));
+        pilhaCompra.add(new CartaEscudo("Parede de terra","Cria uma muralha de terra pra se defender.", 1, 12));
+        pilhaCompra.add(new CartaEscudoRegen("Susano'o perfeito","A defesa mais forte existente no mundo ninja.", 3, 25,7));
+        pilhaCompra.add(new CartaDanoVeneno("Oito Portões Internos", "Libera o limite de chakra para defesa e vigor extremos.", 3, 20, 8));
+        pilhaCompra.add(new CartaEscudoRegen("Defesa de Shukaku", "Areia densa que protege e estabiliza o usuário.", 3, 30, 2));
+        pilhaCompra.add(new CartaDanoVeneno("Gamabunta: Banho de Óleo", "Invoca o Chefe dos Sapos para esmagar e queimar o inimigo.", 3, 25, 4));
+        pilhaCompra.add(new CartaEscudoRegen("Katsuyu: Rede de Cura", "A lesma gigante divide o seu chakra para proteger e curar.", 2, 10, 6));
+
+
+
+
         //embaralhando pilha de compra
         Collections.shuffle(pilhaCompra);
 
@@ -115,24 +162,27 @@ public class App {
         Scanner entrada = new Scanner(System.in);
 
         limparTela();
-        System.out.println("𖣘 Seja Bem-Vindo(a) ao Shinobi Legacy!! 𖣘");
-        System.out.println("Escolha um heroi para iniciar:");
-        //menu de herois
+        System.out.println(AMARELO + "╔════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(AMARELO + "║ " + NEGRITO + "           𖣘  SHINOBI LEGACY: O DUELO NINJA  𖣘          " + RESET + AMARELO + " ║" + RESET);
+        System.out.println(AMARELO + "╚════════════════════════════════════════════════════════════╝" + RESET);
+
+        System.out.println("\n" + CIANO + " [ SELEÇÃO DE HERÓI ] " + RESET);
         for(int i=0; i<heroisDisponiveis.size(); i++){
-            System.out.println("[" + (i+1) + "] " + heroisDisponiveis.get(i).getNome());
+            System.out.println(AMARELO + " [" + (i+1) + "] " + RESET + heroisDisponiveis.get(i).getNome());
         }
+        System.out.print("\n Escolha seu caminho: ");
         leitura = entrada.nextInt();
         Heroi heroiEscolhido = heroisDisponiveis.get(leitura-1);
 
         limparTela();
-        System.out.println("𖣘 Seja Bem-Vindo(a) ao Shinobi Legacy!! 𖣘");
-        System.out.println("Escolha um inimigo para combater:");
-        //menu de inimigos
+        System.out.println(VERMELHO + " [ SELEÇÃO DE ADVERSÁRIO ] " + RESET);
         for(int i=0; i<inimigosDisponiveis.size(); i++){
-            System.out.println("[" + (i+1) + "] " + inimigosDisponiveis.get(i).getNome());
+            System.out.println(AMARELO + " [" + (i+1) + "] " + RESET + inimigosDisponiveis.get(i).getNome());
         }
+        System.out.print("\n Quem você irá enfrentar? ");
         leitura = entrada.nextInt();
         Inimigo inimigoEscolhido = inimigosDisponiveis.get(leitura-1);
+        
         Combate combate = new Combate();
         
         //chama o metodo rodarCombate de combate que retorna o resultado do duelo
