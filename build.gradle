@@ -1,0 +1,24 @@
+plugins {
+    id 'application'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+}
+
+application {
+    mainClass = 'App' 
+}
+
+
+javadoc {
+    destinationDir = file("build/docs/javadoc")
+}
+run {
+    standardInput = System.in
+}
