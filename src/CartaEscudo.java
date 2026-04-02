@@ -12,14 +12,17 @@ public class CartaEscudo extends Carta{
     @Override
     public void usar_h(Heroi h, Inimigo i,Combate combate){
         h.ganharEscudo(qtd_escudo);
-        System.out.println(h.getNome()+" ganhou "+this.qtd_escudo+" de escudo!");
+        //System.out.println(h.getNome()+" ganhou "+this.qtd_escudo+" de escudo!");
+        System.out.println("\n 🛡️  " + App.CIANO + "DEFESA ATIVADA: " + App.RESET + App.NEGRITO + h.getNome() + App.RESET);
+        System.out.println("    Proteção: " + App.CIANO + "+" + this.qtd_escudo + " de Escudo" + App.RESET);
     }
 
     @Override
     public void usar_i(Inimigo i, Heroi h, Combate combate){
         i.ganharEscudo(qtd_escudo);
-        System.out.println(i.getNome()+" ganhou "+this.qtd_escudo+" de escudo!");
-        
+        //System.out.println(i.getNome()+" ganhou "+this.qtd_escudo+" de escudo!");
+        System.out.println("\n 💠 " + App.VERMELHO + App.NEGRITO + i.getNome() + App.RESET + " ergueu uma barreira!");
+        System.out.println("    Escudo Inimigo: " + App.CIANO + "+" + this.qtd_escudo + " de proteção" + App.RESET);
         
         //se a regeneração passar da vida maxima, a vida se limita a vida maxima
         if((i.vida + qtd_escudo) > i.vidaMaxima){
@@ -27,6 +30,7 @@ public class CartaEscudo extends Carta{
         } else{
             i.vida += qtd_escudo;
         }
+        System.out.println("    Nota: O inimigo também estabilizou sua vitalidade.");
     }
 
     @Override

@@ -12,7 +12,9 @@ public class CartaDano extends Carta{
     @Override
     public void usar_h(Heroi h,Inimigo i,Combate combate){
         i.receberDano(qtd_dano);
-        System.out.println(h.getNome() + " atacou " + i.getNome() + " causando " + this.qtd_dano + " de dano!");
+        //System.out.println(h.getNome() + " atacou " + i.getNome() + " causando " + this.qtd_dano + " de dano!");
+        System.out.println(" 💥 " + App.NEGRITO + h.getNome() + App.RESET + " atacou causando " + 
+                       App.VERMELHO + this.qtd_dano + " de dano" + App.RESET + " em " + i.getNome() + "!");
     }
 
     //metodo que usa a carta de dano no inimigo
@@ -20,7 +22,9 @@ public class CartaDano extends Carta{
     public void usar_i(Inimigo i,Heroi h,Combate combate){
         h.receberDano(qtd_dano);
 
-        System.out.println(i.getNome() + " atacou " + h.getNome() + " causando " + this.qtd_dano + " de dano!");
+        //System.out.println(i.getNome() + " atacou " + h.getNome() + " causando " + this.qtd_dano + " de dano!");
+         System.out.println(" ⚠️ " + App.VERMELHO + App.NEGRITO + i.getNome() + App.RESET + " contra-atacou! " + 
+                       "Você sofreu " + App.VERMELHO + App.NEGRITO + this.qtd_dano + " de dano" + App.RESET + "!");
        
     }
 

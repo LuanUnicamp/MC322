@@ -3,6 +3,14 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Combate {
+    public static final String RESET = "\u001B[0m";
+    public static final String VERMELHO = "\u001B[31m";
+    public static final String VERDE = "\u001B[32m";
+    public static final String AMARELO = "\u001B[33m";
+    public static final String CIANO = "\u001B[36m";
+    public static final String ROXO = "\u001B[35m";
+    public static final String NEGRITO = "\033[1m";
+    
     private ArrayList<Efeito> listaEfeitosCombate;
 
     //construtor
@@ -79,6 +87,8 @@ public class Combate {
             //enquanto tiver chackra disponível e os dois estiverem vivos, o turno é o mesmo
             while(chakra>0 && heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
                 leitura = entrada.nextInt();
+                entrada.nextLine();
+                
                 
                 //se a leitura for ultima opção, o chakra é zerado e o turno acaba
                 if(leitura == (maoJogador.size()+3)){
@@ -96,7 +106,6 @@ public class Combate {
 
                         System.out.println("\n[Pressione ENTER para continuar]");
                         entrada.nextLine(); 
-                        entrada.nextLine();
 
                         Carta cartaDescartada = maoJogador.remove(leitura-1);
                         pilhaDescarte.add(cartaDescartada);
@@ -110,11 +119,12 @@ public class Combate {
                     App.menuCartas(maoJogador,entrada);
                     App.limparTela();
                     App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
-                    App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
+                    entrada.nextLine();
                 }
                 //caso o usuario chame o menu de efeitos
                 else if(leitura == (maoJogador.size()+2)){
                     App.menuVenenoRegen(listaEfeitosCombate,entrada);
+                    entrada.nextLine();
                 }
                 else{
                     System.out.println("Opção Inválida!");
@@ -144,6 +154,7 @@ public class Combate {
                 
                 System.out.println("\n[Pressione ENTER para seu próximo turno]");
                 entrada.nextLine();
+                
             }
 
             //publisher avisando o fim do turno
@@ -155,6 +166,7 @@ public class Combate {
             inimigoEscolhido.zeraEscudo();
 
         }
+        /*
         App.limparTela();
         System.out.println("𖣘 FIM DE JOGO! 𖣘");
         
@@ -163,6 +175,17 @@ public class Combate {
             return heroiEscolhido.getNome() + " venceu!";
         } else{
             return inimigoEscolhido.getNome() + " venceu!";
+        } */
+        
+        App.limparTela();
+        System.out.println(AMARELO + "╔════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(AMARELO + "║ " + NEGRITO + "                    𖣘  FIM DA BATALHA  𖣘                  " + RESET + AMARELO + " ║" + RESET);
+        System.out.println(AMARELO + "╚════════════════════════════════════════════════════════════╝" + RESET);
+
+        if(heroiEscolhido.estaVivo()){
+            return "\n " + VERDE + "VITORIA! " + RESET + heroiEscolhido.getNome() + " provou seu valor como Ninja!";
+        } else {
+            return "\n " + VERMELHO + "DERROTA... " + RESET + heroiEscolhido.getNome() + " caiu diante de " + inimigoEscolhido.getNome() + ".";
         }
 
     }
