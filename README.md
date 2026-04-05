@@ -9,8 +9,8 @@ Naruto: Shinobi Legacy é um jogo desenvolvido em Java como projeto da disciplin
 O jogador possui um baralho de cartas com habilidades de ataque e defesa. A cada turno, o jogador possui 3 pontos de chakra(energia), que são utilizados para ativar diferentes ataques, escudos e efeitos. As cartas que compoem o jogo são:
 
 * Rasengan  
-* Kurama (aplica 5 de veneno)  
-* Clone das Sombras (ganha 3 de regen)  
+* Kurama 
+* Clone das Sombras  
 * Sharingan  
 * Jutsu de Substituição  
 * Chidori  
