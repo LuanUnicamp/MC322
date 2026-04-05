@@ -1,18 +1,29 @@
 # Naruto: Shinobi Legacy
 
 ## Descrição
-Naruto: Shinobi Legacy é um jogo simples desenvolvido em Java como projeto da disciplina **MC322 - Programação Orientada a Objetos**.No jogo, o usuário escolhe um herói do anime Naruto, para lutar contra os maiores vilões da saga! O objetivo é derrotar o inimigo utilizando cartas que representam habilidades do personagem.
+Naruto: Shinobi Legacy é um jogo desenvolvido em Java como projeto da disciplina **MC322 - Programação Orientada a Objetos**. No jogo, o usuário escolhe um herói do anime Naruto, para lutar contra os maiores vilões da saga! O objetivo é derrotar o inimigo utilizando cartas que representam habilidades do personagem.
 
 ---
 
 ## Mecânica
-O jogador possui um baralho de cartas com habilidades de ataque e defesa. A cada turno, o jogador possui 3 pontos de chakra(energia), que são utilizados para ativar diferentes ataques ou o escudo, por exemplo:
+O jogador possui um baralho de cartas com habilidades de ataque e defesa. A cada turno, o jogador possui 3 pontos de chakra(energia), que são utilizados para ativar diferentes ataques, escudos e efeitos. As cartas que compoem o jogo são:
 
-* **Rasengan** – causa dano ao inimigo (custa 1 de chakra) - Carta de ataque
-* **Kurama** – causa grande dano ao inimigo (custa 2 de chakra) - Carta de ataque
-* **Clone das Sombras** – gera escudo para proteger o herói (custa 1 de chakra) - Carta de defesa
+* Rasengan  
+* Kurama (aplica 5 de veneno)  
+* Clone das Sombras (ganha 3 de regen)  
+* Sharingan  
+* Jutsu de Substituição  
+* Chidori  
+* Jutsu Dragão de Água  
+* Parede de Terra  
+* Defesa de Shukaku  
+* Susano'o Perfeito  
+* Gamabunta: Banho de Óleo  
+* Katsuyu: Rede de Cura  
+* Oito Portões Internos  
+* Absorção de Chakra  
 
-O jogador pode acessar o Menu de Cartas para ler a descrição e o custo das cartas na mão.
+O jogador pode acessar o Menu de Cartas para ler a descrição e o custo de cada carta que está em sua mão.
 
 **Sistema de efeitos**
 
@@ -20,8 +31,11 @@ Algumas cartas aplicam efeitos especiais, tanto para o heroi, quanto para o inim
 
 * **Veneno** - causa dano contínuo à entidade afetada no final de cada turno.
 * **Regen (Regeneração)** - gera pontos de escudo/vida no início de cada turno.
+* **Dano em Área** - técnicas com chance de acerto crítico ou falha (dano reduzido).
+* **Roubo de Vida** - causa dano ao oponente e restaura a vida do usuário simultaneamente.
+* **Sacrifício** - ataques poderosos que causam dano massivo ao alvo, mas aplicam dano ao próprio usuário.
 
-O jogador pode acessar o Menu de Efeitos para visualizar os efeitos ativos (como Veneno e Regen) no herói e no inimigo, acompanhando a duração (acúmulos) de cada um.
+O jogador pode acessar o Menu de Efeitos para visualizar os efeitos ativos no herói e no inimigo, acompanhando a duração (acúmulos) de cada um.
 
 **Os inimigos também possuem diferentes cartas!**
 
@@ -31,27 +45,23 @@ O jogo termina quando a vida de um dos personagens chega a zero.
 
 ---
 
-## Como compilar
-Clone ou baixe o repositório:
+## Como compilar e executar
+O projeto utiliza o Gradle para automação.
 
-git clone https://github.com/LuanUnicamp/MC322.git
-
-Acesse a pasta do projeto:
-
-`cd MC322`
-
-Compile os arquivos Java:
-
-`javac *.java`
-
----
-
-## Como executar
-Após a compilação, execute o jogo com o comando:
-
-`java App`
+**Compilar o projeto:**
+`./gradlew build`
+**Executar o jogo:**
+`./gradlew run`
 
 O jogo será iniciado no terminal. Durante cada turno, o jogador deve digitar o número correspondente à carta que deseja utilizar.
+
+---
+## Documentação Javadoc
+O código está totalmente documentado. Para gerar e visualizar a documentação técnica em HTML, utilize:
+
+`./gradlew javadoc`
+
+Os arquivos serão gerados na pasta `build/docs/javadoc`. Abra o arquivo `index.html` em seu navegador.
 
 ---
 
