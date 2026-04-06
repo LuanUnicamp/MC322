@@ -93,6 +93,8 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Combate</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Motor principal do jogo que gerencia o fluxo de turnos, aplicação de efeitos
+e a lógica de combate entre o herói e o inimigo.</div>
 </div>
 </section>
 <section class="summary">
@@ -139,7 +141,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Combate</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Construtor da classe Combate.</div>
+</div>
 </div>
 </section>
 </li>
@@ -156,7 +160,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inscreverEfeito(Efeito)" class="member-name-link">inscreverEfeito</a><wbr>(<a href="Efeito.html" title="class in Unnamed Package">Efeito</a>&nbsp;efeito)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Registra um novo efeito na lista de monitoramento do combate.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rodarCombate(Heroi,Inimigo,java.util.ArrayList,java.util.ArrayList,java.util.ArrayList,java.util.ArrayList)" class="member-name-link">rodarCombate</a><wbr>(<a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;heroiEscolhido,
  <a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;inimigoEscolhido,
@@ -164,7 +170,9 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;pilhaCompra,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;maoJogador,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;pilhaDescarte)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gerencia o loop principal do duelo até que um dos lutadores seja derrotado.</div>
+</div>
 </div>
 </div>
 </div>
@@ -307,6 +315,8 @@ loadScripts(document, 'script');</script>
 <h3>Combate</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Combate</span>()</div>
+<div class="block">Construtor da classe Combate. <br>
+<b>Comportamento</b>: Inicializa a lista de efeitos vazia para o início da partida.</div>
 </div>
 </section>
 </li>
@@ -323,6 +333,12 @@ loadScripts(document, 'script');</script>
 <h3>inscreverEfeito</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">inscreverEfeito</span><wbr><span class="parameters">(<a href="Efeito.html" title="class in Unnamed Package">Efeito</a>&nbsp;efeito)</span></div>
+<div class="block">Registra um novo efeito na lista de monitoramento do combate.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>efeito</code> - O efeito a ser inscrito. <br>
+<b>Comportamento</b>: Verifica se o efeito já existe na lista para evitar duplicatas antes de adicioná-lo.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -336,6 +352,20 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;pilhaCompra,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;maoJogador,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;pilhaDescarte)</span></div>
+<div class="block">Gerencia o loop principal do duelo até que um dos lutadores seja derrotado.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>heroiEscolhido</code> - O personagem controlado pelo jogador.</dd>
+<dd><code>inimigoEscolhido</code> - O oponente controlado pelo sistema.</dd>
+<dd><code>movimentosInimigo</code> - Lista de cartas disponíveis para o inimigo.</dd>
+<dd><code>pilhaCompra</code> - Cartas ainda disponíveis para sorteio.</dd>
+<dd><code>maoJogador</code> - Cartas atualmente na mão do jogador.</dd>
+<dd><code>pilhaDescarte</code> - Cartas já utilizadas ou descartadas.</dd>
+<dt>Returns:</dt>
+<dd>Uma string formatada indicando o vencedor e o desfecho da batalha. <br>
+<b>Comportamento</b>: Controla a compra de cartas, o gasto de chakra, a interação com menus, 
+a execução das jogadas de ambos os lados e o processamento de efeitos por turno.</dd>
+</dl>
 </div>
 </section>
 </li>

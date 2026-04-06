@@ -83,6 +83,9 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Inimigo</span>
 <span class="extends-implements">extends <a href="Entidade.html" title="class in Unnamed Package">Entidade</a></span></div>
+<div class="block">Representa o oponente controlado pelo sistema durante o combate. <br>
+<b>Comportamento</b>: Estende as funcionalidades de Entidade e mantém um registro 
+da vida máxima para cálculos de cura e regeneração durante o duelo.</div>
 </div>
 </section>
 <section class="summary">
@@ -98,7 +101,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>int</code></div>
 <div class="col-second even-row-color"><code><a href="#vidaMaxima" class="member-name-link">vidaMaxima</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Atributo que armazena o limite máximo de vida que o inimigo pode possuir.</div>
+</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-Entidade">Fields inherited from class&nbsp;<a href="Entidade.html#field-summary" title="class in Unnamed Package">Entidade</a></h3>
@@ -116,7 +121,9 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int,int)" class="member-name-link">Inimigo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nome,
  int&nbsp;vida,
  int&nbsp;escudo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Inicializa um novo inimigo com os atributos de combate definidos.</div>
+</div>
 </div>
 </section>
 </li>
@@ -146,6 +153,7 @@ loadScripts(document, 'script');</script>
 <h3>vidaMaxima</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">vidaMaxima</span></div>
+<div class="block">Atributo que armazena o limite máximo de vida que o inimigo pode possuir.</div>
 </div>
 </section>
 </li>
@@ -164,6 +172,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Inimigo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nome,
  int&nbsp;vida,
  int&nbsp;escudo)</span></div>
+<div class="block">Inicializa um novo inimigo com os atributos de combate definidos.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nome</code> - O nome do inimigo.</dd>
+<dd><code>vida</code> - A quantidade inicial de pontos de vida.</dd>
+<dd><code>escudo</code> - A quantidade inicial de pontos de escudo.</dd>
+</dl>
 </div>
 </section>
 </li>

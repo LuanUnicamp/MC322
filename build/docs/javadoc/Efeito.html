@@ -92,6 +92,9 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Efeito</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Classe abstrata que define a base para os efeitos de estado do jogo. <br>
+<b>Comportamento</b>: Define a estrutura para o padrão Observer, onde o efeito monitora 
+os turnos do combate e aplica alterações na entidade associada enquanto possuir acúmulos.</div>
 </div>
 </section>
 <section class="summary">
@@ -108,7 +111,9 @@ loadScripts(document, 'script');</script>
  <a href="Entidade.html" title="class in Unnamed Package">Entidade</a>&nbsp;entidade,
  int&nbsp;acumulos,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tipo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Inicializa as propriedades do efeito de estado.</div>
+</div>
 </div>
 </section>
 </li>
@@ -125,13 +130,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#acabou()" class="member-name-link">acabou</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Verifica se o efeito não possui mais acúmulos ativos.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#adicionarAcumulos(int)" class="member-name-link">adicionarAcumulos</a><wbr>(int&nbsp;valor)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Aumenta a contagem de acúmulos do efeito.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#avisado(int)" class="member-name-link">avisado</a><wbr>(int&nbsp;num)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Método de notificação chamado pelo combate para processar o efeito.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAcumulos()" class="member-name-link">getAcumulos</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -143,13 +154,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getString()" class="member-name-link">getString</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gera uma representação textual do estado atual do efeito para exibição em menus.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTipo()" class="member-name-link">getTipo</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reduzirAcumulos()" class="member-name-link">reduzirAcumulos</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Diminui a contagem de acúmulos em uma unidade.</div>
+</div>
 </div>
 </div>
 </div>
@@ -175,6 +190,14 @@ loadScripts(document, 'script');</script>
  <a href="Entidade.html" title="class in Unnamed Package">Entidade</a>&nbsp;entidade,
  int&nbsp;acumulos,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tipo)</span></div>
+<div class="block">Inicializa as propriedades do efeito de estado.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nome</code> - O nome identificador do efeito.</dd>
+<dd><code>entidade</code> - A entidade (Herói ou Inimigo) que está sob o efeito.</dd>
+<dd><code>acumulos</code> - A duração ou intensidade inicial do efeito em turnos.</dd>
+<dd><code>tipo</code> - A categoria do efeito (ex: "VENENO", "REGEN").</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -191,6 +214,8 @@ loadScripts(document, 'script');</script>
 <h3>getString</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getString</span>()</div>
+<div class="block">Gera uma representação textual do estado atual do efeito para exibição em menus. <br>
+<b>Comportamento</b>: Retorna uma string contendo o nome e a quantidade de acúmulos restantes.</div>
 </div>
 </section>
 </li>
@@ -223,6 +248,12 @@ loadScripts(document, 'script');</script>
 <h3>avisado</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">avisado</span><wbr><span class="parameters">(int&nbsp;num)</span></div>
+<div class="block">Método de notificação chamado pelo combate para processar o efeito.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>num</code> - O momento do turno em que a notificação ocorre (0 para início, 1 para fim). <br>
+<b>Comportamento</b>: Implementa a lógica específica de cada efeito, como causar dano ou curar a entidade.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -231,6 +262,8 @@ loadScripts(document, 'script');</script>
 <h3>reduzirAcumulos</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reduzirAcumulos</span>()</div>
+<div class="block">Diminui a contagem de acúmulos em uma unidade. <br>
+<b>Comportamento</b>: Utilizado para controlar a expiração do efeito ao longo dos turnos.</div>
 </div>
 </section>
 </li>
@@ -239,6 +272,8 @@ loadScripts(document, 'script');</script>
 <h3>acabou</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">acabou</span>()</div>
+<div class="block">Verifica se o efeito não possui mais acúmulos ativos. <br>
+<b>Comportamento</b>: Retorna verdadeiro se os acúmulos forem menores ou iguais a zero, sinalizando que deve ser removido.</div>
 </div>
 </section>
 </li>
@@ -247,6 +282,11 @@ loadScripts(document, 'script');</script>
 <h3>adicionarAcumulos</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">adicionarAcumulos</span><wbr><span class="parameters">(int&nbsp;valor)</span></div>
+<div class="block">Aumenta a contagem de acúmulos do efeito.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>valor</code> - A quantidade a ser adicionada aos acúmulos atuais.</dd>
+</dl>
 </div>
 </section>
 </li>

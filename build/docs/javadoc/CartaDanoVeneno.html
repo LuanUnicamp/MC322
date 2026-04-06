@@ -87,6 +87,7 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CartaDanoVeneno</span>
 <span class="extends-implements">extends <a href="CartaDano.html" title="class in Unnamed Package">CartaDano</a></span></div>
+<div class="block">Representa uma carta de ataque que, além de causar dano direto, aplica um efeito contínuo de veneno no alvo.</div>
 </div>
 </section>
 <section class="summary">
@@ -116,7 +117,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;custo,
  int&nbsp;qtd_dano,
  int&nbsp;veneno)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Inicializa os atributos da carta de dano com veneno.</div>
+</div>
 </div>
 </section>
 </li>
@@ -138,12 +141,16 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#usar_h(Heroi,Inimigo,Combate)" class="member-name-link">usar_h</a><wbr>(<a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Executa a ação da carta quando utilizada pelo herói.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#usar_i(Inimigo,Heroi,Combate)" class="member-name-link">usar_i</a><wbr>(<a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Executa a ação da carta quando utilizada pelo inimigo.</div>
+</div>
 </div>
 </div>
 </div>
@@ -176,6 +183,15 @@ loadScripts(document, 'script');</script>
  int&nbsp;custo,
  int&nbsp;qtd_dano,
  int&nbsp;veneno)</span></div>
+<div class="block">Inicializa os atributos da carta de dano com veneno.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nome</code> - O nome da carta.</dd>
+<dd><code>descricao</code> - A descrição do efeito da carta.</dd>
+<dd><code>custo</code> - O custo de chakra para usar a carta.</dd>
+<dd><code>qtd_dano</code> - A quantidade de dano base causado.</dd>
+<dd><code>veneno</code> - A quantidade de acúmulos de veneno aplicados ao alvo.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -194,9 +210,15 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">usar_h</span><wbr><span class="parameters">(<a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</span></div>
+<div class="block">Executa a ação da carta quando utilizada pelo herói.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="CartaDano.html#usar_h(Heroi,Inimigo,Combate)">usar_h</a></code>&nbsp;in class&nbsp;<code><a href="CartaDano.html" title="class in Unnamed Package">CartaDano</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>h</code> - O herói que está usando a carta.</dd>
+<dd><code>i</code> - O inimigo alvo que receberá o dano e o veneno.</dd>
+<dd><code>combate</code> - A instância do gerenciador de combate. <br>
+<b>Comportamento</b>: Causa dano direto ao inimigo, cria o efeito de veneno, aplica-o à entidade e o inscreve na lista do combate, exibindo as ações no terminal.</dd>
 </dl>
 </div>
 </section>
@@ -208,9 +230,15 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">usar_i</span><wbr><span class="parameters">(<a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</span></div>
+<div class="block">Executa a ação da carta quando utilizada pelo inimigo.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="CartaDano.html#usar_i(Inimigo,Heroi,Combate)">usar_i</a></code>&nbsp;in class&nbsp;<code><a href="CartaDano.html" title="class in Unnamed Package">CartaDano</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>i</code> - O inimigo que está usando a carta.</dd>
+<dd><code>h</code> - O herói alvo que receberá o dano e o veneno.</dd>
+<dd><code>combate</code> - A instância do gerenciador de combate. <br>
+<b>Comportamento</b>: Causa dano direto ao herói, cria o efeito de veneno, aplica-o à entidade e o inscreve na lista do combate, exibindo as ações no terminal.</dd>
 </dl>
 </div>
 </section>

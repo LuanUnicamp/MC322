@@ -104,6 +104,9 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Entidade</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Classe abstrata que representa uma entidade básica no jogo (Herói ou Inimigo). <br>
+<b>Comportamento</b>: Gerencia os atributos vitais, a lista de efeitos ativos e a 
+lógica de combate relacionada a dano, cura e defesa.</div>
 </div>
 </section>
 <section class="summary">
@@ -146,7 +149,9 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int,int)" class="member-name-link">Entidade</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nome,
  int&nbsp;vida,
  int&nbsp;escudo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Inicializa uma nova entidade com nome, vida e escudo.</div>
+</div>
 </div>
 </section>
 </li>
@@ -163,13 +168,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aplicarEfeito(Efeito)" class="member-name-link">aplicarEfeito</a><wbr>(<a href="Efeito.html" title="class in Unnamed Package">Efeito</a>&nbsp;efeito)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Aplica um efeito de estado à entidade.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#estaVivo()" class="member-name-link">estaVivo</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Verifica se a entidade ainda possui pontos de vida.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ganharEscudo(int)" class="member-name-link">ganharEscudo</a><wbr>(int&nbsp;qtd_escudo)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Incrementa o valor atual do escudo da entidade.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEscudo()" class="member-name-link">getEscudo</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -181,19 +192,29 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#receberCura(int)" class="member-name-link">receberCura</a><wbr>(int&nbsp;valor)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Restaura pontos de vida da entidade.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#receberDano(int)" class="member-name-link">receberDano</a><wbr>(int&nbsp;dano)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Processa o dano recebido pela entidade, considerando o escudo.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removerEfeito(Efeito)" class="member-name-link">removerEfeito</a><wbr>(<a href="Efeito.html" title="class in Unnamed Package">Efeito</a>&nbsp;efeito)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Remove um efeito específico da lista de efeitos da entidade.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#zeraEscudo()" class="member-name-link">zeraEscudo</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Remove todos os pontos de escudo da entidade.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#zeraVida()" class="member-name-link">zeraVida</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Garante que a vida da entidade não seja exibida como um valor negativo.</div>
+</div>
 </div>
 </div>
 </div>
@@ -266,6 +287,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Entidade</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nome,
  int&nbsp;vida,
  int&nbsp;escudo)</span></div>
+<div class="block">Inicializa uma nova entidade com nome, vida e escudo.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nome</code> - O nome da entidade.</dd>
+<dd><code>vida</code> - A quantidade inicial e máxima de pontos de vida.</dd>
+<dd><code>escudo</code> - A quantidade inicial de pontos de escudo.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -282,6 +310,13 @@ loadScripts(document, 'script');</script>
 <h3>aplicarEfeito</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">aplicarEfeito</span><wbr><span class="parameters">(<a href="Efeito.html" title="class in Unnamed Package">Efeito</a>&nbsp;efeito)</span></div>
+<div class="block">Aplica um efeito de estado à entidade.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>efeito</code> - O efeito a ser aplicado. <br>
+<b>Comportamento</b>: Se a entidade já possuir um efeito com o mesmo nome, os acúmulos 
+são somados. Caso contrário, o novo efeito é adicionado à lista.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -290,6 +325,13 @@ loadScripts(document, 'script');</script>
 <h3>receberDano</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">receberDano</span><wbr><span class="parameters">(int&nbsp;dano)</span></div>
+<div class="block">Processa o dano recebido pela entidade, considerando o escudo.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>dano</code> - A quantidade de dano a ser aplicada. <br>
+<b>Comportamento</b>: O dano reduz primeiro o escudo. Se o dano exceder o escudo, 
+o restante é subtraído da vida. Garante que a vida não fique negativa.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -298,6 +340,11 @@ loadScripts(document, 'script');</script>
 <h3>ganharEscudo</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">ganharEscudo</span><wbr><span class="parameters">(int&nbsp;qtd_escudo)</span></div>
+<div class="block">Incrementa o valor atual do escudo da entidade.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>qtd_escudo</code> - A quantidade de escudo a ser adicionada.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -306,6 +353,8 @@ loadScripts(document, 'script');</script>
 <h3>estaVivo</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a></span>&nbsp;<span class="element-name">estaVivo</span>()</div>
+<div class="block">Verifica se a entidade ainda possui pontos de vida. <br>
+<b>Comportamento</b>: Retorna verdadeiro se a vida for maior que zero.</div>
 </div>
 </section>
 </li>
@@ -314,6 +363,12 @@ loadScripts(document, 'script');</script>
 <h3>receberCura</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">receberCura</span><wbr><span class="parameters">(int&nbsp;valor)</span></div>
+<div class="block">Restaura pontos de vida da entidade.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>valor</code> - A quantidade de pontos de vida a ser curada. <br>
+<b>Comportamento</b>: Adiciona o valor à vida atual, respeitando o limite do atributo vidaMax.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -322,6 +377,8 @@ loadScripts(document, 'script');</script>
 <h3>zeraVida</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">zeraVida</span>()</div>
+<div class="block">Garante que a vida da entidade não seja exibida como um valor negativo. <br>
+<b>Comportamento</b>: Ajusta o valor de vida para zero caso ele seja menor que zero.</div>
 </div>
 </section>
 </li>
@@ -330,6 +387,8 @@ loadScripts(document, 'script');</script>
 <h3>zeraEscudo</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">zeraEscudo</span>()</div>
+<div class="block">Remove todos os pontos de escudo da entidade. <br>
+<b>Comportamento</b>: Atribui zero ao valor do escudo.</div>
 </div>
 </section>
 </li>
@@ -362,6 +421,11 @@ loadScripts(document, 'script');</script>
 <h3>removerEfeito</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removerEfeito</span><wbr><span class="parameters">(<a href="Efeito.html" title="class in Unnamed Package">Efeito</a>&nbsp;efeito)</span></div>
+<div class="block">Remove um efeito específico da lista de efeitos da entidade.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>efeito</code> - O efeito a ser removido.</dd>
+</dl>
 </div>
 </section>
 </li>

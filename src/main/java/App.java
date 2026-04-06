@@ -1,13 +1,15 @@
-
-
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * Classe principal do sistema responsável por gerenciar a interface 
+ * do usuário no terminal e a inicialização das partidas.
+ */
 
 public class App {
 
+    /** Constantes de formatação ANSI utilizadas para colorir o texto no terminal. */
     public static final String RESET = "\u001B[0m";
     public static final String VERMELHO = "\u001B[31m";
     public static final String VERDE = "\u001B[32m";
@@ -16,7 +18,16 @@ public class App {
     public static final String ROXO = "\u001B[35m";
     public static final String NEGRITO = "\033[1m";
 
-    //metodo que contem o display que atualiza a cada nova entrada do usuário
+    /**
+     * Exibe o estado atual do combate no terminal.
+     * @param h O herói cujos atributos serão exibidos.
+     * @param i O inimigo cujos atributos serão exibidos.
+     * @param chakra A quantidade de energia disponível para o jogador.
+     * @param maoJogador A lista de cartas disponíveis para uso no turno.
+     * @param movimentosInimigo A lista de ações que o inimigo pretende realizar. <br>
+     * <b>Comportamento</b>: Atualiza os valores de vida e imprime o painel visual com 
+     * os status de ambos os personagens e as opções de comando.
+     */
     public static void display(Heroi h, Inimigo i, int chakra, ArrayList<Carta> maoJogador, ArrayList<Carta> movimentosInimigo){
         h.zeraVida();
         i.zeraVida();

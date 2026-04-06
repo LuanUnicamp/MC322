@@ -96,6 +96,8 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">App</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Classe principal do sistema responsável por gerenciar a interface 
+do usuário no terminal e a inicialização das partidas.</div>
 </div>
 </section>
 <section class="summary">
@@ -120,7 +122,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#RESET" class="member-name-link">RESET</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Constantes de formatação ANSI utilizadas para colorir o texto no terminal.</div>
+</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#ROXO" class="member-name-link">ROXO</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
@@ -163,7 +167,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;chakra,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;maoJogador,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;movimentosInimigo)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Exibe o estado atual do combate no terminal.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#limparTela()" class="member-name-link">limparTela</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
@@ -200,6 +206,7 @@ loadScripts(document, 'script');</script>
 <h3>RESET</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">RESET</span></div>
+<div class="block">Constantes de formatação ANSI utilizadas para colorir o texto no terminal.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -340,6 +347,17 @@ loadScripts(document, 'script');</script>
  int&nbsp;chakra,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;maoJogador,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Carta.html" title="class in Unnamed Package">Carta</a>&gt;&nbsp;movimentosInimigo)</span></div>
+<div class="block">Exibe o estado atual do combate no terminal.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>h</code> - O herói cujos atributos serão exibidos.</dd>
+<dd><code>i</code> - O inimigo cujos atributos serão exibidos.</dd>
+<dd><code>chakra</code> - A quantidade de energia disponível para o jogador.</dd>
+<dd><code>maoJogador</code> - A lista de cartas disponíveis para uso no turno.</dd>
+<dd><code>movimentosInimigo</code> - A lista de ações que o inimigo pretende realizar. <br>
+<b>Comportamento</b>: Atualiza os valores de vida e imprime o painel visual com 
+os status de ambos os personagens e as opções de comando.</dd>
+</dl>
 </div>
 </section>
 </li>
