@@ -37,7 +37,19 @@ Algumas cartas aplicam efeitos especiais, tanto para o heroi, quanto para o inim
 
 O jogador pode acessar o Menu de Efeitos para visualizar os efeitos ativos no herói e no inimigo, acompanhando a duração (acúmulos) de cada um.
 
-**Os inimigos também possuem diferentes movimentos!**
+**Os inimigos também possuem diferentes movimentos:**
+
+* Shinra Tensei  
+* Jutsu Bola de Fogo  
+* Ninjutsu Médico 
+* Kirin  
+* Edo Tensei  
+* Rotação Hyuga  
+* Manda: Bote Venenoso  
+* Bijuudama  
+* Caminho Naraka  
+* Corte da Samehada  
+* Manto de Chakra  
 
 Após o turno do jogador, as cartas são enviadas para a pilha de descarte e o inimigo realiza automaticamente sua ação. Quando o baralho se esgota, a pilha de descarte é embaralhada e reutilizada como nova pilha de compra. O jogo termina quando a vida de um dos personagens chega a zero.
 
@@ -48,6 +60,7 @@ O projeto utiliza o Gradle para automação.
 
 **Compilar o projeto:**
 `./gradlew build`
+
 **Executar o jogo:**
 `./gradlew run`
 
