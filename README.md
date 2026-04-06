@@ -37,11 +37,9 @@ Algumas cartas aplicam efeitos especiais, tanto para o heroi, quanto para o inim
 
 O jogador pode acessar o Menu de Efeitos para visualizar os efeitos ativos no herói e no inimigo, acompanhando a duração (acúmulos) de cada um.
 
-**Os inimigos também possuem diferentes cartas!**
+**Os inimigos também possuem diferentes movimentos!**
 
-Após o turno do jogador, as cartas vão para a pilha de descarte e o inimigo realiza um ataque automático.
-Quando o baralho acaba a pilha de descarte é embaralhada e reutilizada.
-O jogo termina quando a vida de um dos personagens chega a zero.
+Após o turno do jogador, as cartas são enviadas para a pilha de descarte e o inimigo realiza automaticamente sua ação. Quando o baralho se esgota, a pilha de descarte é embaralhada e reutilizada como nova pilha de compra. O jogo termina quando a vida de um dos personagens chega a zero.
 
 ---
 
@@ -57,7 +55,9 @@ O jogo será iniciado no terminal. Durante cada turno, o jogador deve digitar o 
 
 ---
 ## Documentação Javadoc
-O código está totalmente documentado. Para gerar e visualizar a documentação técnica em HTML, utilize:
+O código está documentado utilizando Javadoc, incluindo classes principais como combate, cartas e sistema de efeitos.
+
+Para gerar e visualizar a documentação técnica em HTML, utilize:
 
 `./gradlew javadoc`
 
