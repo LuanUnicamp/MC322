@@ -1,9 +1,11 @@
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+/**
+ * Motor principal do jogo que gerencia o fluxo de turnos, aplicação de efeitos
+ * e a lógica de combate entre o herói e o inimigo.
+ */
 public class Combate {
     public static final String RESET = "\u001B[0m";
     public static final String VERMELHO = "\u001B[31m";
@@ -13,14 +15,22 @@ public class Combate {
     public static final String ROXO = "\u001B[35m";
     public static final String NEGRITO = "\033[1m";
     
+    /** Lista que armazena os efeitos ativos (Veneno, Regen) que devem ser processados no combate. */
     private ArrayList<Efeito> listaEfeitosCombate;
 
-    //construtor
+    /**
+     * Construtor da classe Combate. <br>
+     * <b>Comportamento</b>: Inicializa a lista de efeitos vazia para o início da partida.
+     */
     public Combate(){
         listaEfeitosCombate= new ArrayList<>();
     }
 
-    //metodo que inscreve os efeitos na lista de efeitos do Combate
+    /**
+     * Registra um novo efeito na lista de monitoramento do combate.
+     * @param efeito O efeito a ser inscrito. <br>
+     * <b>Comportamento</b>: Verifica se o efeito já existe na lista para evitar duplicatas antes de adicioná-lo.
+     */
     public void inscreverEfeito(Efeito efeito){
         for(int i=0;i<listaEfeitosCombate.size();i++){
             Efeito efeitolista =listaEfeitosCombate.get(i);
@@ -31,7 +41,11 @@ public class Combate {
         listaEfeitosCombate.add(efeito);
     } 
 
-    //metodo que avisa todos os efeitos da lista de efeitos do combate sobre inicio ou fim de turno
+    /**
+     * Notifica os efeitos inscritos sobre a passagem do tempo no jogo.
+     * @param num O código do momento do turno (0 para início, 1 para fim). <br>
+     * <b>Comportamento</b>: Remove efeitos cujas durações expiraram e aciona a lógica interna dos efeitos ativos.
+     */
     private void avisar(int num){
         for(int i=listaEfeitosCombate.size()-1;i>=0;i--){
             Efeito efeito =listaEfeitosCombate.get(i);
@@ -47,6 +61,18 @@ public class Combate {
        
     }
 
+    /**
+     * Gerencia o loop principal do duelo até que um dos lutadores seja derrotado.
+     * @param heroiEscolhido O personagem controlado pelo jogador.
+     * @param inimigoEscolhido O oponente controlado pelo sistema.
+     * @param movimentosInimigo Lista de cartas disponíveis para o inimigo.
+     * @param pilhaCompra Cartas ainda disponíveis para sorteio.
+     * @param maoJogador Cartas atualmente na mão do jogador.
+     * @param pilhaDescarte Cartas já utilizadas ou descartadas.
+     * @return Uma string formatada indicando o vencedor e o desfecho da batalha. <br>
+     * <b>Comportamento</b>: Controla a compra de cartas, o gasto de chakra, a interação com menus, 
+     * a execução das jogadas de ambos os lados e o processamento de efeitos por turno.
+     */
     public String rodarCombate(Heroi heroiEscolhido, Inimigo inimigoEscolhido, ArrayList<Carta> movimentosInimigo, ArrayList<Carta> pilhaCompra, ArrayList<Carta> maoJogador, ArrayList<Carta> pilhaDescarte ){
         int leitura;
         Scanner entrada = new Scanner(System.in);
@@ -168,16 +194,6 @@ public class Combate {
             inimigoEscolhido.zeraEscudo();
 
         }
-        /*
-        App.limparTela();
-        System.out.println("𖣘 FIM DE JOGO! 𖣘");
-        
-        //quem permanecer vivo, vence a partida
-        if(heroiEscolhido.estaVivo()){
-            return heroiEscolhido.getNome() + " venceu!";
-        } else{
-            return inimigoEscolhido.getNome() + " venceu!";
-        } */
         
         App.limparTela();
         System.out.println(AMARELO + "╔════════════════════════════════════════════════════════════╗" + RESET);

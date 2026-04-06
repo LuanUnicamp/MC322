@@ -1,8 +1,18 @@
+/**
+ * Representa uma carta que cura o usuário imediatamente e aplica um efeito de regeneração contínua.
+ */
 public class CartaCuraRegen extends Carta {
     private int qtd_cura;
     private int regenCura;
 
-    //construtor
+    /**
+     * Inicializa os atributos da carta de cura com regeneração.
+     * @param nome O nome da carta.
+     * @param descricao A descrição do efeito da carta.
+     * @param custo O custo de chakra para usar a carta.
+     * @param qtd_cura A quantidade de cura imediata recebida.
+     * @param regenCura A quantidade de cura regenerada por turno.
+     */
     public CartaCuraRegen(String nome, String descricao, int custo, int qtd_cura,int regenCura) {
         super(nome, descricao, custo);
         this.qtd_cura=qtd_cura;
@@ -10,7 +20,14 @@ public class CartaCuraRegen extends Carta {
     }
 
 
-    //metodo quando heroi usa a carta de cura com Regen
+    /**
+     * Executa a ação da carta quando utilizada pelo herói.
+     * @param h O herói que está usando a carta e receberá a cura.
+     * @param i O inimigo presente no combate.
+     * @param combate A instância do gerenciador de combate para inscrever o efeito. <br>
+     * <b>Comportamento</b>: Cura a vida do herói imediatamente, instancia um novo efeito de regeneração, 
+     * aplica-o ao herói, inscreve o efeito no combate e exibe a mensagem da ação no terminal.
+     */
     @Override
     public void usar_h(Heroi h, Inimigo i, Combate combate) {
         //logica da carta e do padrao observer
@@ -25,7 +42,14 @@ public class CartaCuraRegen extends Carta {
         System.out.println("    Efeito Ativo: " + VERDE + regen_heroi.getNome() + " (+" + this.regenCura + " de regen de cura)" + RESET);
     }
 
-    //metodo quando inimigo  usa a carta de cura com Regen
+    /**
+     * Executa a ação da carta quando utilizada pelo inimigo.
+     * @param i O inimigo que está usando a carta e receberá a cura.
+     * @param h O herói presente no combate.
+     * @param combate A instância do gerenciador de combate para inscrever o efeito. <br>
+     * <b>Comportamento</b>: Cura a vida do inimigo imediatamente, instancia um novo efeito de regeneração, 
+     * aplica-o ao inimigo, inscreve o efeito no combate e exibe a mensagem da ação no terminal.
+     */
     @Override
     public void usar_i(Inimigo i, Heroi h, Combate combate) {
         //logica da carta e do padrao observer

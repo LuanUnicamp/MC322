@@ -105,6 +105,9 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Carta</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Classe abstrata que define a estrutura base para todas as cartas do jogo. <br>
+<b>Comportamento</b>: Estabelece os atributos comuns e força as classes filhas 
+a implementarem as lógicas específicas de uso no combate.</div>
 </div>
 </section>
 <section class="summary">
@@ -162,7 +165,9 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String,int)" class="member-name-link">Carta</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nome,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;descricao,
  int&nbsp;custo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Inicializa os atributos base de uma carta.</div>
+</div>
 </div>
 </section>
 </li>
@@ -196,12 +201,16 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#usar_h(Heroi,Inimigo,Combate)" class="member-name-link">usar_h</a><wbr>(<a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Executa a ação da carta a partir da jogada do herói.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#usar_i(Inimigo,Heroi,Combate)" class="member-name-link">usar_i</a><wbr>(<a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Executa a ação da carta a partir da jogada do inimigo.</div>
+</div>
 </div>
 </div>
 </div>
@@ -370,6 +379,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Carta</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nome,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;descricao,
  int&nbsp;custo)</span></div>
+<div class="block">Inicializa os atributos base de uma carta.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nome</code> - O nome de exibição da carta.</dd>
+<dd><code>descricao</code> - O texto explicativo do efeito da carta.</dd>
+<dd><code>custo</code> - A quantidade de chakra exigida para ativar a carta.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -388,6 +404,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">usar_h</span><wbr><span class="parameters">(<a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</span></div>
+<div class="block">Executa a ação da carta a partir da jogada do herói.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>h</code> - A entidade do herói que está usando a carta.</dd>
+<dd><code>i</code> - A entidade do inimigo alvo.</dd>
+<dd><code>combate</code> - A instância do gerenciador de combate para registro de efeitos. <br>
+<b>Comportamento</b>: Aplica alterações de status (dano, escudo, cura) nas entidades ou inscreve novos efeitos no combate.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -398,6 +422,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">usar_i</span><wbr><span class="parameters">(<a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</span></div>
+<div class="block">Executa a ação da carta a partir da jogada do inimigo.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>i</code> - A entidade do inimigo que está usando a carta.</dd>
+<dd><code>h</code> - A entidade do herói alvo.</dd>
+<dd><code>combate</code> - A instância do gerenciador de combate para registro de efeitos. <br>
+<b>Comportamento</b>: Semelhante ao uso do herói, mas com a perspectiva e os alvos invertidos.</dd>
+</dl>
 </div>
 </section>
 </li>

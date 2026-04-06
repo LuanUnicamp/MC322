@@ -86,6 +86,8 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CartaSacrificio</span>
 <span class="extends-implements">extends <a href="Carta.html" title="class in Unnamed Package">Carta</a></span></div>
+<div class="block">Representa uma carta de ataque devastador que causa dano ao alvo, 
+mas também inflige dano de recuo ao próprio usuário.</div>
 </div>
 </section>
 <section class="summary">
@@ -112,7 +114,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;custo,
  int&nbsp;danoAlvo,
  int&nbsp;danoUsuario)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Inicializa os atributos da carta de sacrifício.</div>
+</div>
 </div>
 </section>
 </li>
@@ -137,12 +141,16 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#usar_h(Heroi,Inimigo,Combate)" class="member-name-link">usar_h</a><wbr>(<a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Executa a ação da carta quando utilizada pelo herói.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#usar_i(Inimigo,Heroi,Combate)" class="member-name-link">usar_i</a><wbr>(<a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Executa a ação da carta quando utilizada pelo inimigo.</div>
+</div>
 </div>
 </div>
 </div>
@@ -172,6 +180,15 @@ loadScripts(document, 'script');</script>
  int&nbsp;custo,
  int&nbsp;danoAlvo,
  int&nbsp;danoUsuario)</span></div>
+<div class="block">Inicializa os atributos da carta de sacrifício.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nome</code> - O nome da carta.</dd>
+<dd><code>desc</code> - A descrição do efeito da carta.</dd>
+<dd><code>custo</code> - O custo de chakra para usar a carta.</dd>
+<dd><code>danoAlvo</code> - A quantidade de dano causada ao oponente.</dd>
+<dd><code>danoUsuario</code> - A quantidade de dano sofrida pelo usuário como consequência.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -190,9 +207,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">usar_h</span><wbr><span class="parameters">(<a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</span></div>
+<div class="block">Executa a ação da carta quando utilizada pelo herói.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Carta.html#usar_h(Heroi,Inimigo,Combate)">usar_h</a></code>&nbsp;in class&nbsp;<code><a href="Carta.html" title="class in Unnamed Package">Carta</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>h</code> - O herói que está usando a carta e sofrerá o dano de recuo.</dd>
+<dd><code>i</code> - O inimigo alvo que receberá o dano principal.</dd>
+<dd><code>combate</code> - A instância do gerenciador de combate. <br>
+<b>Comportamento</b>: Reduz a vida do herói (dano de recuo) e a vida do inimigo (impacto direto), 
+exibindo as consequências de ambas as partes no terminal.</dd>
 </dl>
 </div>
 </section>
@@ -204,9 +228,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">usar_i</span><wbr><span class="parameters">(<a href="Inimigo.html" title="class in Unnamed Package">Inimigo</a>&nbsp;i,
  <a href="Heroi.html" title="class in Unnamed Package">Heroi</a>&nbsp;h,
  <a href="Combate.html" title="class in Unnamed Package">Combate</a>&nbsp;combate)</span></div>
+<div class="block">Executa a ação da carta quando utilizada pelo inimigo.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Carta.html#usar_i(Inimigo,Heroi,Combate)">usar_i</a></code>&nbsp;in class&nbsp;<code><a href="Carta.html" title="class in Unnamed Package">Carta</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>i</code> - O inimigo que está usando a carta e sofrerá o dano de recuo.</dd>
+<dd><code>h</code> - O herói alvo que receberá o dano principal.</dd>
+<dd><code>combate</code> - A instância do gerenciador de combate. <br>
+<b>Comportamento</b>: Reduz a vida do inimigo (auto-dano) e a vida do herói (alvo atingido), 
+exibindo o aviso da técnica arriscada no terminal.</dd>
 </dl>
 </div>
 </section>

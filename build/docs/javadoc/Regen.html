@@ -82,6 +82,9 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Regen</span>
 <span class="extends-implements">extends <a href="Efeito.html" title="class in Unnamed Package">Efeito</a></span></div>
+<div class="block">Representa um efeito de regeneração contínua que bonifica a entidade a cada turno. <br>
+<b>Comportamento</b>: No início de cada turno (notificação 0), concede pontos de escudo 
+à entidade baseados na quantidade atual de acúmulos e, em seguida, reduz a intensidade do efeito.</div>
 </div>
 </section>
 <section class="summary">
@@ -98,7 +101,9 @@ loadScripts(document, 'script');</script>
  <a href="Entidade.html" title="class in Unnamed Package">Entidade</a>&nbsp;entidade,
  int&nbsp;acumulos,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tipo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Inicializa o efeito de regeneração.</div>
+</div>
 </div>
 </section>
 </li>
@@ -115,7 +120,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#avisado(int)" class="member-name-link">avisado</a><wbr>(int&nbsp;num)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Implementação da lógica de atualização do efeito de regeneração.</div>
+</div>
 </div>
 </div>
 </div>
@@ -144,6 +151,14 @@ loadScripts(document, 'script');</script>
  <a href="Entidade.html" title="class in Unnamed Package">Entidade</a>&nbsp;entidade,
  int&nbsp;acumulos,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tipo)</span></div>
+<div class="block">Inicializa o efeito de regeneração.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nome</code> - O nome da técnica de regeneração.</dd>
+<dd><code>entidade</code> - A entidade que receberá os benefícios.</dd>
+<dd><code>acumulos</code> - A duração/intensidade inicial do efeito.</dd>
+<dd><code>tipo</code> - O rótulo identificador do tipo de efeito ("REGEN").</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -160,9 +175,14 @@ loadScripts(document, 'script');</script>
 <h3>avisado</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">avisado</span><wbr><span class="parameters">(int&nbsp;num)</span></div>
+<div class="block">Implementação da lógica de atualização do efeito de regeneração.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Efeito.html#avisado(int)">avisado</a></code>&nbsp;in class&nbsp;<code><a href="Efeito.html" title="class in Unnamed Package">Efeito</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>num</code> - O código do momento do turno (0 para início, 1 para fim). <br>
+<b>Comportamento</b>: Se a notificação for de início de turno (0), a entidade ganha 
+escudo equivalente aos acúmulos atuais e um acúmulo é consumido.</dd>
 </dl>
 </div>
 </section>
