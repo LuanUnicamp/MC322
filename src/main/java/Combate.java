@@ -83,7 +83,7 @@ public class Combate {
             //puvlisher avisando inicio do turno
             avisar(0);
     
-            int chakra = 3;
+            int chakra = 4;
             ///variável que indica quando o heroi não tem chackra suficiente para usar habilidade
             Boolean insuficiente = false;
 
@@ -131,6 +131,7 @@ public class Combate {
                     if(chakra >= cartaSelecionada.getCusto()){
                         chakra -= cartaSelecionada.getCusto();
                         cartaSelecionada.usar_h(heroiEscolhido, inimigoEscolhido,this);
+                        
 
                         System.out.println("\n[Pressione ENTER para continuar]");
                         entrada.nextLine(); 
@@ -176,6 +177,8 @@ public class Combate {
                 Carta cartaDescartada = maoJogador.remove(i);
                 pilhaDescarte.add(cartaDescartada);
             }
+
+            inimigoEscolhido.zeraEscudo();
             //inimigo ataca automaticamente no final de cada turno, mas só se ele estiver vivo
             if (inimigoEscolhido.getVida()>0) {
                 movimentosInimigo.get(0).usar_i(inimigoEscolhido, heroiEscolhido,this);
@@ -191,7 +194,6 @@ public class Combate {
 
             //escudo zerado depois de cada turno
             heroiEscolhido.zeraEscudo();
-            inimigoEscolhido.zeraEscudo();
 
         }
         

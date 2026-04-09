@@ -47,8 +47,8 @@ public class App {
         System.out.println(CIANO + "╠════════════════════════════════════════════════════════════════╣" + RESET);
         
         // chakra em destaque
-        String chakraBarra = "● ".repeat(chakra) + "○ ".repeat(3 - chakra);
-        System.out.println("  Energia: " + AMARELO + chakra + "/3 Chakra [" + chakraBarra + "]" + RESET);
+        String chakraBarra = "● ".repeat(chakra) + "○ ".repeat(4 - chakra);
+        System.out.println("  Energia: " + AMARELO + chakra + "/4 Chakra [" + chakraBarra + "]" + RESET);
         System.out.println("  Próximo golpe do inimigo: " + VERMELHO + movimentosInimigo.get(0).getNome() + RESET);
         System.out.println(CIANO + "╟────────────────────────────────────────────────────────────────╢" + RESET);
 

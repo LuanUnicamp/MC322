@@ -46,12 +46,6 @@ public class CartaEscudo extends Carta{
         System.out.println("\n 💠 " + App.VERMELHO + App.NEGRITO + i.getNome() + App.RESET + " ergueu uma barreira!");
         System.out.println("    Escudo Inimigo: " + App.CIANO + "+" + this.qtd_escudo + " de proteção" + App.RESET);
         
-        //se a regeneração passar da vida maxima, a vida se limita a vida maxima
-        if((i.vida + qtd_escudo) > i.vidaMaxima){
-            i.vida = i.vidaMaxima;
-        } else{
-            i.vida += qtd_escudo;
-        }
         System.out.println("    Nota: O inimigo também estabilizou sua vitalidade.");
     }
 
