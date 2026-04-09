@@ -46,7 +46,6 @@ public class CartaEscudo extends Carta{
         System.out.println("\n 💠 " + App.VERMELHO + App.NEGRITO + i.getNome() + App.RESET + " ergueu uma barreira!");
         System.out.println("    Escudo Inimigo: " + App.CIANO + "+" + this.qtd_escudo + " de proteção" + App.RESET);
         
-        System.out.println("    Nota: O inimigo também estabilizou sua vitalidade.");
     }
 
     @Override
