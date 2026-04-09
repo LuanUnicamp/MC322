@@ -50,6 +50,43 @@ public class App {
         String chakraBarra = "● ".repeat(chakra) + "○ ".repeat(4 - chakra);
         System.out.println("  Energia: " + AMARELO + chakra + "/4 Chakra [" + chakraBarra + "]" + RESET);
         System.out.println("  Próximo golpe do inimigo: " + VERMELHO + movimentosInimigo.get(0).getNome() + RESET);
+        Carta c=movimentosInimigo.get(0);
+
+        if(c instanceof CartaDano) {
+            System.out.println("  Dano: " + VERMELHO + c.getDano() + RESET);
+        } 
+        else if(c instanceof CartaEscudo) {
+            System.out.println("  Escudo: " + CIANO + c.getEscudo() + RESET);
+            if(c instanceof CartaEscudoRegen) {
+                System.out.println("  Regen: " + VERDE + "+" + ((CartaEscudoRegen)c).getRegen() + " de regen" + RESET);
+            }
+        }
+        else if(c instanceof CartaCuraRegen) {
+            CartaCuraRegen cr = (CartaCuraRegen) c;
+            System.out.println("  Cura: " + VERDE + "+" + cr.getCura() + " HP" + RESET);
+            System.out.println("  Regen: " + VERDE + "+" + cr.getRegenCura() + " de regen" + RESET);
+        }
+        else if(c instanceof CartaDanoArea) {
+            System.out.println("  Potencial: " + VERMELHO + c.getDano() + " (Crítico)" + RESET);
+            System.out.println("  " + AMARELO + "🎲 Chance de falha na execução" + RESET);
+        }
+        else if(c instanceof CartaDanoVeneno) {
+            CartaDanoVeneno cv = (CartaDanoVeneno) c;
+            System.out.println("  Efeito: " + ROXO + "Veneno 🧪 (" + cv.getVeneno() + " de veneno)" + RESET);
+            System.out.println("  " + ROXO + "Debuff acumulativo por tempo" + RESET);
+        }
+        else if(c instanceof CartaEscudoEspinhos) {
+            CartaEscudoEspinhos ce = (CartaEscudoEspinhos) c;
+            System.out.println("  Defesa: " + App.CIANO + "+" + ce.getEscudo() + " Escudo" + App.RESET);
+            System.out.println("  Efeito: " + App.VERMELHO + "Espinhos (" + ce.getDano() + " Contra-ataque)" + App.RESET);
+            System.out.println("  " + App.CIANO + "🛡️ O inimigo sofre dano ao te atacar!" + App.RESET);
+        }
+        else if(c instanceof CartaRouboVida) {
+            CartaRouboVida rv = (CartaRouboVida) c;
+            System.out.println("  Ataque: " + App.VERMELHO + "-" + rv.getDano() + " HP" + App.RESET);
+            System.out.println("  " + App.VERMELHO + "🩸 Rouba a essência vital do alvo!" + App.RESET);
+        }
+
         System.out.println(CIANO + "╟────────────────────────────────────────────────────────────────╢" + RESET);
 
         // mão do Jogador Formatada
@@ -59,7 +96,7 @@ public class App {
         }
         
         System.out.println(CIANO + "╟────────────────────────────────────────────────────────────────╢" + RESET);
-        System.out.println("  [" + (maoJogador.size()+1) + "] ℹ️ Menu das Cartas | [" + (maoJogador.size()+2) + "] 🧪 Efeitos | [" + (maoJogador.size()+3) + "] ⌛ Encerrar Turno");
+        System.out.println("  [" + (maoJogador.size()+1) + "] ℹ️  Menu das Cartas | [" + (maoJogador.size()+2) + "] 🧪 Efeitos | [" + (maoJogador.size()+3) + "] ⌛ Encerrar Turno");
         System.out.println(CIANO + "╚════════════════════════════════════════════════════════════════╝" + RESET);
         System.out.print("  Escolha sua ação: ");
     }
@@ -119,7 +156,6 @@ public class App {
             else if(c instanceof CartaRouboVida) {
                 CartaRouboVida rv = (CartaRouboVida) c;
                 System.out.println("     Ataque: " + App.VERMELHO + "-" + rv.getDano() + " HP" + App.RESET);
-                System.out.println("     Dreno: " + App.VERDE + "+" + (rv.getDano() / 2) + " Cura (50%)" + App.RESET);
                 System.out.println("     " + App.VERMELHO + "🩸 Rouba a essência vital do alvo!" + App.RESET);
             }
 
@@ -140,12 +176,20 @@ public class App {
         } else {
             for(int j = 0; j < listaEfeitos.size(); j++){
                 Efeito e = listaEfeitos.get(j);
-                String corEfeito = e.getNome().contains("Veneno") ? ROXO : VERDE;
-                String icone = e.getNome().contains("Veneno") ? "☣" : "✚";
+                String corEfeito;
+                String icone;
+                if(e instanceof Veneno){
+                    corEfeito=ROXO;
+                    icone="☣";
+                } else{
+                    corEfeito=VERDE;
+                    icone="✚";
+                }
+                
                 
                 System.out.println(corEfeito + "  [" + (j+1) + "] " + icone + " " + NEGRITO + e.getNome().toUpperCase() + RESET);
                 System.out.println("      Dono: " + NEGRITO + e.getEntidade().getNome() + RESET);
-                System.out.println("      Status: " + corEfeito + e.getString() + RESET);
+                System.out.println(corEfeito +"      Acumulos: " + corEfeito + e.getAcumulos() + RESET);
                 System.out.println(ROXO + "      ──────────────────────────────────────────────────" + RESET);
             }
         }

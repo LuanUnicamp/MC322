@@ -29,7 +29,7 @@ public abstract class Efeito {
      * <b>Comportamento</b>: Retorna uma string contendo o nome e a quantidade de acúmulos restantes.
      */
     public String getString(){
-        return "Efeito! Nome:"+this.nome+" | Acumulos:"+this.acumulos;
+        return "Acumulos:"+this.acumulos;
     }
 
     //getters
