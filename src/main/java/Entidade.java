@@ -140,6 +140,9 @@ public abstract class Entidade {
     public int getEscudo() {
         return escudo;
     }
+    public int getVidaMax(){
+        return vidaMax;
+    }
 
     /**
      * Remove um efeito específico da lista de efeitos da entidade.
