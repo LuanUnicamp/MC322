@@ -566,7 +566,7 @@ public class Historia {
                     imprimirFala("Os moradores de Konoha comemoram. Naruto finalmente é reconhecido como o Herói da Vila!", entrada);
                     
                     System.out.println("\n" + App.AMARELO + "=== FIM DO MODO HISTÓRIA ===" + App.RESET);
-                    System.out.println("Parabéns por zerar a demonstração do Shinobi Legacy!");
+                    System.out.println("Parabéns por zerar o Shinobi Legacy!");
                     imprimirFala("[Pressione ENTER para retornar ao menu principal]", entrada);
                     
                     acabou = true; 
