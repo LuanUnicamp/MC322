@@ -4,7 +4,7 @@ import java.util.Collections;
 
 /**
  * Classe principal do sistema responsável por gerenciar a interface 
- * do usuário no terminal e a inicialização das partidas.
+ * do usuário no terminal, menus de navegação e a inicialização das partidas.
  */
 
 public class App {
@@ -474,24 +474,30 @@ public class App {
         Scanner entrada = new Scanner(System.in);
         limparTela();
         
+        
         //o usuario podera escolher se quer jogar o modo historia um um combate livre antes de iniciar o game
+        
         int escolha = menuPrincipal(entrada);
 
-        switch(escolha){
-        case 1:
-            modoHistoria(entrada);
-            break;
-        case 2:
-            modoBatalha(entrada);
-            break;
-        case 3:
-            System.out.println("Até a próxima, Shinobi!");
-            break;
-        default:
-            System.out.println("Opção inválida.");
+        while(escolha!=3){
+            
+            switch(escolha){
+            case 1:
+                modoHistoria(entrada);
+                break;
+            case 2:
+                modoBatalha(entrada);
+                break;
+            case 3:
+                System.out.println("Até a próxima, Shinobi!");
+                break;
+            default:
+                System.out.println("Opção inválida.");
+            }
+
+            escolha = menuPrincipal(entrada);
+
         }
-
-
-    entrada.close();
-}
+        entrada.close();
+    }
 }

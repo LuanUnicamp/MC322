@@ -102,14 +102,11 @@ public class AppTest {
 
     @Test
     public void testMainSairDoJogo() throws Exception {
-        // Simula o usuário abrindo o jogo e digitando "3" para Sair
         String fantasmaStr = "3\n"; 
         InputStream tecladoReal = System.in;
 
         try {
             System.setIn(new ByteArrayInputStream(fantasmaStr.getBytes()));
-            
-            // Cobre o App.main, App.menuPrincipal e o "case 3" do switch!
             App.main(new String[]{}); 
             
         } catch (Exception e) {

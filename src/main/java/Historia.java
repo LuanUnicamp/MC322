@@ -3,6 +3,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Classe responsável por gerenciar a progressão do Modo História (Shinobi Legacy: Saga Naruto Shippuden).
+ * <br>
+ * Utiliza uma estrutura de Árvore (através da classe {@link DefaultMutableTreeNode}) para 
+ * mapear as fases, opções de treinamentos e bifurcações narrativas do jogador, além de 
+ * controlar os itens consumíveis e moedas ganhas nas campanhas.
+ */
 public class Historia {
 
     private DefaultMutableTreeNode arvoreHistoria;
@@ -22,6 +29,13 @@ public class Historia {
     //0 = sem transformacao, 1=modo senin, 2=modo kurama
     private int transformação = 0;
 
+    /**
+     * Construtor da classe Historia.
+     * <br>
+     * <b>Comportamento:</b> Dispara a construção da árvore narrativa, inicializa o nó inicial, 
+     * cria o perfil do Naruto (Genin) para o começo da jornada, configura seu Deck (baralho) 
+     * básico inicial e zera/configura os inventários de moedas, curas e armas.
+     */
     public Historia() {
         construirArvore();
         //no atual comeca no primeiro filho da raiz(arvore historia)
@@ -46,7 +60,14 @@ public class Historia {
 
     }
 
-    //método que constroi árvore
+    /**
+     * Constrói e vincula os nós da árvore de história.
+     * <br>
+     * <b>Comportamento:</b> Define o nó raiz e cria os nós filhos correspondentes às fases 
+     * (ex: O Sequestro de Gaara, Invasão de Pain) e às diferentes escolhas narrativas 
+     * (como treinar com Jiraiya ou com Kakashi).
+     */
+
     private void construirArvore(){
         //nó raiz
         this.arvoreHistoria = new DefaultMutableTreeNode("Shinobi Legacy: Saga Naruto Shippuden");
@@ -70,13 +91,25 @@ public class Historia {
         treinoKakashi.add(fase2PainCaminhoK);
     }
 
-    //funcao que imprime o texto e pede um enter para imprimir o pŕoximo texto
+    /**
+     * Imprime um trecho do diálogo da história no console e pausa a execução até 
+     * que o usuário decida prosseguir.
+     * * @param texto   A mensagem, contexto ou fala do personagem a ser exibida.
+     * @param entrada Objeto {@link Scanner} utilizado para capturar a tecla [ENTER] do usuário.
+     */
+
     private void imprimirFala(String texto, Scanner entrada) {
         System.out.println(texto);
         entrada.nextLine(); 
     }
 
-    //funcao que mostra um mapa cada vez que algum evento acontece, para o usuário se situar na história
+    /**
+     * Exibe visualmente o "Pergaminho das Missões", servindo como um mapa da campanha.
+     * <br>
+     * <b>Comportamento:</b> Baseado no caminho percorrido desde a raiz até o nó atual do jogador, 
+     * desenha caminhos (branches) completados, caminhos abandonados e indica a posição atual com a 
+     * tag.
+     */
     public void mostrarMapa() {
         System.out.println("\n" + App.AMARELO + "            📜 PERGAMINHO DAS MISSÕES 📜" + App.RESET);
         System.out.println(App.CIANO + "╔══════════════════════════════════════════════════╗" + App.RESET);
@@ -130,7 +163,12 @@ public class Historia {
         System.out.println(App.CIANO + "╚══════════════════════════════════════════════════╝" + App.RESET);
     }
 
-    //metodo que pergunta se o jogador quer acessar a loja ou nao
+    /**
+     * Questiona o jogador via console se ele deseja pausar o progresso na missão 
+     * para visitar o Mercado Shinobi.
+     * * @param entrada Objeto {@link Scanner} para ler a opção do usuário. 
+     * Se a escolha for 1, o método invoca {@link #abrirLoja(Scanner)}.
+     */
     private void perguntarLoja(Scanner entrada) {
         System.out.println("\n" + App.CIANO + "╔══════════════════════════════════════════════════╗" + App.RESET);
         System.out.println(App.CIANO + "║" + App.RESET + " Deseja visitar o " + App.AMARELO + "Mercado Shinobi" + App.RESET + " antes de seguir? " + App.CIANO + "║" + App.RESET);
@@ -146,7 +184,11 @@ public class Historia {
         }
     }
 
-    //metodo que abre a loja
+    /**
+     * Renderiza o menu do Mercado Shinobi, onde o jogador pode trocar suas "Shinobi Coins" 
+     * por itens consumíveis (Bandagens, Shurikens ou Bandanas).
+     * * @param entrada Objeto {@link Scanner} para capturar as interações de compra.
+     */
     private void abrirLoja(Scanner entrada) {
         boolean contComprar = true;
         while(contComprar) {
@@ -175,7 +217,16 @@ public class Historia {
         }
     }
 
-    //o usuario pode se preparar antes de enfrentar o inimigo (se tiver com pouca vida pode usar bandagem por ex)
+    /**
+     * Inicia a sequência da "Sala de Preparação" imediatamente antes de uma batalha iniciar.
+     * <br>
+     * <b>Comportamento:</b> Permite ao usuário visualizar seus recursos (Vida / Escudo) e a Vida 
+     * do inimigo. O usuário pode abrir a mochila para consumir itens de cura e proteção, ou usar 
+     * itens de ataque surpresa (Shuriken) no oponente antes mesmo do embate começar em turnos.
+     * * @param entrada         Objeto {@link Scanner} para navegar nos menus da mochila e iniciar a luta.
+     * @param inimigoOriginal A instância do inimigo que será enfrentado.
+     * @return O objeto {@link Inimigo} possivelmente modificado (caso tenha sofrido dano da Shuriken).
+     */
     private Inimigo salaDePreparacao(Scanner entrada, Inimigo inimigoOriginal) {
         boolean vaiLutar = false;
         int escudoAcumulado = 0;
@@ -569,6 +620,7 @@ public class Historia {
                     System.out.println("Parabéns por zerar a demonstração do Shinobi Legacy!");
                     imprimirFala("[Pressione ENTER para retornar ao menu principal]", entrada);
                     
+                    
                     acabou = true; 
                     continue;
                 }
@@ -589,10 +641,5 @@ public class Historia {
             
             
         }
-        
-        
-        
-
-        
     }
 }

@@ -25,9 +25,11 @@ public class Combate {
     private int regen = 0;
     private int transformacao = 0;
 
-    /**
-     * Construtor da classe Combate. <br>
-     * <b>Comportamento</b>: Inicializa a lista de efeitos vazia para o início da partida.
+   /**
+     * Construtor padrão da classe Combate.
+     * <br>
+     * <b>Comportamento:</b> Inicializa a lista de monitoramento de efeitos (como Veneno ou Regeneração) 
+     * como uma lista vazia para o início seguro da partida.
      */
     public Combate(){
         listaEfeitosCombate= new ArrayList<>();
@@ -35,9 +37,12 @@ public class Combate {
 
     /**
      * Registra um novo efeito na lista de monitoramento do combate.
-     * @param efeito O efeito a ser inscrito. <br>
-     * <b>Comportamento</b>: Verifica se o efeito já existe na lista para evitar duplicatas antes de adicioná-lo.
+     * <br>
+     * <b>Comportamento:</b> Verifica se um efeito com o mesmo nome já existe na lista ativa. 
+     * Caso não exista, ele adiciona o efeito, impedindo duplicatas que poderiam quebrar o balanceamento.
+     * * @param efeito O objeto {@link Efeito} que será adicionado à entidade.
      */
+
     public void inscreverEfeito(Efeito efeito){
         for(int i=0;i<listaEfeitosCombate.size();i++){
             Efeito efeitolista =listaEfeitosCombate.get(i);
@@ -53,9 +58,12 @@ public class Combate {
     }
 
     /**
-     * Notifica os efeitos inscritos sobre a passagem do tempo no jogo.
-     * @param num O código do momento do turno (0 para início, 1 para fim). <br>
-     * <b>Comportamento</b>: Remove efeitos cujas durações expiraram e aciona a lógica interna dos efeitos ativos.
+     * Notifica todos os efeitos inscritos sobre a passagem do tempo dentro do turno.
+     * <br>
+     * <b>Comportamento:</b> Percorre a lista de efeitos ativos de trás para frente. 
+     * Aciona a lógica interna de cada efeito e remove aqueles cujas durações já se esgotaram.
+     * * @param num Código de sinalização do momento no turno (0 para o início do turno, 
+     * 1 para o fim do turno).
      */
     private void avisar(int num){
         for(int i=listaEfeitosCombate.size()-1;i>=0;i--){
@@ -73,16 +81,18 @@ public class Combate {
     }
 
     /**
-     * Gerencia o loop principal do duelo até que um dos lutadores seja derrotado.
-     * @param heroiEscolhido O personagem controlado pelo jogador.
-     * @param inimigoEscolhido O oponente controlado pelo sistema.
-     * @param movimentosInimigo Lista de cartas disponíveis para o inimigo.
-     * @param pilhaCompra Cartas ainda disponíveis para sorteio.
-     * @param maoJogador Cartas atualmente na mão do jogador.
-     * @param pilhaDescarte Cartas já utilizadas ou descartadas.
-     * @return Uma string formatada indicando o vencedor e o desfecho da batalha. <br>
-     * <b>Comportamento</b>: Controla a compra de cartas, o gasto de chakra, a interação com menus, 
-     * a execução das jogadas de ambos os lados e o processamento de efeitos por turno.
+     * Gerencia o loop principal do duelo até que um dos lutadores seja derrotado (HP chegue a zero).
+     * <br>
+     * <b>Comportamento:</b> Controla a compra de cartas, evolução das transformações de modo história, 
+     * a execução das jogadas pelo jogador (via console) e pelo inimigo (automáticas), além de 
+     * desencadear notificações do publisher (efeitos) a cada início e fim de turno.
+     * * @param heroiEscolhido    O herói controlado pelo jogador.
+     * @param inimigoEscolhido  O oponente controlado pelo sistema.
+     * @param movimentosInimigo Lista de cartas com as possíveis ações do inimigo.
+     * @param pilhaCompra       Lista de cartas ainda disponíveis para o jogador sacar.
+     * @param maoJogador        Lista de cartas atualmente na mão do jogador.
+     * @param pilhaDescarte     Lista de cartas já utilizadas ou descartadas pelo jogador.
+     * @return Uma {@link String} formatada e colorida indicando o vencedor e a mensagem de desfecho da batalha.
      */
     public String rodarCombate(Heroi heroiEscolhido, Inimigo inimigoEscolhido, ArrayList<Carta> movimentosInimigo, ArrayList<Carta> pilhaCompra, ArrayList<Carta> maoJogador, ArrayList<Carta> pilhaDescarte ){
         int leitura;

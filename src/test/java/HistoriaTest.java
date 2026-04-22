@@ -7,25 +7,18 @@ public class HistoriaTest{
 
     @Test
     public void testarHistoriaCompletaSemTravar() {
-        // O "Fantasma": Esta string simula o usuário digitando no teclado.
-        // Cada "\n" é um ENTER pressionado.
-        // Os números são as escolhas de menus, cartas (para atacar e passar os turnos)
-        
         StringBuilder fantasma = new StringBuilder();
         
-        // 1. Início e Fase 1
         fantasma.append("\n\n"); // Passar pelo menu e tela inicial
         fantasma.append("\n\n\n\n\n\n\n\n\n\n\n"); // Falas da Fase 1
         
-        // Batalha contra Deidara (Turnos genéricos: selecionando carta 1, ou passando turno até morrer/ganhar)
         for (int i = 0; i < 20; i++) {
-            fantasma.append("1\n"); // Escolhe carta 1 ou passa o texto de dano
-            fantasma.append("\n");  // Confirma turno
+            fantasma.append("1\n"); 
+            fantasma.append("\n");  
         }
         
-        // Pós Deidara e Escolha de Treinamento
         fantasma.append("\n\n\n\n"); 
-        fantasma.append("2\n"); // Escolhe [2] KAKASHI
+        fantasma.append("2\n"); 
         fantasma.append("\n\n\n\n\n");
         
         // Batalha contra Kakashi
@@ -64,11 +57,9 @@ public class HistoriaTest{
             
             Historia historia = new Historia();
             
-            // AQUI É ONDE A MÁGICA ACONTECE! Chamamos o método que inicia tudo.
             historia.iniciar(scannerFantasma);
 
-        } catch (Exception e) {
-            // O teste vai rodar até onde o "fantasma" conseguir digitar. 
+        } catch (Exception e) { 
             // Se o jogo acabar antes ou pedir um input diferente, ele cai aqui, 
             // mas o JaCoCo já gravou tudo de verde até esse ponto!
         } finally {

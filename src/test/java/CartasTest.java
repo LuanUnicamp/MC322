@@ -39,8 +39,6 @@ public class CartasTest {
         assertEquals(20, h.getEscudo());
     }
 
-    // --- CARTAS AVANÇADAS (As que você mandou por último) ---
-
     @Test
     public void testCartaSacrificio() {
         Heroi h = new Heroi("Naruto", 100, 0);
@@ -64,9 +62,8 @@ public class CartasTest {
         
         carta.usar_h(h, i, c);
         
-        // Verificamos se a vida do inimigo desceu (100 - 20 = 80)
+        
         assertEquals(80, i.getVida(), "Inimigo deveria ter 80 de vida");
-        // Verificamos se o Naruto curou (50 + 20 = 70)
         assertEquals(70, h.getVida(), "Herói deveria ter 70 de vida");
     }
 
@@ -88,22 +85,22 @@ public class CartasTest {
         Inimigo i = new Inimigo("Pain", 100, 0);
         Combate c = new Combate();
         
-        // Testa a lógica interna da classe Veneno (SINTAXE CORRIGIDA)
+       
         Veneno v = new Veneno("Veneno Letal", i, 10, "VENENO");
         i.aplicarEfeito(v); 
         v.avisado(1); 
         v.avisado(0);
         
-        // Testa a lógica interna da classe Regen (SINTAXE CORRIGIDA)
+    
         Regen r = new Regen("Cura Contínua", h, 10, "REGEN");
         h.aplicarEfeito(r);
         r.avisado(1); 
         r.avisado(0);
         
-        // Força o JaCoCo a ler a linha que barra efeitos duplicados no Combate
+        
         c.inscreverEfeito(v);
         c.inscreverEfeito(r);
-        c.inscreverEfeito(v); // Tentando colocar o mesmo veneno de novo!
+        c.inscreverEfeito(v); 
 
         // Testa as transformações
         c.habilitarEvolucao(1);
