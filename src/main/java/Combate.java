@@ -18,6 +18,13 @@ public class Combate {
     /** Lista que armazena os efeitos ativos (Veneno, Regen) que devem ser processados no combate. */
     private ArrayList<Efeito> listaEfeitosCombate;
 
+    private int barraEvolucao = 0;
+    private boolean modoSeninAtivo = false;
+    private boolean modoKuramaAtivo = false;
+    private int turno = 0;
+    private int regen = 0;
+    private int transformacao = 0;
+
     /**
      * Construtor da classe Combate. <br>
      * <b>Comportamento</b>: Inicializa a lista de efeitos vazia para o início da partida.
@@ -40,6 +47,10 @@ public class Combate {
         }
         listaEfeitosCombate.add(efeito);
     } 
+
+    public void habilitarEvolucao(int tipo) {
+        this.transformacao = tipo;
+    }
 
     /**
      * Notifica os efeitos inscritos sobre a passagem do tempo no jogo.
@@ -79,12 +90,54 @@ public class Combate {
 
         //o jogo acaba quando um dos dois oponentes tem estavivo() retornando false
         while(heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
-   
-            //puvlisher avisando inicio do turno
+            this.turno++;
+            String msgRegen = "";
+            //publisher avisando inicio do turno
             avisar(0);
+
+            //logica para caso a transformacao do modo historia estiver desbloqueada
+            if(transformacao > 0){
+                if(!modoSeninAtivo && !modoKuramaAtivo){
+                    if(turno > 0 && turno < 5){
+                        barraEvolucao+=25;
+                        System.out.println(App.AMARELO + "⚡ Barra de Evolução: " + barraEvolucao + "%" + App.RESET);
+                        if (barraEvolucao == 100) {
+                            System.out.print(App.AMARELO + "Digite 'x' para liberar o poder: " + App.RESET);
+                            String comando = entrada.next();
+                            
+                            if (comando.equals("x")) {
+                                if (transformacao == 1){
+                                    System.out.println(App.VERDE + "🌀 MODO SÁBIO ATIVADO!" + App.RESET);
+                                    modoSeninAtivo = true;
+                                } else if (transformacao == 2){
+                                    System.out.println(App.VERMELHO + "🔥 MANTO DA KYUUBI LIBERADO!" + App.RESET);
+                                    modoKuramaAtivo = true;
+                                }
+                            }
+                        }
+                    } else{
+                        System.out.println(App.AMARELO + "⚡ Barra de Evolução: " + barraEvolucao + "%" + App.RESET);
+                    }
+                } else {
+                    if (modoSeninAtivo) {
+                        regen = 10;
+                    } else {
+                        regen = 5;
+                    }
+                    if (heroiEscolhido.getVida()<heroiEscolhido.getVidaMax()) {
+                        heroiEscolhido.receberCura(regen);
+                        if (heroiEscolhido.getVida()>heroiEscolhido.getVidaMax()) {
+                            heroiEscolhido.setVida(heroiEscolhido.getVidaMax());
+                        }
+                        msgRegen = (App.VERDE + "✨ " + (modoSeninAtivo ? "Modo Senin" : "Manto da Kyuubi") + 
+                           ": Regenerando +" + regen + " HP (" + 
+                           heroiEscolhido.getVidaMax() + "/" + heroiEscolhido.getVidaMax() + ")" + App.RESET);
+                    }
+                }
+            }
     
             int chakra = 4;
-            ///variável que indica quando o heroi não tem chackra suficiente para usar habilidade
+            //variável que indica quando o heroi não tem chackra suficiente para usar habilidade
             Boolean insuficiente = false;
 
 
@@ -110,7 +163,10 @@ public class Combate {
             Collections.shuffle(movimentosInimigo);
 
             App.limparTela();
-            App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
+            App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo, this.transformacao, this.barraEvolucao, this.modoSeninAtivo, this.modoKuramaAtivo);
+            if (!msgRegen.equals("")) {
+                System.out.println("\n"+ msgRegen);
+            }
 
             //enquanto tiver chackra disponível e os dois estiverem vivos, o turno é o mesmo
             while(chakra>0 && heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
@@ -118,7 +174,8 @@ public class Combate {
                 entrada.nextLine();
                 
                 
-                //se a leitura for ultima opção, o chakra é zerado e o turno acaba
+                //se a leitura for ultima opção, o chakra é zerado e o turno acaba. +3 porque
+                //tem os menus de carta e efeito
                 if(leitura == (maoJogador.size()+3)){
                     chakra = 0;
                 } 
@@ -130,9 +187,23 @@ public class Combate {
                     //se tem chakra para a habilidade, usa a carta e a descarta depois
                     if(chakra >= cartaSelecionada.getCusto()){
                         chakra -= cartaSelecionada.getCusto();
-                        cartaSelecionada.usar_h(heroiEscolhido, inimigoEscolhido,this);
-                        
 
+                        int danoBase = cartaSelecionada.getDano(); 
+    
+                        // Se a carta for de dano (seja área ou único), aplica o bônus
+                        if (danoBase > 0 || cartaSelecionada instanceof CartaDanoArea) { 
+                            int danoExtra = 0;
+                            if (modoSeninAtivo) danoExtra = 5;
+                            else if (modoKuramaAtivo) danoExtra = 10;
+
+                            if (danoExtra > 0) {
+                                inimigoEscolhido.receberDano(danoExtra);
+                                System.out.println(App.CIANO + "⚔️ Bônus de " + (modoSeninAtivo ? "Senjutsu" : "Kurama") + ": +" + danoExtra + " de dano!" + App.RESET);
+                            }
+                        }
+
+                        cartaSelecionada.usar_h(heroiEscolhido, inimigoEscolhido, this);
+                        
                         System.out.println("\n[Pressione ENTER para continuar]");
                         entrada.nextLine(); 
 
@@ -147,7 +218,7 @@ public class Combate {
                 else if(leitura == (maoJogador.size()+1)){
                     App.menuCartas(maoJogador,entrada);
                     App.limparTela();
-                    App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
+                    App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo, this.transformacao, this.barraEvolucao, this.modoSeninAtivo, this.modoKuramaAtivo);
                     entrada.nextLine();
                 }
                 //caso o usuario chame o menu de efeitos
@@ -165,7 +236,7 @@ public class Combate {
                 //de que chackra não é suficiente para a habilidade apareça no terminal
                 if (!insuficiente) {
                     App.limparTela();
-                    App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo);
+                    App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo, this.transformacao, this.barraEvolucao, this.modoSeninAtivo, this.modoKuramaAtivo);
                 }
                 insuficiente = false;
 

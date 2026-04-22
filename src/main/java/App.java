@@ -132,7 +132,7 @@ public class App {
      * <b>Comportamento</b>: Atualiza os valores de vida e imprime o painel visual com 
      * os status de ambos os personagens e as opções de comando.
      */
-    public static void display(Heroi h, Inimigo i, int chakra, ArrayList<Carta> maoJogador, ArrayList<Carta> movimentosInimigo){
+    public static void display(Heroi h, Inimigo i, int chakra, ArrayList<Carta> maoJogador, ArrayList<Carta> movimentosInimigo, int transformacao, int barra, boolean modoSenin, boolean modoKurama){
         h.zeraVida();
         i.zeraVida();
         
@@ -154,7 +154,7 @@ public class App {
 
         System.out.println(CIANO + "╠════════════════════════════════════════════════════════════════╣" + RESET);
         
-        // chakra em destaque
+        //chakra em destaque
         String chakraBarra = "● ".repeat(chakra) + "○ ".repeat(4 - chakra);
         System.out.println("  Energia: " + AMARELO + chakra + "/4 Chakra [" + chakraBarra + "]" + RESET);
         System.out.println("  Próximo golpe do inimigo: " + VERMELHO + movimentosInimigo.get(0).getNome() + RESET);
@@ -197,7 +197,7 @@ public class App {
 
         System.out.println(CIANO + "╟────────────────────────────────────────────────────────────────╢" + RESET);
 
-        // mão do Jogador Formatada
+        //mão do Jogador Formatada
         for(int j = 0; j < maoJogador.size(); j++){
             System.out.println("  [" + (j+1) + "] " + NEGRITO + maoJogador.get(j).getNome() + RESET + 
                             " (" + AMARELO + maoJogador.get(j).getCusto() + " Chakra" + RESET + ")");
@@ -206,7 +206,116 @@ public class App {
         System.out.println(CIANO + "╟────────────────────────────────────────────────────────────────╢" + RESET);
         System.out.println("  [" + (maoJogador.size()+1) + "] ℹ️  Menu das Cartas | [" + (maoJogador.size()+2) + "] 🧪 Efeitos | [" + (maoJogador.size()+3) + "] ⌛ Encerrar Turno");
         System.out.println(CIANO + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+
+        if (transformacao > 0) {
+            System.out.println("\n" + AMARELO + "╔════════════════════════════════════════════════════════════╗" + RESET);
+            if (modoSenin) {
+                System.out.println(VERDE + "║ ✨ MODO SÁBIO ATIVO: +5 Dano / +10 Regen                   ║" + RESET);
+            } else if (modoKurama) {
+                System.out.println(VERMELHO + "║ 🦊 MANTO DA KYUUBI ATIVO: +10 Dano / +5 Regen             ║" + RESET);
+            } else {
+                //Desenha a barra de progresso visual para a transformacao
+                String barraVisual = "█".repeat(barra / 10) + "░".repeat(10 - (barra / 10));
+                System.out.println(AMARELO + "║ ⚡ TRANSFORMAÇÃO: [" + barraVisual + "] " + barra + "%                     ║" + RESET);
+            }
+            System.out.println(AMARELO + "╚════════════════════════════════════════════════════════════╝" + RESET);
+        }
+
         System.out.print("  Escolha sua ação: ");
+    }
+
+    public static int menuPrincipal(Scanner leitura){
+        System.out.println(AMARELO + "╔════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(AMARELO + "║ " + NEGRITO + "           𖣘  SHINOBI LEGACY: O DUELO NINJA  𖣘          " + RESET + AMARELO + "   ║" + RESET);
+        System.out.println(AMARELO + "╚════════════════════════════════════════════════════════════╝" + RESET);
+
+        System.out.println("\n[1] Modo História");
+        System.out.println("[2] Batalha livre");
+        System.out.println("[3] Sair");
+        System.out.print("\nEscolha uma opção: ");
+
+        return leitura.nextInt();
+    }
+
+    //declarando e instanciando arraylist de herois
+    public static ArrayList<Heroi> GeraHeroisDisponiveis(){
+        ArrayList<Heroi> heroisDisponiveis = new ArrayList<>();
+        heroisDisponiveis.add(new Heroi("Naruto Uzumaki", 100, 0));
+        heroisDisponiveis.add(new Heroi("Sasuke Uchiha", 100, 0));
+
+        return heroisDisponiveis;
+    }
+
+    //declarando e instanciando arraylist de inimigos
+    public static ArrayList<Inimigo> GeraInimigosDisponiveis(){
+        ArrayList<Inimigo> inimigosDisponiveis = new ArrayList<>();
+        inimigosDisponiveis.add(new Inimigo("Madara Uchiha", 120, 0));
+        inimigosDisponiveis.add(new Inimigo("Pain", 100, 0));
+        inimigosDisponiveis.add(new Inimigo("Deidara", 60, 0));
+
+        return inimigosDisponiveis;
+    }
+
+    //gera deck baseado em qual inimigo for, cada um tem suas próprias habilidades (traz mais realidade pra historia)
+    public static ArrayList<Carta> GeraDeckInimigo(Inimigo i){
+        ArrayList<Carta> movimentos = new ArrayList<>();
+
+        if (i.getNome().contains("Pain")) {
+            movimentos.add(new CartaDanoVeneno("Shinra Tensei", "Repulsão divina.", 0, 25, 5));
+            movimentos.add(new CartaCuraRegen("Caminho Naraka", "Rei do Inferno.", 0, 10, 5));
+            movimentos.add(new CartaRouboVida("Absorção de Chakra (Preta)", "Drena energia.", 3, 10, 10));
+        } 
+        else if (i.getNome().contains("Madara")) {
+            movimentos.add(new CartaDanoArea("Bijuudama", "Esfera devastadora.", 0, 35, 6, 40));
+            movimentos.add(new CartaDano("Jutsu Bola de Fogo", "Clássico Uchiha.", 0, 15));
+            movimentos.add(new CartaEscudoEspinhos("Susano'o Perfeito", "Muralha impenetrável.", 0, 25, 8));
+        }
+        else if (i.getNome().contains("Deidara")) {
+            movimentos.add(new CartaDano("C1: Pássaros Explosivos", "Ataque rápido.", 0, 5));
+            movimentos.add(new CartaDano("C2: Dragão de Argila", "Dragão que lança explosões ao alvo", 0, 10));
+            movimentos.add(new CartaDanoArea("C3: Bomba Gigante", "Explosão em massa.", 0, 20, 10, 50));
+            movimentos.add(new CartaEscudoEspinhos("Clone de Argila", "Usa clone de argila para se defender e explodir no inimigo", 0, 10, 5));
+        }
+        else if (i.getNome().contains("Jiraiya")) {
+            movimentos.add(new CartaDano("Rasengan", "Ataque espiral de alta compressão.", 0, 15));
+            movimentos.add(new CartaDano("Estilo Fogo: Chama do Dragão", "Uma rajada de fogo devastadora.", 0, 7));
+            movimentos.add(new CartaEscudoEspinhos("Agulhas Jizo", "Endurece o cabelo como espinhos para defesa e contra-ataque.", 0, 8, 8));
+            movimentos.add(new CartaEscudoRegen("Invocação: Sapo Escudo", "Invoca um sapo para defesa tática.", 0, 5, 3));
+        }
+        else if (i.getNome().contains("Kakashi")) {
+            movimentos.add(new CartaDano("Raikiri (Corte Relâmpago)", "Um ataque perfurante letal de elemento raio.", 0, 15));
+            movimentos.add(new CartaDano("Estilo Água: Dragão de Água", "Um dragão colossal feito de água esmaga o alvo.", 0, 10));
+            movimentos.add(new CartaDanoVeneno("Invocação: Cães Ninjas", "Pakkun e os outros imobilizam e ferem o alvo.", 0, 8, 3));
+            movimentos.add(new CartaEscudo("Estilo Terra: Parede de Lama", "Cria uma barreira impenetrável de pedra.", 0, 8));
+            movimentos.add(new CartaEscudoRegen("Sharingan", "Lê perfeitamente os movimentos do adversário.", 0, 10, 2));
+        }
+
+        return movimentos;
+    }
+
+    //gera deck baseado em qual heroi for, cada um tem suas próprias habilidades (traz mais realidade pra historia)
+    public static ArrayList<Carta> GeraDeckHeroi(Heroi h){
+        ArrayList<Carta> pilhaCompra = new ArrayList<>();
+        
+        //cartas universais
+        pilhaCompra.add(new CartaEscudo("Jutsu de Substituição", "Defesa básica.", 1, 10));
+
+        //gera cartas do naruto
+        if (h.getNome().contains("Naruto")) {
+            pilhaCompra.add(new CartaDano("Rasengan", "Ataque espiral.", 1, 12));
+            pilhaCompra.add(new CartaDanoVeneno("Kurama", "Chakra da Raposa.", 3, 20, 5));
+            pilhaCompra.add(new CartaEscudoRegen("Clone das sombras", "Defesa em massa.", 2, 15, 3));
+            pilhaCompra.add(new CartaDanoArea("Gamabunta: Banho de Óleo", "Invoca o Chefe dos Sapos.", 3, 35, 6, 40));
+        } 
+        //gera cartas do naruto
+        else if (h.getNome().contains("Sasuke")) {
+            pilhaCompra.add(new CartaDano("Chidori", "Golpe dos mil pássaros.", 1, 12));
+            pilhaCompra.add(new CartaDano("Sharingan", "Lê os movimentos.", 2, 20));
+            pilhaCompra.add(new CartaEscudoEspinhos("Susano'o perfeito", "Defesa absoluta.", 3, 25, 7));
+            pilhaCompra.add(new CartaDano("Kirin", "Dragão de raios.", 0, 20));
+        }
+
+        return pilhaCompra;
     }
 
     //metodo que "limpa" o terminal para dar um efeito de que o status dos personagens está sendo atualizado
@@ -307,74 +416,24 @@ public class App {
         
         leitura.next(); 
     }
-    
-    public static void main(String[] args) throws Exception {
 
-        //declarando e instanciando arraylist de herois
-        ArrayList<Heroi> heroisDisponiveis = new ArrayList<>();
-        heroisDisponiveis.add(new Heroi("Naruto Uzumaki", 100, 0));
-        heroisDisponiveis.add(new Heroi("Sasuke Uchiha", 100, 0));
-
-        //declarando e instanciando arraylist de inimigos
-        ArrayList<Inimigo> inimigosDisponiveis = new ArrayList<>();
-        inimigosDisponiveis.add(new Inimigo("Madara Uchiha", 120, 0));
-        inimigosDisponiveis.add(new Inimigo("Pain", 100, 0));
-
-         
-        //declarando e instanciando arraylist de movimentos do inimigo
-        ArrayList<Carta> movimentosInimigo = new ArrayList<>();
-        movimentosInimigo.add(new CartaDanoVeneno("Shinra Tensei(aplica 5 de veneno)", "Usa Shinra Tensei para atacar.", 0, 25,5));
-        movimentosInimigo.add(new CartaDano("Jutsu Bola de Fogo", "Usa Jutsu Bola de Fogo para atacar.", 0, 15));
-        movimentosInimigo.add(new CartaEscudoRegen("Ninjutsu Médico(ganha 3 de regen)", "Usa Ninjutsu médico para recuperar vida.", 0, 15,3));
-        movimentosInimigo.add(new CartaDano("Kirin", "Invoca um dragão feito de raios pra cima do inimigo.", 0, 20));
-        movimentosInimigo.add(new CartaDanoVeneno("Edo Tensei", "Traz shinobis incríveis do passado de volta a vida!", 0,20 ,5));
-        movimentosInimigo.add(new CartaEscudo("Rotação Hyuga", "Defesa absoluta dos Hyuga.", 0, 22));
-        movimentosInimigo.add(new CartaDanoVeneno("Manda: Bote Venenoso", "A cobra gigante surge do solo para um ataque mortal.", 0, 22, 6));
-        
-        movimentosInimigo.add(new CartaDanoArea("Bijuudama", "Dispara uma esfera de chakra concentrado devastadora.", 0, 35,6,40));
-        movimentosInimigo.add(new CartaCuraRegen("Caminho Naraka", "O Rei do Inferno restaura o corpo do usuário.", 0, 20, 5));
-        movimentosInimigo.add(new CartaRouboVida("Corte da Samehada", "Drena o chakra do alvo", 3, 10, 10));
-        movimentosInimigo.add(new CartaEscudoEspinhos("Manto de Chakra", "O chakra da Kurama protege e lança mini bombas bijuu no oponente.", 0, 15, 8));
-
-
-        //declarando e instanciando a pilha de compra
-        ArrayList<Carta> pilhaCompra = new ArrayList<>();
-        pilhaCompra.add(new CartaDano("Rasengan","Usa o Razengan para atacar o inimigo." ,1, 12));
-        pilhaCompra.add(new CartaDanoVeneno("Kurama (aplica 5 de veneno)","Usa a Kurama para atacar o inimigo.", 3, 20,5));
-        pilhaCompra.add(new CartaEscudoRegen("Clone das sombras (ganha 3 de regen)","Usa o jutsu Clone das Sombras para ganhar escudo.", 2, 15,3));
-        pilhaCompra.add(new CartaDano("Sharingan","Usa Sharingan para atacar o inimigo.", 2, 20));
-        pilhaCompra.add(new CartaEscudo("Jutsu de Substituição","Usa jutsu de Substituição para ganhar escudo.", 1, 10));
-        pilhaCompra.add(new CartaDano("Chidori", "Um ataque perfurante de alta precisão, conhecido tam,bém como o golpe dos mil pássaros.", 1, 12));
-        pilhaCompra.add(new CartaDano("Jutsu Dragão de Água", "Estilo Água: Jutsu Dragao de Água!.", 2, 14));
-        pilhaCompra.add(new CartaEscudo("Parede de terra","Cria uma muralha de terra pra se defender.", 1, 12));
-        pilhaCompra.add(new CartaEscudoRegen("Defesa de Shukaku", "Areia densa que protege e estabiliza o usuário.", 3, 30, 2));
-
-
-        //cinco novas cartas - cura esta aplicando o efeito regen de cura
-        pilhaCompra.add(new CartaEscudoEspinhos("Susano'o perfeito","A defesa mais forte existente no mundo ninja com um ataque incrivel.", 3, 25,7)); 
-        pilhaCompra.add(new CartaDanoArea("Gamabunta: Banho de Óleo", "Invoca o Chefe dos Sapos para esmagar e queimar o inimigo.", 3, 35, 6,40));
-        pilhaCompra.add(new CartaCuraRegen("Katsuyu: Rede de Cura", "A lesma gigante divide o seu chakra para proteger e curar.", 2, 10, 6));
-        pilhaCompra.add(new CartaSacrificio("Oito Portões Internos", "Ataques letais em troca de energia vital.", 3, 30, 20));
-        pilhaCompra.add(new CartaRouboVida("Absorção de chakra", "Utiliza o caminho Preta para roubar energia vital.", 3, 10, 10));
-
-
-
-        //embaralhando pilha de compra
-        Collections.shuffle(pilhaCompra);
-
-        //declarando a mão do jogador
-        ArrayList<Carta> maoJogador = new ArrayList<>();
-        //declarando a pilha de descarte 
-        ArrayList<Carta> pilhaDescarte = new ArrayList<>();
-        
-        int leitura;
-        Scanner entrada = new Scanner(System.in);
-
+    //metodo que chama a func iniciar do modo historia (para melhor organizacao e nao ficar tudo no app)
+    public static void modoHistoria(Scanner entrada) {
         limparTela();
-        System.out.println(AMARELO + "╔════════════════════════════════════════════════════════════╗" + RESET);
-        System.out.println(AMARELO + "║ " + NEGRITO + "           𖣘  SHINOBI LEGACY: O DUELO NINJA  𖣘          " + RESET + AMARELO + " ║" + RESET);
-        System.out.println(AMARELO + "╚════════════════════════════════════════════════════════════╝" + RESET);
+        Historia hist = new Historia();
+        hist.iniciar(entrada);
+    }
 
+
+    public static void modoBatalha(Scanner entrada) {
+        limparTela();
+        int leitura;
+        
+        //gerando personagens, cartas, movimentos do inimigo
+        ArrayList<Heroi> heroisDisponiveis = GeraHeroisDisponiveis();
+        ArrayList<Inimigo> inimigosDisponiveis = GeraInimigosDisponiveis();
+
+        //selecao do heroi
         System.out.println("\n" + CIANO + " [ SELEÇÃO DE HERÓI ] " + RESET);
         for(int i=0; i<heroisDisponiveis.size(); i++){
             System.out.println(AMARELO + " [" + (i+1) + "] " + RESET + heroisDisponiveis.get(i).getNome());
@@ -384,6 +443,8 @@ public class App {
         Heroi heroiEscolhido = heroisDisponiveis.get(leitura-1);
 
         limparTela();
+
+        //selecao do inimigo
         System.out.println(VERMELHO + " [ SELEÇÃO DE ADVERSÁRIO ] " + RESET);
         for(int i=0; i<inimigosDisponiveis.size(); i++){
             System.out.println(AMARELO + " [" + (i+1) + "] " + RESET + inimigosDisponiveis.get(i).getNome());
@@ -391,11 +452,44 @@ public class App {
         System.out.print("\n Quem você irá enfrentar? ");
         leitura = entrada.nextInt();
         Inimigo inimigoEscolhido = inimigosDisponiveis.get(leitura-1);
+
+        ArrayList<Carta> pilhaCompra = GeraDeckHeroi(heroiEscolhido);
+        ArrayList<Carta> movimentosInimigo = GeraDeckInimigo(inimigoEscolhido);
+
+        // Prepara a mesa do jogador
+        Collections.shuffle(pilhaCompra);
+        ArrayList<Carta> maoJogador = new ArrayList<>();
+        ArrayList<Carta> pilhaDescarte = new ArrayList<>();
         
+        //inicia o combate
         Combate combate = new Combate();
-        
+        System.out.println(combate.rodarCombate(heroiEscolhido, inimigoEscolhido, movimentosInimigo, pilhaCompra, maoJogador, pilhaDescarte));
         //chama o metodo rodarCombate de combate que retorna o resultado do duelo
         System.out.println(combate.rodarCombate(heroiEscolhido, inimigoEscolhido, movimentosInimigo, pilhaCompra, maoJogador, pilhaDescarte));
+
+    }
+    
+    public static void main(String[] args) throws Exception {
+
+        Scanner entrada = new Scanner(System.in);
+        limparTela();
+        
+        //o usuario podera escolher se quer jogar o modo historia um um combate livre antes de iniciar o game
+        int escolha = menuPrincipal(entrada);
+
+        switch(escolha){
+        case 1:
+            modoHistoria(entrada);
+            break;
+        case 2:
+            modoBatalha(entrada);
+            break;
+        case 3:
+            System.out.println("Até a próxima, Shinobi!");
+            break;
+        default:
+            System.out.println("Opção inválida.");
+        }
 
 
     entrada.close();
