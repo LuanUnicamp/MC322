@@ -274,9 +274,11 @@ public class Combate {
         System.out.println(AMARELO + "╚════════════════════════════════════════════════════════════╝" + RESET);
 
         if(heroiEscolhido.estaVivo()){
-            return "\n " + VERDE + "VITORIA! " + RESET + heroiEscolhido.getNome() + " provou seu valor como Ninja!";
+            App.exibirFinal(1);
+            return AMARELO + NEGRITO + "             --- VITÓRIA! VOCÊ SE TORNOU UMA LENDA ---" + RESET;
         } else {
-            return "\n " + VERMELHO + "DERROTA... " + RESET + heroiEscolhido.getNome() + " caiu diante de " + inimigoEscolhido.getNome() + ".";
+            App.exibirFinal(0);
+            return ROXO+NEGRITO+"             --- DERROTA! O CICLO DE ÓDIO CONTINUA ---"+RESET;
         }
 
     }
