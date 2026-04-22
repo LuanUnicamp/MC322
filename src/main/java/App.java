@@ -425,7 +425,7 @@ public class App {
         hist.iniciar(entrada);
     }
 
-
+    //metodo de modo batalha
     public static void modoBatalha(Scanner entrada) {
         limparTela();
         int leitura;
