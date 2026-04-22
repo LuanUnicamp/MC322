@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="HistoriaTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-22T00:26:44" hostname="luan-ribeiro-Vivobook-Go-E1504FA-E1504FA" time="0.028">
+  <properties/>
+  <testcase name="testarHistoriaCompletaSemTravar()" classname="HistoriaTest" time="0.028"/>
+  <system-out><![CDATA[
+?[36m╔════════════════════════════════════════════════════════════╗?[0m
+?[36m║?[0m?[1m?[33m             ]]>&#x1f4dc;<![CDATA[ MODO HISTÓRIA: SAGA SHIPPUDEN               ?[0m?[36m║?[0m
+?[36m╚════════════════════════════════════════════════════════════╝?[0m
+
+?[33m            ]]>&#x1f4dc;<![CDATA[ PERGAMINHO DAS MISSÕES ]]>&#x1f4dc;<![CDATA[?[0m
+?[36m╔══════════════════════════════════════════════════╗?[0m
+?[36m║?[0m  ]]>&#x168d8;<![CDATA[ ?[1mShinobi Legacy: Saga Naruto Shippuden?[0m
+?[36m║?[0m   │
+?[36m║?[0m   └── ]]>&#x1f4cd;<![CDATA[ ?[1mFase 1: O Sequestro de Gaara?[31m ◄ [VOCÊ]?[0m
+?[36m║?[0m        │
+?[36m║?[0m        └── ☁️  ?[33mDestino Oculto...?[0m
+?[36m╚══════════════════════════════════════════════════╝?[0m
+
+[Pressione ENTER para iniciar a fase]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?[36m╔════════════════════════════════════════════════════════════╗?[0m
+?[36m║?[0m?[1m?[33m               ⚔️  FASE 1: O SEQUESTRO DE GAARA              ?[0m?[36m║?[0m
+?[36m╚════════════════════════════════════════════════════════════╝?[0m
+
+
+?[33m[Pressione ENTER para iniciar a introdução]?[0m
+?[36m]]>&#x1f4d6;<![CDATA[ O vento uiva pelos desfiladeiros da Vila Oculta da Areia...?[0m
+?[36m]]>&#x1f4d6;<![CDATA[ O céu noturno é subitamente iluminado por clarões ensurdecedores.?[0m
+?[36m]]>&#x1f4d6;<![CDATA[ Kankuro cai de joelhos na areia. Suas marionetes estão em pedaços.?[0m
+
+?[31mDeidara?[0m (sorrindo): 'A arte é uma explosão! E o seu Kazekage é a minha obra-prima de hoje.'
+?[35mSasori?[0m (impaciente): 'Não me faça esperar, Deidara. Odeio esperar e odeio fazer os outros esperarem.'
+?[36m
+]]>&#x1f4d6;<![CDATA[ Os dois membros da Akatsuki desaparecem na escuridão, levando Gaara...?[0m
+?[36m]]>&#x1f4d6;<![CDATA[ [ Alguns dias depois, nos portões de Konoha... ]
+?[0m
+?[32mKakashi?[0m: 'A situação é crítica. A Akatsuki não age sem um plano impecável.'
+?[32mKakashi?[0m: 'Precisamos ser táticos e calcular cada movimento.'
+?[33mNaruto?[0m (cerrando os punhos): 'Eu não dou a mínima para os planos deles, Kakashi-sensei!'
+?[33mNaruto?[0m: 'O Gaara sofreu a vida toda com a mesma dor que eu... Eu vou trazê-lo de volta!'
+?[32mKakashi?[0m: 'Vou atrás de Sasori, Naruto. Cuide do Deidara!'
+
+?[31m]]>&#x1f525;<![CDATA[ PREPARE-SE: A perseguição começou! ]]>&#x1f525;<![CDATA[?[0m
+
+?[33m⚔️  INICIANDO BATALHA: NARUTO vs DEIDARA ⚔️?[0m
+[Pressione ENTER para lutar]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?[36m╔════════════════════════ SHINOBI LEGACY ════════════════════════╗?[0m
+  ?[1mNaruto (Genin)?[0m         vs                ?[1mDeidara?[0m  
+  Vida: ?[32m50                      ?[0m      Vida: ?[32m60?[0m  
+  Escudo: ?[36m0                     ?[0m      Escudo: ?[36m0?[0m  
+?[36m╠════════════════════════════════════════════════════════════════╣?[0m
+  Energia: ?[33m4/4 Chakra [● ● ● ● ]?[0m
+  Próximo golpe do inimigo: ?[31mC3: Bomba Gigante?[0m
+  Potencial: ?[31m20 (Crítico)?[0m
+  ?[33m]]>&#x1f3b2;<![CDATA[ Chance de falha na execução?[0m
+?[36m╟────────────────────────────────────────────────────────────────╢?[0m
+  [1] ?[1mJutsu Clone das Sombras?[0m (?[33m2 Chakra?[0m)
+  [2] ?[1mJutsu de Substituição?[0m (?[33m1 Chakra?[0m)
+  [3] ?[1mTaijutsu?[0m (?[33m1 Chakra?[0m)
+?[36m╟────────────────────────────────────────────────────────────────╢?[0m
+  [4] ℹ️  Menu das Cartas | [5] ]]>&#x1f9ea;<![CDATA[ Efeitos | [6] ⌛ Encerrar Turno
+?[36m╚════════════════════════════════════════════════════════════════╝?[0m
+  Escolha sua ação: ]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

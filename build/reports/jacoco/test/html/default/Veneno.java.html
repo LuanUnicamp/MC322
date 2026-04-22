@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Veneno.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MC322</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Veneno.java</span></div><h1>Veneno.java</h1><pre class="source lang-java linenums">/**
+ * Representa um efeito negativo de veneno que causa dano contínuo à entidade afetada. &lt;br&gt;
+ * &lt;b&gt;Comportamento&lt;/b&gt;: Diferente da regeneração, o veneno é processado no final de cada turno 
+ * (notificação 1), reduzindo a vida da entidade com base na intensidade atual e, em seguida, 
+ * diminuindo um acúmulo.
+ */
+public class Veneno extends Efeito{
+
+    /**
+     * Inicializa o efeito de veneno.
+     * @param nome O nome da técnica ou substância venenosa.
+     * @param entidade A entidade que sofrerá o dano periódico.
+     * @param acumulos A duração ou intensidade inicial do veneno.
+     * @param tipo O rótulo identificador do tipo de efeito (&quot;VENENO&quot;).
+     */
+    public Veneno(String nome, Entidade entidade, int acumulos, String tipo){
+<span class="fc" id="L17">        super(nome,entidade,acumulos,tipo);</span>
+
+<span class="fc" id="L19">    }</span>
+
+    /**
+     * Implementação da lógica de atualização do dano por veneno.
+     * @param num O código do momento do turno (0 para início, 1 para fim). &lt;br&gt;
+     * &lt;b&gt;Comportamento&lt;/b&gt;: Se a notificação for de fim de turno (1), a entidade recebe 
+     * dano equivalente aos acúmulos atuais e um acúmulo é consumido da contagem total.
+     */
+    @Override
+    public void avisado(int num){
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if(num==1){</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">            if(getAcumulos()&gt;0){</span>
+<span class="fc" id="L31">                getEntidade().receberDano(getAcumulos());</span>
+<span class="fc" id="L32">                reduzirAcumulos();</span>
+            }
+
+        }
+<span class="fc" id="L36">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

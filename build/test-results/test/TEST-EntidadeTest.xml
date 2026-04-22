@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EntidadeTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-04-22T00:26:44" hostname="luan-ribeiro-Vivobook-Go-E1504FA-E1504FA" time="0.014">
+  <properties/>
+  <testcase name="testEstaVivo()" classname="EntidadeTest" time="0.002"/>
+  <testcase name="testReceberDanoMaiorQueEscudo()" classname="EntidadeTest" time="0.002"/>
+  <testcase name="testReceberDanoComEscudo()" classname="EntidadeTest" time="0.002"/>
+  <testcase name="testReceberCuraNaoUltrapassaVidaMax()" classname="EntidadeTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

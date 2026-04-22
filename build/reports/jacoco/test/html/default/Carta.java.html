@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Carta.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MC322</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Carta.java</span></div><h1>Carta.java</h1><pre class="source lang-java linenums">/**
+ * Classe abstrata que define a estrutura base para todas as cartas do jogo. &lt;br&gt;
+ * &lt;b&gt;Comportamento&lt;/b&gt;: Estabelece os atributos comuns e força as classes filhas 
+ * a implementarem as lógicas específicas de uso no combate.
+ */
+public abstract class Carta{
+    public static final String RESET = &quot;\u001B[0m&quot;;
+    public static final String VERMELHO = &quot;\u001B[31m&quot;;
+    public static final String VERDE = &quot;\u001B[32m&quot;;
+    public static final String AMARELO = &quot;\u001B[33m&quot;;
+    public static final String CIANO = &quot;\u001B[36m&quot;;
+    public static final String ROXO = &quot;\u001B[35m&quot;;
+    public static final String NEGRITO = &quot;\033[1m&quot;;
+
+    protected String nome;
+    protected String descricao;
+    protected int custo;
+
+    /**
+     * Inicializa os atributos base de uma carta.
+     * @param nome O nome de exibição da carta.
+     * @param descricao O texto explicativo do efeito da carta.
+     * @param custo A quantidade de chakra exigida para ativar a carta.
+     */
+<span class="fc" id="L25">    public Carta(String nome, String descricao, int custo) {</span>
+<span class="fc" id="L26">        this.nome = nome;</span>
+<span class="fc" id="L27">        this.descricao = descricao;</span>
+<span class="fc" id="L28">        this.custo = custo;</span>
+<span class="fc" id="L29">    }</span>
+
+    /**
+     * Executa a ação da carta a partir da jogada do herói.
+     * @param h A entidade do herói que está usando a carta.
+     * @param i A entidade do inimigo alvo.
+     * @param combate A instância do gerenciador de combate para registro de efeitos. &lt;br&gt;
+     * &lt;b&gt;Comportamento&lt;/b&gt;: Aplica alterações de status (dano, escudo, cura) nas entidades ou inscreve novos efeitos no combate.
+     */
+    public abstract void usar_h(Heroi h, Inimigo i,Combate combate);
+
+    /**
+     * Executa a ação da carta a partir da jogada do inimigo.
+     * @param i A entidade do inimigo que está usando a carta.
+     * @param h A entidade do herói alvo.
+     * @param combate A instância do gerenciador de combate para registro de efeitos. &lt;br&gt;
+     * &lt;b&gt;Comportamento&lt;/b&gt;: Semelhante ao uso do herói, mas com a perspectiva e os alvos invertidos.
+     */
+    public abstract void usar_i(Inimigo i, Heroi h,Combate combate);
+    
+    public abstract int getDano();
+
+    public abstract int getEscudo();
+
+    public String getNome(){
+<span class="fc" id="L54">        return nome;</span>
+    }
+
+    public int getCusto(){
+<span class="fc" id="L58">        return custo;</span>
+    }
+
+    public String getDescricao(){
+<span class="fc" id="L62">        return descricao;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

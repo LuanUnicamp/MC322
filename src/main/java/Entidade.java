@@ -137,6 +137,20 @@ public abstract class Entidade {
         return vida;
     }
 
+    public int getVidaMax() {
+        return vidaMax;
+    }
+
+    public void setVida(int novaVida) {
+        if (novaVida < 0) {
+            this.vida = 0;
+        } else if (novaVida > vidaMax){
+            this.vida = vidaMax;
+        }else {
+            this.vida = novaVida;
+        }
+    }
+
     public int getEscudo() {
         return escudo;
     }

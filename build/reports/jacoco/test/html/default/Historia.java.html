@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Historia.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MC322</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Historia.java</span></div><h1>Historia.java</h1><pre class="source lang-java linenums">import java.util.Scanner;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Historia {
+
+    private DefaultMutableTreeNode arvoreHistoria;
+    private DefaultMutableTreeNode noAtual;
+
+    private Heroi naruto;
+    private ArrayList&lt;Carta&gt; deckNaruto;
+
+    //itens do jogo
+    private int shinobiCoins;
+    private int vidaMaxima;
+    private int qtdBandagem;
+    private int qtdShuriken;
+    private int qtdBandana;
+
+    //0 = sem transformacao, 1=modo senin, 2=modo kurama
+<span class="fc" id="L22">    private int transformação = 0;</span>
+
+<span class="fc" id="L24">    public Historia() {</span>
+<span class="fc" id="L25">        construirArvore();</span>
+        //no atual comeca no primeiro filho da raiz(arvore historia)
+<span class="fc" id="L27">        this.noAtual = (DefaultMutableTreeNode) arvoreHistoria.getChildAt(0);</span>
+
+        //cria personagem e deck específico para o modo história e eles vão evoluindo com o progresso do usuário
+<span class="fc" id="L30">        this.naruto = new Heroi(&quot;Naruto (Genin)&quot;, 50, 0);</span>
+<span class="fc" id="L31">        this.deckNaruto = new ArrayList&lt;&gt;();</span>
+
+        //para controlar o funcionamento dos itens
+<span class="fc" id="L34">        this.vidaMaxima = 50; </span>
+<span class="fc" id="L35">        this.shinobiCoins = 0;</span>
+<span class="fc" id="L36">        this.qtdBandagem = 0;</span>
+<span class="fc" id="L37">        this.qtdShuriken = 0;</span>
+<span class="fc" id="L38">        this.qtdBandana = 0;</span>
+
+        //habilidades básicas do personagem ao iniciar
+<span class="fc" id="L41">        this.deckNaruto.add(new CartaEscudo(&quot;Jutsu Clone das Sombras&quot;, &quot;Naruto gera muitos clones para se proteger do inimigo&quot;, 2, 10));</span>
+<span class="fc" id="L42">        this.deckNaruto.add(new CartaDano(&quot;Rasengan&quot;, &quot;Principal jutsu de ataque de Naruto&quot;, 3, 15));</span>
+<span class="fc" id="L43">        this.deckNaruto.add(new CartaDano(&quot;Taijutsu&quot;, &quot;Ataque físico ao inimigo&quot;, 1, 7));</span>
+<span class="fc" id="L44">        this.deckNaruto.add(new CartaEscudo(&quot;Jutsu de Substituição&quot;, &quot;Ao ser atacado se substitui por um tronco para se defender&quot;, 1, 5));</span>
+
+<span class="fc" id="L46">    }</span>
+
+    //método que constroi árvore
+    private void construirArvore(){
+        //nó raiz
+<span class="fc" id="L51">        this.arvoreHistoria = new DefaultMutableTreeNode(&quot;Shinobi Legacy: Saga Naruto Shippuden&quot;);</span>
+
+        //inicio - fase 1
+<span class="fc" id="L54">        DefaultMutableTreeNode fase1 = new DefaultMutableTreeNode(&quot;Fase 1: O Sequestro de Gaara&quot;);</span>
+<span class="fc" id="L55">        arvoreHistoria.add(fase1);</span>
+
+        //Para aprender novas habilidades, naruto passa por treinamentos, ele escolhe qual treinamento quiser
+<span class="fc" id="L58">        DefaultMutableTreeNode treinoJiraiya = new DefaultMutableTreeNode(&quot;Treinamento com Jiraiya&quot;);</span>
+<span class="fc" id="L59">        DefaultMutableTreeNode treinoKakashi = new DefaultMutableTreeNode(&quot;Treinamento com Kakashi&quot;);</span>
+        //2 nós filhos do nó fase 1
+<span class="fc" id="L61">        fase1.add(treinoJiraiya);</span>
+<span class="fc" id="L62">        fase1.add(treinoKakashi);</span>
+
+        //os 2 nós levam a um evento comum &quot;fase 2&quot;, que na verdade são nós independentes, um é filho de
+        //treinoJiraya e o outro de treinoKakashi, mas causa a impressão de que os nós se juntam em uma fase comum
+<span class="fc" id="L66">        DefaultMutableTreeNode fase2PainCaminhoJ = new DefaultMutableTreeNode(&quot;Fase 2: A Invasão de Pain&quot;);</span>
+<span class="fc" id="L67">        DefaultMutableTreeNode fase2PainCaminhoK = new DefaultMutableTreeNode(&quot;Fase 2: A Invasão de Pain&quot;);</span>
+<span class="fc" id="L68">        treinoJiraiya.add(fase2PainCaminhoJ);</span>
+<span class="fc" id="L69">        treinoKakashi.add(fase2PainCaminhoK);</span>
+<span class="fc" id="L70">    }</span>
+
+    //funcao que imprime o texto e pede um enter para imprimir o pŕoximo texto
+    private void imprimirFala(String texto, Scanner entrada) {
+<span class="fc" id="L74">        System.out.println(texto);</span>
+<span class="fc" id="L75">        entrada.nextLine(); </span>
+<span class="fc" id="L76">    }</span>
+
+    //funcao que mostra um mapa cada vez que algum evento acontece, para o usuário se situar na história
+    public void mostrarMapa() {
+<span class="fc" id="L80">        System.out.println(&quot;\n&quot; + App.AMARELO + &quot;            📜 PERGAMINHO DAS MISSÕES 📜&quot; + App.RESET);</span>
+<span class="fc" id="L81">        System.out.println(App.CIANO + &quot;╔══════════════════════════════════════════════════╗&quot; + App.RESET);</span>
+
+        // Pega exatamente a trilha do início até onde o jogador está AGORA
+<span class="fc" id="L84">        javax.swing.tree.TreeNode[] caminho = noAtual.getPath();</span>
+        
+<span class="fc" id="L86">        String espacamento = &quot;  &quot;; </span>
+        // 1. Desenha a Raiz (Título do Jogo)
+<span class="fc" id="L88">        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) caminho[0];</span>
+<span class="fc" id="L89">        System.out.println(App.CIANO + &quot;║&quot; + App.RESET + espacamento + &quot;𖣘 &quot; + App.NEGRITO + raiz.getUserObject() + App.RESET);</span>
+
+        // 2. Percorre os degraus da história passo a passo
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (int i = 1; i &lt; caminho.length; i++) {</span>
+<span class="fc" id="L93">            DefaultMutableTreeNode pai = (DefaultMutableTreeNode) caminho[i - 1];</span>
+<span class="fc" id="L94">            DefaultMutableTreeNode noCaminho = (DefaultMutableTreeNode) caminho[i];</span>
+
+<span class="fc" id="L96">            System.out.println(App.CIANO + &quot;║&quot; + App.RESET + espacamento + &quot; │&quot;);</span>
+
+<span class="fc" id="L98">            int numFilhos = pai.getChildCount();</span>
+            
+            // Varre as opções que existiam naquela época
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            for (int j = 0; j &lt; numFilhos; j++) {</span>
+<span class="fc" id="L102">                DefaultMutableTreeNode irmao = (DefaultMutableTreeNode) pai.getChildAt(j);</span>
+<span class="fc" id="L103">                String nomeIrmao = (String) irmao.getUserObject();</span>
+
+                // Define se a linha de desenho continua (├──) ou faz a curva final (└──)
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">                String prefixoGalho = (j == numFilhos - 1) ? &quot; └── &quot; : &quot; ├── &quot;;</span>
+
+                // Verifica se esta era a opção que o jogador escolheu
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">                if (irmao == noCaminho) {</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                    if (i == caminho.length - 1) { </span>
+                        // É exatamente onde o jogador está agora
+<span class="fc" id="L112">                        System.out.println(App.CIANO + &quot;║&quot; + App.RESET + espacamento + prefixoGalho + &quot;📍 &quot; + App.NEGRITO + nomeIrmao + App.VERMELHO + &quot; ◄ [VOCÊ]&quot; + App.RESET);</span>
+                    } else { 
+                        // É uma fase que ele já venceu
+<span class="nc" id="L115">                        System.out.println(App.CIANO + &quot;║&quot; + App.RESET + espacamento + prefixoGalho + &quot;✅ &quot; + nomeIrmao);</span>
+                    }
+                } 
+                else {
+<span class="nc" id="L119">                    System.out.println(App.CIANO + &quot;║&quot; + App.RESET + espacamento + prefixoGalho + &quot;❌ &quot; + nomeIrmao + App.AMARELO + &quot; (Caminho Abandonado)&quot; + App.RESET);</span>
+                }
+            }
+<span class="fc" id="L122">            espacamento += &quot;     &quot;;</span>
+        }
+        
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (noAtual.getChildCount() &gt; 0) {</span>
+<span class="fc" id="L126">            System.out.println(App.CIANO + &quot;║&quot; + App.RESET + espacamento + &quot; │&quot;);</span>
+<span class="fc" id="L127">            System.out.println(App.CIANO + &quot;║&quot; + App.RESET + espacamento + &quot; └── ☁️  &quot; + App.AMARELO + &quot;Destino Oculto...&quot; + App.RESET);</span>
+        }
+
+<span class="fc" id="L130">        System.out.println(App.CIANO + &quot;╚══════════════════════════════════════════════════╝&quot; + App.RESET);</span>
+<span class="fc" id="L131">    }</span>
+
+    private void perguntarLoja(Scanner entrada) {
+<span class="nc" id="L134">        System.out.println(&quot;\n&quot; + App.CIANO + &quot;╔══════════════════════════════════════════════════╗&quot; + App.RESET);</span>
+<span class="nc" id="L135">        System.out.println(App.CIANO + &quot;║&quot; + App.RESET + &quot; Deseja visitar o &quot; + App.AMARELO + &quot;Mercado Shinobi&quot; + App.RESET + &quot; antes de seguir? &quot; + App.CIANO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L136">        System.out.println(App.CIANO + &quot;╚══════════════════════════════════════════════════╝&quot; + App.RESET);</span>
+<span class="nc" id="L137">        System.out.println(&quot;[1] Sim, gastar Shinobi Coins&quot;);</span>
+<span class="nc" id="L138">        System.out.println(&quot;[2] Não, focar na missão&quot;);</span>
+<span class="nc" id="L139">        System.out.print(&quot;Escolha: &quot;);</span>
+<span class="nc" id="L140">        int esc = entrada.nextInt();</span>
+<span class="nc" id="L141">        entrada.nextLine(); </span>
+        
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if(esc == 1) {</span>
+<span class="nc" id="L144">            abrirLoja(entrada);</span>
+        }
+<span class="nc" id="L146">    }</span>
+
+    private void abrirLoja(Scanner entrada) {
+<span class="nc" id="L149">        boolean contComprar = true;</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        while(contComprar) {</span>
+<span class="nc" id="L151">            App.limparTela();</span>
+<span class="nc" id="L152">            System.out.println(App.AMARELO + &quot;╔════════════════════════════════════════════════════════╗&quot; + App.RESET);</span>
+<span class="nc" id="L153">            System.out.println(App.AMARELO + &quot;║&quot; + App.RESET + App.NEGRITO + &quot;                   🏪  MERCADO SHINOBI                   &quot; + App.RESET + App.AMARELO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L154">            System.out.println(App.AMARELO + &quot;╠════════════════════════════════════════════════════════╣&quot; + App.RESET);</span>
+<span class="nc" id="L155">            System.out.println(App.AMARELO + &quot;║&quot; + App.RESET + &quot; 💰 Moedas: &quot; + App.VERDE + shinobiCoins + &quot; Shinobi Coins&quot; + App.RESET + &quot;                              &quot; + App.AMARELO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L156">            System.out.println(App.AMARELO + &quot;╠════════════════════════════════════════════════════════╣&quot; + App.RESET);</span>
+<span class="nc" id="L157">            System.out.println(App.AMARELO + &quot;║&quot; + App.RESET + &quot; [1] 🩹 Bandagem (Cura 20 HP)               - 40 Coins &quot; + App.AMARELO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L158">            System.out.println(App.AMARELO + &quot;║&quot; + App.RESET + &quot; [2] 🗡️ Shuriken (Tira 10 HP do Inimigo)    - 50 Coins &quot; + App.AMARELO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L159">            System.out.println(App.AMARELO + &quot;║&quot; + App.RESET + &quot; [3] 🥷 Bandana (+5 de Escudo Inicial)      - 30 Coins &quot; + App.AMARELO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L160">            System.out.println(App.AMARELO + &quot;║&quot; + App.RESET + &quot; [4] 🚪 Sair da Loja                                   &quot; + App.AMARELO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L161">            System.out.println(App.AMARELO + &quot;╚════════════════════════════════════════════════════════╝&quot; + App.RESET);</span>
+<span class="nc" id="L162">            System.out.print(&quot;Sua escolha: &quot;);</span>
+<span class="nc" id="L163">            int opcao = entrada.nextInt();</span>
+<span class="nc" id="L164">            entrada.nextLine();</span>
+
+<span class="nc bnc" id="L166" title="All 4 branches missed.">            if (opcao == 1 &amp;&amp; shinobiCoins &gt;= 40) { shinobiCoins -= 40; qtdBandagem++; System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Bandagem guardada na mochila!&quot; + App.RESET); }</span>
+<span class="nc bnc" id="L167" title="All 4 branches missed.">            else if (opcao == 2 &amp;&amp; shinobiCoins &gt;= 50) { shinobiCoins -= 50; qtdShuriken++; System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Shuriken guardada na mochila!&quot; + App.RESET); }</span>
+<span class="nc bnc" id="L168" title="All 4 branches missed.">            else if (opcao == 3 &amp;&amp; shinobiCoins &gt;= 30) { shinobiCoins -= 30; qtdBandana++; System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Bandana guardada na mochila!&quot; + App.RESET); }</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">            else if (opcao == 4) { contComprar = false; }</span>
+<span class="nc" id="L170">            else { System.out.println(App.VERMELHO + &quot;&gt;&gt;&gt; Moedas insuficientes ou opção inválida!&quot; + App.RESET); }</span>
+
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            if(contComprar) { System.out.println(&quot;[Pressione ENTER para continuar comprando]&quot;); entrada.nextLine(); }</span>
+<span class="nc" id="L173">        }</span>
+<span class="nc" id="L174">    }</span>
+
+    private Inimigo salaDePreparacao(Scanner entrada, Inimigo inimigoOriginal) {
+<span class="nc" id="L177">        boolean vaiLutar = false;</span>
+<span class="nc" id="L178">        int escudoAcumulado = 0;</span>
+<span class="nc" id="L179">        int limiteBandana = 2; // Regra: só 2 bandanas</span>
+<span class="nc" id="L180">        boolean usouShuriken = false; // Regra: só 1 shuriken</span>
+        
+<span class="nc" id="L182">        String nomeInimigo = inimigoOriginal.getNome();</span>
+<span class="nc" id="L183">        int vidaInimigo = inimigoOriginal.getVida(); </span>
+        
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        while(!vaiLutar) {</span>
+<span class="nc" id="L186">            App.limparTela();</span>
+<span class="nc" id="L187">            System.out.println(App.VERMELHO + &quot;╔════════════════════════════════════════════════════════╗&quot; + App.RESET);</span>
+<span class="nc" id="L188">            System.out.println(App.VERMELHO + &quot;║&quot; + App.RESET + App.NEGRITO + &quot;                  ⚔️  SALA DE PREPARAÇÃO                &quot; + App.RESET + App.VERMELHO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L189">            System.out.println(App.VERMELHO + &quot;╚════════════════════════════════════════════════════════╝&quot; + App.RESET);</span>
+<span class="nc" id="L190">            System.out.println(&quot;  Inimigo: &quot; + App.VERMELHO + nomeInimigo + App.RESET + &quot; | HP: &quot; + vidaInimigo);</span>
+<span class="nc" id="L191">            System.out.println(&quot;  Naruto : &quot; + App.AMARELO + &quot;HP &quot; + naruto.getVida() + &quot;/&quot; + vidaMaxima + App.RESET + &quot; | Escudo Inicial: &quot; + escudoAcumulado);</span>
+<span class="nc" id="L192">            System.out.println(&quot;\n[1] 🎒 Abrir Mochila&quot;);</span>
+<span class="nc" id="L193">            System.out.println(&quot;[2] ⚔️ Iniciar Luta&quot;);</span>
+<span class="nc" id="L194">            System.out.print(&quot;Sua escolha: &quot;);</span>
+            
+<span class="nc" id="L196">            int op = entrada.nextInt();</span>
+<span class="nc" id="L197">            entrada.nextLine();</span>
+
+<span class="nc bnc" id="L199" title="All 2 branches missed.">            if (op == 1) {</span>
+<span class="nc" id="L200">                boolean naMochila = true;</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">                while(naMochila) {</span>
+<span class="nc" id="L202">                    App.limparTela();</span>
+<span class="nc" id="L203">                    System.out.println(App.AMARELO + &quot;========== 🎒 SUA MOCHILA ==========&quot; + App.RESET);</span>
+<span class="nc" id="L204">                    System.out.println(&quot;[1] 🩹 Bandagem (&quot; + qtdBandagem + &quot;x) - Cura 20 HP&quot;);</span>
+<span class="nc" id="L205">                    System.out.println(&quot;[2] 🗡️ Shuriken (&quot; + qtdShuriken + &quot;x) - Tira 10 HP do Inimigo agora!&quot;);</span>
+<span class="nc" id="L206">                    System.out.println(&quot;[3] 🥷 Bandana  (&quot; + qtdBandana + &quot;x) - +5 Escudo (Máx por luta: 2)&quot;);</span>
+<span class="nc" id="L207">                    System.out.println(&quot;[4] 🔙 Fechar Mochila&quot;);</span>
+<span class="nc" id="L208">                    System.out.print(&quot;Escolha um item para usar: &quot;);</span>
+<span class="nc" id="L209">                    int item = entrada.nextInt();</span>
+<span class="nc" id="L210">                    entrada.nextLine();</span>
+                    
+<span class="nc bnc" id="L212" title="All 2 branches missed.">                    if (item == 1) {</span>
+<span class="nc bnc" id="L213" title="All 4 branches missed.">                        if (qtdBandagem &gt; 0 &amp;&amp; naruto.getVida() &lt; vidaMaxima) {</span>
+<span class="nc" id="L214">                            qtdBandagem--;</span>
+<span class="nc" id="L215">                            int novaVida = Math.min(naruto.getVida() + 20, vidaMaxima);</span>
+<span class="nc" id="L216">                            naruto = new Heroi(naruto.getNome(), novaVida, naruto.getEscudo());</span>
+<span class="nc" id="L217">                            System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Bandagem usada! HP recuperado.&quot; + App.RESET);</span>
+<span class="nc" id="L218">                        } else { System.out.println(App.VERMELHO + &quot;&gt;&gt;&gt; Sem bandagens ou HP já está cheio!&quot; + App.RESET); }</span>
+                    } 
+<span class="nc bnc" id="L220" title="All 2 branches missed.">                    else if (item == 2) {</span>
+<span class="nc bnc" id="L221" title="All 4 branches missed.">                        if (qtdShuriken &gt; 0 &amp;&amp; !usouShuriken) {</span>
+<span class="nc" id="L222">                            qtdShuriken--;</span>
+<span class="nc" id="L223">                            usouShuriken = true;</span>
+<span class="nc" id="L224">                            vidaInimigo -= 10;</span>
+<span class="nc" id="L225">                            System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Ataque Surpresa! &quot; + nomeInimigo + &quot; perdeu 10 HP antes da luta!&quot; + App.RESET);</span>
+<span class="nc" id="L226">                        } else { System.out.println(App.VERMELHO + &quot;&gt;&gt;&gt; Sem shurikens ou já arremessou nesta batalha!&quot; + App.RESET); }</span>
+                    }
+<span class="nc bnc" id="L228" title="All 2 branches missed.">                    else if (item == 3) {</span>
+<span class="nc bnc" id="L229" title="All 4 branches missed.">                        if (qtdBandana &gt; 0 &amp;&amp; limiteBandana &gt; 0) {</span>
+<span class="nc" id="L230">                            qtdBandana--;</span>
+<span class="nc" id="L231">                            limiteBandana--;</span>
+<span class="nc" id="L232">                            escudoAcumulado += 5;</span>
+<span class="nc" id="L233">                            System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Bandana equipada! Escudo inicial +5.&quot; + App.RESET);</span>
+<span class="nc" id="L234">                        } else { System.out.println(App.VERMELHO + &quot;&gt;&gt;&gt; Sem bandanas ou limite de 2 atingido!&quot; + App.RESET); }</span>
+                    }
+<span class="nc bnc" id="L236" title="All 2 branches missed.">                    else if (item == 4) { naMochila = false; }</span>
+                    
+<span class="nc bnc" id="L238" title="All 2 branches missed.">                    if(naMochila) { System.out.println(&quot;[Pressione ENTER]&quot;); entrada.nextLine(); }</span>
+<span class="nc" id="L239">                }</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">            } else if (op == 2) {</span>
+<span class="nc" id="L241">                vaiLutar = true;</span>
+            }
+<span class="nc" id="L243">        }</span>
+        
+        // Aplica o escudo pro Naruto
+<span class="nc" id="L246">        this.naruto = new Heroi(this.naruto.getNome(), this.naruto.getVida(), escudoAcumulado);</span>
+        
+        // Retorna o inimigo com a vida atualizada (se tomou dano da Shuriken)
+<span class="nc" id="L249">        return new Inimigo(nomeInimigo, vidaInimigo, 0);</span>
+    }
+
+    //rodar historia
+    public void iniciar(Scanner entrada){
+<span class="fc" id="L254">        System.out.println(&quot;\n&quot; + App.CIANO + &quot;╔&quot; + &quot;═&quot;.repeat(60) + &quot;╗&quot; + App.RESET);</span>
+<span class="fc" id="L255">        System.out.println(App.CIANO + &quot;║&quot; + App.RESET + App.NEGRITO + App.AMARELO + &quot;             📜 MODO HISTÓRIA: SAGA SHIPPUDEN               &quot; + App.RESET + App.CIANO + &quot;║&quot; + App.RESET);</span>
+<span class="fc" id="L256">        System.out.println(App.CIANO + &quot;╚&quot; + &quot;═&quot;.repeat(60) + &quot;╝&quot; + App.RESET);</span>
+
+<span class="fc" id="L258">        boolean acabou = false;</span>
+
+<span class="fc" id="L260">        entrada.nextLine();</span>
+
+<span class="pc bpc" id="L262" title="1 of 2 branches missed.">        while(!acabou){</span>
+
+<span class="fc" id="L264">            mostrarMapa();</span>
+<span class="fc" id="L265">            System.out.println(&quot;\n[Pressione ENTER para iniciar a fase]&quot;);</span>
+<span class="fc" id="L266">            entrada.nextLine();</span>
+
+<span class="fc" id="L268">            App.limparTela();</span>
+
+<span class="fc" id="L270">            String nomeFase = (String) noAtual.getUserObject();</span>
+
+<span class="fc" id="L272">            System.out.println(&quot;\n&quot; + App.CIANO + &quot;╔&quot; + &quot;═&quot;.repeat(60) + &quot;╗&quot; + App.RESET);</span>
+<span class="fc" id="L273">            System.out.println(App.CIANO + &quot;║&quot; + App.RESET + App.NEGRITO + App.AMARELO + &quot;               ⚔️  &quot; + nomeFase.toUpperCase() + &quot;              &quot; + App.RESET + App.CIANO + &quot;║&quot; + App.RESET);</span>
+<span class="fc" id="L274">            System.out.println(App.CIANO + &quot;╚&quot; + &quot;═&quot;.repeat(60) + &quot;╝&quot; + App.RESET + &quot;\n&quot;);</span>
+
+<span class="pc bpc" id="L276" title="1 of 2 branches missed.">            if(nomeFase.equals(&quot;Fase 1: O Sequestro de Gaara&quot;)){</span>
+<span class="fc" id="L277">                System.out.println(&quot;\n&quot; + App.AMARELO + &quot;[Pressione ENTER para iniciar a introdução]&quot; + App.RESET);</span>
+<span class="fc" id="L278">                entrada.nextLine();</span>
+                
+                // --- DESCRIÇÃO DE CENA (Narrador) ---
+<span class="fc" id="L281">                imprimirFala(App.CIANO + &quot;📖 O vento uiva pelos desfiladeiros da Vila Oculta da Areia...&quot; + App.RESET, entrada);</span>
+<span class="fc" id="L282">                imprimirFala(App.CIANO + &quot;📖 O céu noturno é subitamente iluminado por clarões ensurdecedores.&quot; + App.RESET, entrada);</span>
+<span class="fc" id="L283">                imprimirFala(App.CIANO + &quot;📖 Kankuro cai de joelhos na areia. Suas marionetes estão em pedaços.&quot; + App.RESET, entrada);</span>
+                
+<span class="fc" id="L285">                System.out.println(); // Espaço em branco para respirar</span>
+
+                // --- FALAS COM NOMES COLORIDOS ---
+<span class="fc" id="L288">                imprimirFala(App.VERMELHO + &quot;Deidara&quot; + App.RESET + &quot; (sorrindo): 'A arte é uma explosão! E o seu Kazekage é a minha obra-prima de hoje.'&quot;, entrada);</span>
+<span class="fc" id="L289">                imprimirFala(App.ROXO + &quot;Sasori&quot; + App.RESET + &quot; (impaciente): 'Não me faça esperar, Deidara. Odeio esperar e odeio fazer os outros esperarem.'&quot;, entrada);</span>
+                
+<span class="fc" id="L291">                imprimirFala(App.CIANO + &quot;\n📖 Os dois membros da Akatsuki desaparecem na escuridão, levando Gaara...&quot; + App.RESET, entrada);</span>
+                
+<span class="fc" id="L293">                System.out.println(App.CIANO + &quot;📖 [ Alguns dias depois, nos portões de Konoha... ]\n&quot; + App.RESET);</span>
+<span class="fc" id="L294">                entrada.nextLine();</span>
+
+<span class="fc" id="L296">                imprimirFala(App.VERDE + &quot;Kakashi&quot; + App.RESET + &quot;: 'A situação é crítica. A Akatsuki não age sem um plano impecável.'&quot;, entrada);</span>
+<span class="fc" id="L297">                imprimirFala(App.VERDE + &quot;Kakashi&quot; + App.RESET + &quot;: 'Precisamos ser táticos e calcular cada movimento.'&quot;, entrada);</span>
+            
+
+<span class="fc" id="L300">                imprimirFala(App.AMARELO + &quot;Naruto&quot; + App.RESET + &quot; (cerrando os punhos): 'Eu não dou a mínima para os planos deles, Kakashi-sensei!'&quot;, entrada);</span>
+<span class="fc" id="L301">                imprimirFala(App.AMARELO + &quot;Naruto&quot; + App.RESET + &quot;: 'O Gaara sofreu a vida toda com a mesma dor que eu... Eu vou trazê-lo de volta!'&quot;, entrada);</span>
+
+<span class="fc" id="L303">                imprimirFala(App.VERDE + &quot;Kakashi&quot; + App.RESET + &quot;: 'Vou atrás de Sasori, Naruto. Cuide do Deidara!'&quot;, entrada);</span>
+
+<span class="fc" id="L305">                System.out.println(&quot;\n&quot; + App.VERMELHO + &quot;🔥 PREPARE-SE: A perseguição começou! 🔥&quot; + App.RESET);</span>
+                
+                
+<span class="fc" id="L308">                System.out.println(&quot;\n&quot; + App.AMARELO + &quot;⚔️  INICIANDO BATALHA: NARUTO vs DEIDARA ⚔️&quot; + App.RESET);</span>
+<span class="fc" id="L309">                System.out.println(&quot;[Pressione ENTER para lutar]&quot;);</span>
+<span class="fc" id="L310">                entrada.nextLine();</span>
+
+                //preparação paraa a batalha naruto x deidara
+<span class="fc" id="L313">                Inimigo deidara = new Inimigo(&quot;Deidara&quot;, 60, 0);</span>
+<span class="fc" id="L314">                ArrayList&lt;Carta&gt; deckDeidara = App.GeraDeckInimigo(deidara);</span>
+
+<span class="fc" id="L316">                ArrayList&lt;Carta&gt; deckParaLuta = new ArrayList&lt;&gt;(this.deckNaruto);</span>
+<span class="fc" id="L317">                Collections.shuffle(deckParaLuta);</span>
+<span class="fc" id="L318">                Collections.shuffle(deckDeidara);</span>
+                
+                
+<span class="fc" id="L321">                ArrayList&lt;Carta&gt; mao = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L322">                ArrayList&lt;Carta&gt; descarte = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L324">                Combate arena = new Combate();</span>
+<span class="nc" id="L325">                String resultado = arena.rodarCombate(this.naruto, deidara, deckDeidara, deckParaLuta, mao, descarte);</span>
+                
+<span class="nc" id="L327">                System.out.println(&quot;\n&quot; + resultado);</span>
+
+<span class="nc bnc" id="L329" title="All 2 branches missed.">                if (this.naruto.getVida() &lt;= 0) {</span>
+<span class="nc" id="L330">                    System.out.println(&quot;\n💀 GAME OVER: A Akatsuki escapou com o Kazekage...&quot;);</span>
+<span class="nc" id="L331">                    System.out.println(&quot;[Pressione ENTER para voltar ao menu]&quot;);</span>
+<span class="nc" id="L332">                    entrada.nextLine();</span>
+<span class="nc" id="L333">                    acabou = true;</span>
+<span class="nc" id="L334">                    continue;</span>
+                } 
+                else {
+<span class="nc" id="L337">                    System.out.println(&quot;\n&quot; + App.VERDE + &quot;🌟 Deidara é derrotado, e Naruto consegue resgatar Gaara 🌟&quot; + App.RESET);</span>
+<span class="nc" id="L338">                    int recompensa = 50;</span>
+<span class="nc" id="L339">                    shinobiCoins += recompensa;</span>
+<span class="nc" id="L340">                    System.out.println(App.VERDE + &quot;\n🪙  Parabéns, você ganhou &quot; + recompensa + &quot; shinobi coins 🪙&quot; + App.RESET);</span>
+
+<span class="nc" id="L342">                    System.out.println(&quot;\n[Pressione ENTER para continuar a história]&quot;);</span>
+<span class="nc" id="L343">                    entrada.nextLine();</span>
+<span class="nc" id="L344">                    App.limparTela();</span>
+
+<span class="nc" id="L346">                    imprimirFala(App.CIANO + &quot;📖 Naruto sabe que as próximas batalhas serão contra a elite da Akatsuki.&quot; + App.RESET, entrada);</span>
+<span class="nc" id="L347">                    imprimirFala(App.CIANO + &quot;📖 Para se tornar mais forte, ele deve escolher um mestre para um treino intensivo.&quot; + App.RESET, entrada);</span>
+                    
+<span class="nc" id="L349">                    App.limparTela();</span>
+
+<span class="nc" id="L351">                    System.out.println(App.CIANO + &quot;╔&quot; + &quot;═&quot;.repeat(60) + &quot;╗&quot; + App.RESET);</span>
+<span class="nc" id="L352">                    System.out.println(App.CIANO + &quot;║&quot; + App.RESET + App.NEGRITO + App.AMARELO + &quot;              📜 QUEM SERÁ O SEU NOVO SENSEI?               &quot; + App.RESET + App.CIANO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L353">                    System.out.println(App.CIANO + &quot;╠&quot; + &quot;═&quot;.repeat(60) + &quot;╣&quot; + App.RESET);</span>
+<span class="nc" id="L354">                    System.out.println(App.CIANO + &quot;║&quot; + App.RESET + &quot;  [1] JIRAIYA (Foco em Invocação e Resistência)             &quot; + App.CIANO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L355">                    System.out.println(App.CIANO + &quot;║&quot; + App.RESET + &quot;  [2] KAKASHI (Foco em Natureza de Chakra e Dano)           &quot; + App.CIANO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L356">                    System.out.println(App.CIANO + &quot;╚&quot; + &quot;═&quot;.repeat(60) + &quot;╝&quot; + App.RESET);</span>
+                    
+<span class="nc" id="L358">                    System.out.print(&quot;\nEscolha seu caminho: &quot;);</span>
+<span class="nc" id="L359">                    int escolha = entrada.nextInt();</span>
+<span class="nc" id="L360">                    entrada.nextLine();</span>
+
+<span class="nc" id="L362">                    this.noAtual = (DefaultMutableTreeNode) noAtual.getChildAt(escolha - 1);</span>
+                    
+<span class="nc bnc" id="L364" title="All 2 branches missed.">                    if (escolha == 1){</span>
+<span class="nc" id="L365">                        imprimirFala(&quot;\n&quot; + App.ROXO + &quot;Jiraiya&quot; + App.RESET + &quot;: 'Prepare o seu espírito, Naruto! Vamos ao Monte Myoboku!'&quot;, entrada);</span>
+<span class="nc" id="L366">                        App.limparTela();</span>
+                    } else {
+<span class="nc" id="L368">                        imprimirFala(&quot;\n&quot; + App.VERDE + &quot;Kakashi&quot; + App.RESET + &quot;: 'Espero que esteja pronto para um treino de elite. Vamos nessa!'&quot;, entrada);</span>
+<span class="nc" id="L369">                        App.limparTela();</span>
+                    }
+<span class="nc" id="L371">                    continue;</span>
+                }
+            }
+<span class="nc bnc" id="L374" title="All 2 branches missed.">            else if (nomeFase.equals(&quot;Treinamento com Jiraiya&quot;)){</span>
+<span class="nc" id="L375">                imprimirFala(App.CIANO + &quot;📖 Naruto e Jiraiya viajam para o Monte Myoboku, a terra dos sapos...&quot; + App.RESET, entrada);</span>
+<span class="nc" id="L376">                System.out.println();</span>
+<span class="nc" id="L377">                imprimirFala(App.ROXO + &quot;Jiraiya&quot; + App.RESET + &quot;: 'Para dominar a invocação, você precisa extrair o chakra da Raposa!'&quot; , entrada);</span>
+<span class="nc" id="L378">                imprimirFala(App.ROXO + &quot;Jiraiya&quot; + App.RESET + &quot; (invocando um sapo gigante): 'Tente sobreviver aos meus ataques!'&quot; , entrada);</span>
+<span class="nc" id="L379">                imprimirFala(App.AMARELO + &quot;Naruto&quot; + App.RESET + &quot;: 'Eu não vou recuar! Vou dominar esse jutsu agora mesmo!'&quot; , entrada);</span>
+                
+<span class="nc" id="L381">                System.out.println(&quot;\n&quot; + App.AMARELO + &quot;⚔️  INICIANDO BATALHA: NARUTO vs JIRAYA ⚔️&quot; + App.RESET);</span>
+<span class="nc" id="L382">                System.out.println(&quot;[Pressione ENTER para lutar]&quot;);</span>
+<span class="nc" id="L383">                entrada.nextLine();</span>
+
+<span class="nc" id="L385">                Inimigo jiraiya = new Inimigo(&quot;Jiraiya&quot;, 70, 0);</span>
+<span class="nc" id="L386">                ArrayList&lt;Carta&gt; deckJiraiya = App.GeraDeckInimigo(jiraiya); </span>
+
+<span class="nc" id="L388">                ArrayList&lt;Carta&gt; deckParaLuta = new ArrayList&lt;&gt;(this.deckNaruto);</span>
+<span class="nc" id="L389">                Collections.shuffle(deckParaLuta);</span>
+                
+<span class="nc" id="L391">                Combate arena = new Combate();</span>
+<span class="nc" id="L392">                String resultado = arena.rodarCombate(this.naruto, jiraiya, deckJiraiya, deckParaLuta, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L393">                System.out.println(&quot;\n&quot; + resultado);</span>
+
+<span class="nc bnc" id="L395" title="All 2 branches missed.">                if (this.naruto.getVida() &lt;= 0) {</span>
+<span class="nc" id="L396">                    System.out.println(&quot;\n💀 Jiraiya: 'Ainda falta muito, garoto...' GAME OVER.&quot;);</span>
+<span class="nc" id="L397">                    entrada.nextLine();</span>
+<span class="nc" id="L398">                    acabou = true;</span>
+<span class="nc" id="L399">                    continue;</span>
+                } else {
+<span class="nc" id="L401">                    System.out.println(App.VERDE + &quot;\n🌟 TREINO CONCLUÍDO! Jiraiya aprova sua força. 🌟&quot; + App.RESET);</span>
+<span class="nc" id="L402">                    entrada.nextLine();</span>
+
+<span class="nc" id="L404">                    int recompensa = 70;</span>
+<span class="nc" id="L405">                    shinobiCoins += recompensa;</span>
+<span class="nc" id="L406">                    System.out.println(App.VERDE + &quot;🪙  Parabéns, você ganhou &quot; + recompensa + &quot; shinobi coins 🪙&quot;);</span>
+<span class="nc" id="L407">                    entrada.nextLine();</span>
+
+<span class="nc" id="L409">                    int vidaAtual = this.naruto.getVida();</span>
+<span class="nc" id="L410">                    this.naruto = new Heroi(&quot;Naruto (Sábio)&quot;, vidaAtual, 0);</span>
+<span class="nc" id="L411">                    vidaMaxima = 80;</span>
+<span class="nc" id="L412">                    this.deckNaruto.add(new CartaDanoArea(&quot;Jutsu de Invocação: Gamabunta&quot;, &quot;Convoca o Chefe dos Sapos!&quot;, 3, 25, 4, 75));</span>
+<span class="nc" id="L413">                    this.transformação = 1; // Desbloqueia modo sábio</span>
+
+<span class="nc bnc" id="L415" title="All 2 branches missed.">                    for (int i = 0; i &lt; this.deckNaruto.size(); i++) {</span>
+<span class="nc" id="L416">                        Carta cartaAtual = this.deckNaruto.get(i);</span>
+                        
+                        //rasengan deixa de custar 3 para custar 2
+<span class="nc bnc" id="L419" title="All 2 branches missed.">                        if (cartaAtual.getNome().equals(&quot;Rasengan&quot;)) {</span>
+<span class="nc" id="L420">                            this.deckNaruto.set(i, new CartaDano(&quot;Rasengan&quot;, &quot;Principal jutsu de ataque de Naruto&quot;, 2, 15));</span>
+                        } 
+                        //clone das sombras deixa de custar 2 para custar 1 
+<span class="nc bnc" id="L423" title="All 2 branches missed.">                        else if (cartaAtual.getNome().equals(&quot;Jutsu Clone das Sombras&quot;)) {</span>
+<span class="nc" id="L424">                            this.deckNaruto.set(i, new CartaEscudo(&quot;Jutsu Clone das Sombras&quot;, &quot;Naruto gera muitos clones para se proteger do inimigo&quot;, 1, 10));</span>
+                        }
+                        //remove jutsu de substituicao do baralho
+<span class="nc bnc" id="L427" title="All 2 branches missed.">                        else if (cartaAtual.getNome().equals(&quot;Jutsu de Substituição&quot;)) {</span>
+<span class="nc" id="L428">                            this.deckNaruto.remove(i);</span>
+<span class="nc" id="L429">                            i--; </span>
+                        }
+                    }
+
+<span class="nc" id="L433">                    System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Transformação desbloqueada: MODO SÁBIO 🌀&quot; + App.RESET);</span>
+<span class="nc" id="L434">                    System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Você aprendeu: Jutsu de Invocação: Gamabunta! 🐸&quot; + App.RESET);</span>
+<span class="nc" id="L435">                    System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Sua vida máxima aumentou para 80!&quot; + App.RESET);</span>
+
+<span class="nc" id="L437">                    imprimirFala(&quot;\n[Pressione ENTER para continuar]&quot;, entrada);</span>
+
+<span class="nc" id="L439">                    imprimirFala(App.CIANO + &quot;📖 Após o treinamento, Naruto decide retornar à Aldeia da Folha passando pela Aldeia da Névoa&quot; + App.RESET, entrada);</span>
+<span class="nc" id="L440">                    imprimirFala(App.CIANO + &quot;📖 Lá ele se depara com uma loja, onde guerreiros ninja costumam frequentar entre as missões.&quot; + App.RESET, entrada);</span>
+
+<span class="nc" id="L442">                    perguntarLoja(entrada);</span>
+<span class="nc" id="L443">                    App.limparTela();</span>
+                }
+<span class="nc" id="L445">            }</span>
+<span class="nc bnc" id="L446" title="All 2 branches missed.">            else if(nomeFase.equals(&quot;Treinamento com Kakashi&quot;)){</span>
+<span class="nc" id="L447">                imprimirFala(App.VERDE + &quot;Kakashi:&quot; + App.RESET + &quot; 'Vamos focar na sua natureza de chakra: o Vento.'&quot;, entrada);</span>
+<span class="nc" id="L448">                imprimirFala(App.VERDE + &quot;Kakashi:&quot; + App.RESET + &quot; 'Vamos intensificar o poder do seu rasengan!'&quot;, entrada);</span>
+                
+<span class="nc" id="L450">                System.out.println(&quot;\n&quot; + App.AMARELO + &quot;⚔️  INICIANDO BATALHA: NARUTO vs KAKASHI ⚔️&quot; + App.RESET);</span>
+<span class="nc" id="L451">                System.out.println(&quot;[Pressione ENTER para lutar]&quot;);</span>
+<span class="nc" id="L452">                entrada.nextLine();</span>
+
+<span class="nc" id="L454">                Inimigo kakashi = new Inimigo(&quot;Kakashi&quot;, 70, 0);</span>
+<span class="nc" id="L455">                ArrayList&lt;Carta&gt; deckKakashi = App.GeraDeckInimigo(kakashi); </span>
+
+<span class="nc" id="L457">                ArrayList&lt;Carta&gt; deckParaLuta = new ArrayList&lt;&gt;(this.deckNaruto);</span>
+<span class="nc" id="L458">                Collections.shuffle(deckParaLuta);</span>
+                
+<span class="nc" id="L460">                Combate arena = new Combate();</span>
+<span class="nc" id="L461">                String resultado = arena.rodarCombate(this.naruto, kakashi, deckKakashi, deckParaLuta, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L462">                System.out.println(&quot;\n&quot; + resultado);</span>
+
+<span class="nc bnc" id="L464" title="All 2 branches missed.">                if (this.naruto.getVida() &lt;= 0) {</span>
+<span class="nc" id="L465">                    System.out.println(&quot;\n💀 Kakashi: 'Você perdeu a concentração...' GAME OVER.&quot;);</span>
+<span class="nc" id="L466">                    entrada.nextLine();</span>
+<span class="nc" id="L467">                    acabou = true;</span>
+<span class="nc" id="L468">                    continue;</span>
+                } else {
+<span class="nc" id="L470">                    System.out.println(&quot;\n🌟 TREINO CONCLUÍDO! Você cortou a cachoeira ao meio! 🌟&quot;);</span>
+                    
+<span class="nc" id="L472">                    int recompensa = 80;</span>
+<span class="nc" id="L473">                    shinobiCoins += recompensa;</span>
+<span class="nc" id="L474">                    System.out.println(App.VERDE + &quot;\n🪙 Parabéns, você ganhou &quot; + recompensa + &quot; shinobi coins 🪙&quot;);</span>
+<span class="nc" id="L475">                    entrada.nextLine();</span>
+
+<span class="nc" id="L477">                    int vidaAtual = this.naruto.getVida();</span>
+<span class="nc" id="L478">                    this.naruto = new Heroi(&quot;Naruto (Manto da Kyuubi)&quot;, vidaAtual, 0);</span>
+<span class="nc" id="L479">                    vidaMaxima = 80;</span>
+<span class="nc" id="L480">                    this.deckNaruto.add(new CartaDano(&quot;Rasenshuriken&quot;, &quot;Lâminas de vento destrutivas&quot;, 3, 35));</span>
+<span class="nc" id="L481">                    this.transformação = 2; // Desbloqueia modo kurama incompleto</span>
+
+<span class="nc bnc" id="L483" title="All 2 branches missed.">                    for (int i = 0; i &lt; this.deckNaruto.size(); i++) {</span>
+<span class="nc" id="L484">                        Carta cartaAtual = this.deckNaruto.get(i);</span>
+                        
+                        //rasengan deixa de custar 3 para custar 2
+<span class="nc bnc" id="L487" title="All 2 branches missed.">                        if (cartaAtual.getNome().equals(&quot;Rasengan&quot;)) {</span>
+<span class="nc" id="L488">                            this.deckNaruto.set(i, new CartaDano(&quot;Rasengan&quot;, &quot;Principal jutsu de ataque de Naruto&quot;, 2, 15));</span>
+                        } 
+                        //clone das sombras deixa de custar 2 para custar 1 
+<span class="nc bnc" id="L491" title="All 2 branches missed.">                        else if (cartaAtual.getNome().equals(&quot;Jutsu Clone das Sombras&quot;)) {</span>
+<span class="nc" id="L492">                            this.deckNaruto.set(i, new CartaEscudo(&quot;Jutsu Clone das Sombras&quot;, &quot;Naruto gera muitos clones para se proteger do inimigo&quot;, 1, 10));</span>
+                        }
+                        //remove jutsu de substituicao do baralho
+<span class="nc bnc" id="L495" title="All 2 branches missed.">                        else if (cartaAtual.getNome().equals(&quot;Jutsu de Substituição&quot;)) {</span>
+<span class="nc" id="L496">                            this.deckNaruto.remove(i);</span>
+<span class="nc" id="L497">                            i--; </span>
+                        }
+                    }
+                    
+<span class="nc" id="L501">                    System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Transformação desbloqueada: MANTO DA KYUUBI 🔥&quot; + App.RESET);</span>
+<span class="nc" id="L502">                    System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Você aprendeu: Rasenshuriken! 💨&quot; + App.RESET);</span>
+<span class="nc" id="L503">                    System.out.println(App.VERDE + &quot;&gt;&gt;&gt; Sua vida máxima aumentou para 80!&quot; + App.RESET);</span>
+
+<span class="nc" id="L505">                    imprimirFala(&quot;\n[Pressione ENTER para continuar]&quot;, entrada);</span>
+
+<span class="nc" id="L507">                    imprimirFala(App.CIANO + &quot;📖 Após o treinamento, Naruto decide retornar à Aldeia da Folha passando pela Aldeia da Névoa&quot; + App.RESET, entrada);</span>
+<span class="nc" id="L508">                    imprimirFala(App.CIANO + &quot;📖 Lá ele se depara com uma loja, onde guerreiros ninja costumam frequentar entre as missões.&quot; + App.RESET, entrada);</span>
+
+<span class="nc" id="L510">                    perguntarLoja(entrada);</span>
+<span class="nc" id="L511">                    App.limparTela();</span>
+                }
+<span class="nc" id="L513">            }</span>
+
+<span class="nc bnc" id="L515" title="All 2 branches missed.">            else if(nomeFase.equals(&quot;Fase 2: A Invasão de Pain&quot;)){</span>
+<span class="nc" id="L516">                System.out.println(&quot;\n[Pressione ENTER para avançar]&quot;);</span>
+<span class="nc" id="L517">                entrada.nextLine();</span>
+
+<span class="nc" id="L519">                imprimirFala(App.CIANO + &quot;\n📖 De volta à Vila da Folha, o cenário é de destruição total...&quot;, entrada);</span>
+<span class="nc" id="L520">                imprimirFala(App.CIANO + &quot;📖 O silêncio de Konoha é ensurdecedor...&quot; + App.RESET, entrada);</span>
+<span class="nc" id="L521">                imprimirFala(App.CIANO + &quot;📖 Uma cratera gigante substituiu o centro da Aldeia.&quot; + App.RESET, entrada);</span>
+
+<span class="nc" id="L523">                imprimirFala(App.ROXO + &quot;\nPain&quot; + App.RESET + &quot; (flutuando nos céus): 'O mundo deve conhecer a dor.'&quot;, entrada);</span>
+                
+<span class="nc" id="L525">                imprimirFala(App.CIANO + &quot;\n📖 Uma nuvem de fumaça explode no centro da cratera...&quot; + App.RESET, entrada);</span>
+<span class="nc" id="L526">                imprimirFala(App.CIANO + &quot;📖 Naruto surge em meio ao caos para salvar Konoha.&quot; + App.RESET, entrada);</span>
+
+<span class="nc" id="L528">                imprimirFala(App.AMARELO + &quot;\nNaruto&quot; + App.RESET + &quot;: 'Eu vou acabar com você... e trazer a paz do meu jeito!'&quot;, entrada);</span>
+                
+<span class="nc" id="L530">                System.out.println(&quot;\n&quot; + App.VERMELHO + &quot;╔&quot; + &quot;═&quot;.repeat(60) + &quot;╗&quot; + App.RESET);</span>
+<span class="nc" id="L531">                System.out.println(App.VERMELHO + &quot;║&quot; + App.RESET + App.NEGRITO + &quot;               ☠️  BATALHA FINAL: A DOR PARA TRAZER A CURA           &quot; + App.VERMELHO + &quot;║&quot; + App.RESET);</span>
+<span class="nc" id="L532">                System.out.println(App.VERMELHO + &quot;╚&quot; + &quot;═&quot;.repeat(60) + &quot;╝&quot; + App.RESET);</span>
+
+<span class="nc" id="L534">                System.out.println(&quot;\n&quot; + App.ROXO + &quot;⚔️  COMBATE FINAL: NARUTO vs PAIN&quot; + App.RESET);</span>
+                
+<span class="nc" id="L536">                Inimigo pain = new Inimigo(&quot;Pain&quot;, 120, 0); </span>
+<span class="nc" id="L537">                pain = salaDePreparacao(entrada, pain);</span>
+
+<span class="nc" id="L539">                ArrayList&lt;Carta&gt; deckPain = App.GeraDeckInimigo(pain); </span>
+
+<span class="nc" id="L541">                ArrayList&lt;Carta&gt; deckParaLuta = new ArrayList&lt;&gt;(this.deckNaruto);</span>
+<span class="nc" id="L542">                Collections.shuffle(deckParaLuta);</span>
+                
+<span class="nc" id="L544">                Combate arena = new Combate();</span>
+
+<span class="nc" id="L546">                arena.habilitarEvolucao(this.transformação);</span>
+
+<span class="nc" id="L548">                String resultado = arena.rodarCombate(this.naruto, pain, deckPain, deckParaLuta, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L549">                System.out.println(&quot;\n&quot; + resultado);</span>
+
+<span class="nc bnc" id="L551" title="All 2 branches missed.">                if (this.naruto.getVida() &lt;= 0) {</span>
+<span class="nc" id="L552">                    System.out.println(&quot;\n💀 GAME OVER: A Vila da Folha foi aniquilada...&quot;);</span>
+<span class="nc" id="L553">                    System.out.println(&quot;[Pressione ENTER para voltar ao menu]&quot;);</span>
+<span class="nc" id="L554">                    entrada.nextLine();</span>
+<span class="nc" id="L555">                    acabou = true;</span>
+<span class="nc" id="L556">                    continue;</span>
+                } else {
+<span class="nc" id="L558">                    System.out.println(&quot;\n🌟 VITÓRIA ÉPICA! A PAZ FOI RESTAURADA! 🌟&quot;);</span>
+<span class="nc" id="L559">                    imprimirFala(&quot;O corpo de Pain cai no chão. A ameaça da Akatsuki foi parada.&quot;, entrada);</span>
+<span class="nc" id="L560">                    imprimirFala(&quot;Os moradores de Konoha comemoram. Naruto finalmente é reconhecido como o Herói da Vila!&quot;, entrada);</span>
+                    
+<span class="nc" id="L562">                    System.out.println(&quot;\n&quot; + App.AMARELO + &quot;=== FIM DO MODO HISTÓRIA ===&quot; + App.RESET);</span>
+<span class="nc" id="L563">                    System.out.println(&quot;Parabéns por zerar a demonstração do Shinobi Legacy!&quot;);</span>
+<span class="nc" id="L564">                    imprimirFala(&quot;[Pressione ENTER para retornar ao menu principal]&quot;, entrada);</span>
+                    
+<span class="nc" id="L566">                    acabou = true; </span>
+<span class="nc" id="L567">                    continue;</span>
+                }
+            }
+
+<span class="nc" id="L571">            int qtdFilhos = noAtual.getChildCount();</span>
+            
+            // Se o nó atual não tem mais filhos, acabou a história construída até agora
+<span class="nc bnc" id="L574" title="All 2 branches missed.">            if (qtdFilhos == 0) {</span>
+<span class="nc" id="L575">                System.out.println(&quot;\n[ Fim do Conteúdo Atual da História. Pressione ENTER para sair ]&quot;);</span>
+<span class="nc" id="L576">                entrada.nextLine();</span>
+<span class="nc" id="L577">                acabou = true; </span>
+            } 
+            // Se tiver só 1 filho (caminho linear no futuro, ex: Fase 3)
+<span class="nc bnc" id="L580" title="All 2 branches missed.">            else if (qtdFilhos == 1) {</span>
+<span class="nc" id="L581">                noAtual = (DefaultMutableTreeNode) noAtual.getChildAt(0); </span>
+            }
+            
+            
+<span class="nc" id="L585">        }</span>
+        
+        
+        
+
+        
+<span class="nc" id="L591">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

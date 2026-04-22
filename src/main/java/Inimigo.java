@@ -15,8 +15,4 @@ public class Inimigo extends Entidade{
         super(nome, vida, escudo);
     }
 
-    /** Atributo que armazena o limite máximo de vida que o inimigo pode possuir. */
-    public int vidaMaxima = vida;
-    
-
 }

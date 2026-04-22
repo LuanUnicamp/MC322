@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CartaDanoArea.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MC322</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">CartaDanoArea.java</span></div><h1>CartaDanoArea.java</h1><pre class="source lang-java linenums">import java.util.Random;
+
+/**
+ * Representa uma carta de ataque em área que possui uma chance de causar dano crítico 
+ * ou falhar, resultando em um dano reduzido.
+ */
+public class CartaDanoArea extends Carta {
+    private int danoCritico;
+    private int danoFalha;
+    private int chanceSucesso;
+<span class="fc" id="L11">    private Random random = new Random();</span>
+
+    /**
+     * Inicializa os atributos da carta de dano em área.
+     * @param nome O nome da carta.
+     * @param descricao A descrição do efeito da carta.
+     * @param custo O custo de chakra para usar a carta.
+     * @param critico O valor do dano caso o ataque seja bem-sucedido.
+     * @param falha O valor do dano caso o ataque falhe.
+     * @param chance A porcentagem de chance (0 a 100) do ataque ser um sucesso crítico.
+     */
+    public CartaDanoArea(String nome, String descricao, int custo, int critico, int falha, int chance) {
+<span class="fc" id="L23">        super(nome, descricao, custo);</span>
+<span class="fc" id="L24">        this.danoCritico = critico;</span>
+<span class="fc" id="L25">        this.danoFalha = falha;</span>
+<span class="fc" id="L26">        this.chanceSucesso = chance;</span>
+<span class="fc" id="L27">    }</span>
+
+    /**
+     * Executa a ação da carta quando utilizada pelo herói.
+     * @param h O herói que está usando a carta.
+     * @param i O inimigo alvo que receberá o dano.
+     * @param combate A instância do gerenciador de combate. &lt;br&gt;
+     * &lt;b&gt;Comportamento&lt;/b&gt;: Calcula aleatoriamente se o ataque será crítico ou falho com base na chance de sucesso, 
+     * aplica o dano correspondente ao inimigo e exibe o resultado no terminal.
+     */
+    @Override
+    public void usar_h(Heroi h, Inimigo i, Combate combate) {
+        //logica da carta e o que esta acontecendo 
+<span class="fc" id="L40">        System.out.println(&quot;\n 🌀 &quot; + App.CIANO + &quot;ESTILO DANO EM ÁREA: &quot; + App.RESET + App.NEGRITO + nome + App.RESET);</span>
+        
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (random.nextInt(100) &lt; this.chanceSucesso) {</span>
+<span class="fc" id="L43">            i.receberDano(this.danoCritico);</span>
+<span class="fc" id="L44">            System.out.println(&quot;    &quot; + App.VERDE + &quot;SUCESSO TOTAL! 🔥 &quot; + App.RESET + &quot;A técnica atingiu o ápice!&quot;);</span>
+<span class="fc" id="L45">            System.out.println(&quot;    Dano Crítico: &quot; + App.VERMELHO + &quot;-&quot; + this.danoCritico + &quot; HP em &quot; + i.getNome() + App.RESET);</span>
+        } else {
+<span class="nc" id="L47">            i.receberDano(this.danoFalha);</span>
+<span class="nc" id="L48">            System.out.println(&quot;    &quot; + App.AMARELO + &quot;FALHA NA EXECUÇÃO... 💨&quot; + App.RESET + &quot; A energia se dispersou.&quot;);</span>
+<span class="nc" id="L49">            System.out.println(&quot;    Dano Reduzido: &quot; + App.VERMELHO + &quot;-&quot; + this.danoFalha + &quot; HP&quot; + App.RESET);</span>
+        }
+<span class="fc" id="L51">    }</span>
+
+
+    /**
+     * Executa a ação da carta quando utilizada pelo inimigo.
+     * @param i O inimigo que está usando a carta.
+     * @param h O herói alvo que receberá o dano.
+     * @param combate A instância do gerenciador de combate. &lt;br&gt;
+     * &lt;b&gt;Comportamento&lt;/b&gt;: Calcula aleatoriamente se o ataque será crítico ou falho com base na chance de sucesso, 
+     * aplica o dano correspondente ao herói e exibe o resultado no terminal.
+     */
+    @Override
+    public void usar_i(Inimigo i, Heroi h, Combate combate) {
+        //logica da carta e o que esta acontecendo 
+<span class="nc" id="L65">        System.out.println(&quot;\n 🌪️ &quot; + App.VERMELHO + App.NEGRITO + i.getNome() + App.RESET + &quot; lançou um ataque massivo!&quot;);</span>
+
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (random.nextInt(100) &lt; this.chanceSucesso) {</span>
+<span class="nc" id="L68">            h.receberDano(this.danoCritico);</span>
+<span class="nc" id="L69">            System.out.println(&quot;    &quot; + App.VERMELHO + &quot;GOLPE CRÍTICO! Você recebeu &quot; + this.danoCritico + &quot; de dano!&quot; + App.RESET);</span>
+        } else {
+<span class="nc" id="L71">            h.receberDano(this.danoFalha);</span>
+<span class="nc" id="L72">            System.out.println(&quot;    &quot; + App.AMARELO + &quot;Você esquivou parcialmente! Recebeu apenas &quot; + this.danoFalha + &quot; de dano.&quot; + App.RESET);</span>
+        }
+<span class="nc" id="L74">    }</span>
+
+<span class="fc" id="L76">    @Override public int getDano() { return this.danoCritico; }</span>
+<span class="nc" id="L77">    @Override public int getEscudo() { return 0; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

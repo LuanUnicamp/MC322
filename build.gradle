@@ -1,24 +1,58 @@
 plugins {
     id 'application'
     id 'java'
+    id 'jacoco'
 }
 
 repositories {
     mavenCentral()
 }
 
+// Isso resolve o problema da "versão 69" do Java 25
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+}
+
+// Configura a versão do JaCoCo para uma que suporte seu Java
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+test {
+    useJUnitPlatform()
+    // finalizedBy garante que o relatório seja gerado sempre que o teste rodar
+    finalizedBy jacocoTestReport 
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.required = true
+    }
+    
+    // Filtro para focar apenas no seu código e não dar erro nas classes do sistema
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ["sun/**", "jdk/**", "java/**"])
+        }))
+    }
 }
 
 application {
     mainClass = 'App' 
 }
 
-
 javadoc {
     destinationDir = file("build/docs/javadoc")
 }
+
 run {
     standardInput = System.in
 }

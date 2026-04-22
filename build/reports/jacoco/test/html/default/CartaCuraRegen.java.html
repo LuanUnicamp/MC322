@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CartaCuraRegen.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MC322</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">CartaCuraRegen.java</span></div><h1>CartaCuraRegen.java</h1><pre class="source lang-java linenums">/**
+ * Representa uma carta que cura o usuário imediatamente e aplica um efeito de regeneração contínua.
+ */
+public class CartaCuraRegen extends Carta {
+    private int qtd_cura;
+    private int regenCura;
+
+    /**
+     * Inicializa os atributos da carta de cura com regeneração.
+     * @param nome O nome da carta.
+     * @param descricao A descrição do efeito da carta.
+     * @param custo O custo de chakra para usar a carta.
+     * @param qtd_cura A quantidade de cura imediata recebida.
+     * @param regenCura A quantidade de cura regenerada por turno.
+     */
+    public CartaCuraRegen(String nome, String descricao, int custo, int qtd_cura,int regenCura) {
+<span class="fc" id="L17">        super(nome, descricao, custo);</span>
+<span class="fc" id="L18">        this.qtd_cura=qtd_cura;</span>
+<span class="fc" id="L19">        this.regenCura=regenCura;</span>
+<span class="fc" id="L20">    }</span>
+
+
+    /**
+     * Executa a ação da carta quando utilizada pelo herói.
+     * @param h O herói que está usando a carta e receberá a cura.
+     * @param i O inimigo presente no combate.
+     * @param combate A instância do gerenciador de combate para inscrever o efeito. &lt;br&gt;
+     * &lt;b&gt;Comportamento&lt;/b&gt;: Cura a vida do herói imediatamente, instancia um novo efeito de regeneração, 
+     * aplica-o ao herói, inscreve o efeito no combate e exibe a mensagem da ação no terminal.
+     */
+    @Override
+    public void usar_h(Heroi h, Inimigo i, Combate combate) {
+        //logica da carta e do padrao observer
+<span class="fc" id="L34">        h.receberCura(this.qtd_cura);</span>
+<span class="fc" id="L35">        Regen regen_heroi = new Regen(&quot;Ninjutsu Médico Contínuo&quot;, h, this.regenCura, &quot;REGEN&quot;);</span>
+<span class="fc" id="L36">        h.aplicarEfeito(regen_heroi);</span>
+<span class="fc" id="L37">        combate.inscreverEfeito(regen_heroi);</span>
+
+        //aviso do que esta acontecendo 
+<span class="fc" id="L40">        System.out.println(&quot;\n ✨ &quot; + VERDE + &quot;ARTE MÉDICA: &quot; + RESET + NEGRITO + h.getNome() + RESET);</span>
+<span class="fc" id="L41">        System.out.println(&quot;    Cura Imediata: &quot; + VERDE + &quot;+&quot; + this.qtd_cura + &quot; HP&quot; + RESET);</span>
+<span class="fc" id="L42">        System.out.println(&quot;    Efeito Ativo: &quot; + VERDE + regen_heroi.getNome() + &quot; (+&quot; + this.regenCura + &quot; de regen de cura)&quot; + RESET);</span>
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Executa a ação da carta quando utilizada pelo inimigo.
+     * @param i O inimigo que está usando a carta e receberá a cura.
+     * @param h O herói presente no combate.
+     * @param combate A instância do gerenciador de combate para inscrever o efeito. &lt;br&gt;
+     * &lt;b&gt;Comportamento&lt;/b&gt;: Cura a vida do inimigo imediatamente, instancia um novo efeito de regeneração, 
+     * aplica-o ao inimigo, inscreve o efeito no combate e exibe a mensagem da ação no terminal.
+     */
+    @Override
+    public void usar_i(Inimigo i, Heroi h, Combate combate) {
+        //logica da carta e do padrao observer
+<span class="nc" id="L56">        i.receberCura(this.qtd_cura);</span>
+<span class="nc" id="L57">        Regen regen_inimigo = new Regen(&quot;Regeneração Celular&quot;, i, this.regenCura, &quot;REGEN&quot;);</span>
+<span class="nc" id="L58">        i.aplicarEfeito(regen_inimigo);</span>
+<span class="nc" id="L59">        combate.inscreverEfeito(regen_inimigo);</span>
+
+        //aviso do que esta acontecendo 
+<span class="nc" id="L62">        System.out.println(&quot;\n 🌿 &quot; + VERMELHO + NEGRITO + i.getNome() + RESET + &quot; usou uma técnica de restauração!&quot;);</span>
+<span class="nc" id="L63">        System.out.println(&quot;    Recuperação: &quot; + VERDE + &quot;+&quot; + this.qtd_cura + &quot; HP imediatos&quot; + RESET);</span>
+<span class="nc" id="L64">        System.out.println(&quot;    Efeito: &quot; + VERDE + &quot;Regeneração ativada (+&quot; + this.regenCura + &quot; de regen de cura)&quot; + RESET);</span>
+<span class="nc" id="L65">    }</span>
+
+<span class="nc" id="L67">    @Override public int getDano() { return 0; }</span>
+<span class="nc" id="L68">    @Override public int getEscudo() { return 0; }</span>
+
+    public int getCura(){
+<span class="nc" id="L71">        return qtd_cura;</span>
+    }
+
+    public int getRegenCura(){
+<span class="nc" id="L75">        return regenCura;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
