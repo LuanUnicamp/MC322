@@ -65,4 +65,8 @@ public class CartaSacrificio extends Carta {
 
     @Override public int getDano() { return this.danoAoAlvo; }
     @Override public int getEscudo() { return 0; }
+
+    public int getDanoAoUsuario(){
+        return this.danoAoUsuario;
+    }
 }

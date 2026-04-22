@@ -75,4 +75,12 @@ public class CartaDanoArea extends Carta {
 
     @Override public int getDano() { return this.danoCritico; }
     @Override public int getEscudo() { return 0; }
+
+    public int getDanoFalha(){
+        return this.danoFalha;
+    }
+
+    public int getChanceSucesso(){
+        return this.chanceSucesso;
+    }
 }

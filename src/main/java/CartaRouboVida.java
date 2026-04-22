@@ -61,4 +61,8 @@ public class CartaRouboVida extends Carta {
 
     @Override public int getDano() { return this.dano; }
     @Override public int getEscudo() { return 0; }
+    
+    public int getCura(){
+        return this.cura;
+    }
 }

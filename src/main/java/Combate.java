@@ -25,14 +25,14 @@ public class Combate {
     private int regen = 0;
     private int transformacao = 0;
 
-   /**
+    /**
      * Construtor padrão da classe Combate.
      * <br>
      * <b>Comportamento:</b> Inicializa a lista de monitoramento de efeitos (como Veneno ou Regeneração) 
      * como uma lista vazia para o início seguro da partida.
      */
     public Combate(){
-        listaEfeitosCombate= new ArrayList<>();
+        listaEfeitosCombate = new ArrayList<>();
     }
 
     /**
@@ -40,12 +40,11 @@ public class Combate {
      * <br>
      * <b>Comportamento:</b> Verifica se um efeito com o mesmo nome já existe na lista ativa. 
      * Caso não exista, ele adiciona o efeito, impedindo duplicatas que poderiam quebrar o balanceamento.
-     * * @param efeito O objeto {@link Efeito} que será adicionado à entidade.
+     * @param efeito O objeto {@link Efeito} que será adicionado à entidade.
      */
-
     public void inscreverEfeito(Efeito efeito){
         for(int i=0;i<listaEfeitosCombate.size();i++){
-            Efeito efeitolista =listaEfeitosCombate.get(i);
+            Efeito efeitolista = listaEfeitosCombate.get(i);
             if(efeito.getNome().equals(efeitolista.getNome())){       
                 return;
             }
@@ -62,12 +61,12 @@ public class Combate {
      * <br>
      * <b>Comportamento:</b> Percorre a lista de efeitos ativos de trás para frente. 
      * Aciona a lógica interna de cada efeito e remove aqueles cujas durações já se esgotaram.
-     * * @param num Código de sinalização do momento no turno (0 para o início do turno, 
+     * @param num Código de sinalização do momento no turno (0 para o início do turno, 
      * 1 para o fim do turno).
      */
     private void avisar(int num){
         for(int i=listaEfeitosCombate.size()-1;i>=0;i--){
-            Efeito efeito =listaEfeitosCombate.get(i);
+            Efeito efeito = listaEfeitosCombate.get(i);
             
             if(efeito.acabou()){
                 listaEfeitosCombate.remove(i);
@@ -75,9 +74,7 @@ public class Combate {
             }else{
                 efeito.avisado(num);
             }
-
         }
-       
     }
 
     /**
@@ -86,26 +83,35 @@ public class Combate {
      * <b>Comportamento:</b> Controla a compra de cartas, evolução das transformações de modo história, 
      * a execução das jogadas pelo jogador (via console) e pelo inimigo (automáticas), além de 
      * desencadear notificações do publisher (efeitos) a cada início e fim de turno.
-     * * @param heroiEscolhido    O herói controlado pelo jogador.
+     * @param heroiEscolhido    O herói controlado pelo jogador.
      * @param inimigoEscolhido  O oponente controlado pelo sistema.
      * @param movimentosInimigo Lista de cartas com as possíveis ações do inimigo.
      * @param pilhaCompra       Lista de cartas ainda disponíveis para o jogador sacar.
      * @param maoJogador        Lista de cartas atualmente na mão do jogador.
      * @param pilhaDescarte     Lista de cartas já utilizadas ou descartadas pelo jogador.
+     * @param entrada           Scanner compartilhado para leitura da entrada do usuário.
      * @return Uma {@link String} formatada e colorida indicando o vencedor e a mensagem de desfecho da batalha.
      */
-    public String rodarCombate(Heroi heroiEscolhido, Inimigo inimigoEscolhido, ArrayList<Carta> movimentosInimigo, ArrayList<Carta> pilhaCompra, ArrayList<Carta> maoJogador, ArrayList<Carta> pilhaDescarte ){
-        int leitura;
-        Scanner entrada = new Scanner(System.in);
+    public String rodarCombate(Heroi heroiEscolhido, Inimigo inimigoEscolhido, 
+                           ArrayList<Carta> movimentosInimigo, 
+                           ArrayList<Carta> pilhaCompra, 
+                           ArrayList<Carta> maoJogador, 
+                           ArrayList<Carta> pilhaDescarte,
+                           Scanner entrada) {
 
-        //o jogo acaba quando um dos dois oponentes tem estavivo() retornando false
+        int leitura;
+
+        this.listaEfeitosCombate = new ArrayList<>();
+        this.turno = 0;
+
+        // o jogo acaba quando um dos dois oponentes tem estaVivo() retornando false
         while(heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
             this.turno++;
             String msgRegen = "";
-            //publisher avisando inicio do turno
+            // publisher avisando inicio do turno
             avisar(0);
 
-            //logica para caso a transformacao do modo historia estiver desbloqueada
+            // lógica para caso a transformação do modo história estiver desbloqueada
             if(transformacao > 0){
                 if(!modoSeninAtivo && !modoKuramaAtivo){
                     if(turno > 0 && turno < 5){
@@ -147,29 +153,26 @@ public class Combate {
             }
     
             int chakra = 4;
-            //variável que indica quando o heroi não tem chackra suficiente para usar habilidade
+            // variável que indica quando o herói não tem chakra suficiente para usar habilidade
             Boolean insuficiente = false;
 
-
             for(int k = 0; k < 3; k++){
-                //se a pilha de compras estiver vazia e a pilha de descarte tiver cartas, as cartas são
-                //adicionadas à pilha de compras e embaralhadas
+                // se a pilha de compras estiver vazia e a pilha de descarte tiver cartas, recicla
                 if(pilhaCompra.size()==0 && pilhaDescarte.size()>0){
                     for (int j = pilhaDescarte.size() - 1; j >= 0; j--) {
                         Carta cartaReciclada = pilhaDescarte.remove(j);
                         pilhaCompra.add(cartaReciclada);
                     }
-                Collections.shuffle(pilhaCompra);
+                    Collections.shuffle(pilhaCompra);
                 }
 
-                //se tiver cartas na pilha de compras e não tiver 3 cartas na mão do jogador, ele adiciona até
-                //3 novas cartas conforme a necessidade
+                // compra até 3 cartas se a mão estiver incompleta
                 if(pilhaCompra.size()>0 && maoJogador.size()<3){
                     Carta cartaComprada = pilhaCompra.remove(pilhaCompra.size() - 1);
                     maoJogador.add(cartaComprada);
                 }
             }
-            //decide o ataque do inimigo
+            // decide o ataque do inimigo
             Collections.shuffle(movimentosInimigo);
 
             App.limparTela();
@@ -178,29 +181,25 @@ public class Combate {
                 System.out.println("\n"+ msgRegen);
             }
 
-            //enquanto tiver chackra disponível e os dois estiverem vivos, o turno é o mesmo
+            // enquanto tiver chakra disponível e os dois estiverem vivos, o turno continua
             while(chakra>0 && heroiEscolhido.estaVivo() && inimigoEscolhido.estaVivo()){
                 leitura = entrada.nextInt();
                 entrada.nextLine();
                 
-                
-                //se a leitura for ultima opção, o chakra é zerado e o turno acaba. +3 porque
-                //tem os menus de carta e efeito
+                // se a leitura for a última opção, o chakra é zerado e o turno acaba
                 if(leitura == (maoJogador.size()+3)){
                     chakra = 0;
                 } 
 
-                //se a leitura estiver entre as opções de cartas a serem utilizadas
+                // se a leitura estiver entre as opções de cartas a serem utilizadas
                 else if(leitura > 0 && leitura <= maoJogador.size()){
                     Carta cartaSelecionada = maoJogador.get(leitura-1);
 
-                    //se tem chakra para a habilidade, usa a carta e a descarta depois
                     if(chakra >= cartaSelecionada.getCusto()){
                         chakra -= cartaSelecionada.getCusto();
 
                         int danoBase = cartaSelecionada.getDano(); 
     
-                        // Se a carta for de dano (seja área ou único), aplica o bônus
                         if (danoBase > 0 || cartaSelecionada instanceof CartaDanoArea) { 
                             int danoExtra = 0;
                             if (modoSeninAtivo) danoExtra = 5;
@@ -224,58 +223,50 @@ public class Combate {
                         insuficiente = true;
                     }
                 }
-                //caso o usuario chame o menu de cartas
+                // menu de cartas
                 else if(leitura == (maoJogador.size()+1)){
-                    App.menuCartas(maoJogador,entrada);
+                    App.menuCartas(maoJogador, entrada);
                     App.limparTela();
                     App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo, this.transformacao, this.barraEvolucao, this.modoSeninAtivo, this.modoKuramaAtivo);
                     entrada.nextLine();
                 }
-                //caso o usuario chame o menu de efeitos
+                // menu de efeitos
                 else if(leitura == (maoJogador.size()+2)){
-                    App.menuVenenoRegen(listaEfeitosCombate,entrada);
+                    App.menuVenenoRegen(listaEfeitosCombate, entrada);
                     entrada.nextLine();
                 }
                 else{
                     System.out.println("Opção Inválida!");
-                    //para não chamar o display
                     insuficiente = true;
                 }
 
-                //caso o chackra seja insuficiente não vai limpar a tela e chamar display, para que a mensagem
-                //de que chackra não é suficiente para a habilidade apareça no terminal
                 if (!insuficiente) {
                     App.limparTela();
                     App.display(heroiEscolhido, inimigoEscolhido, chakra, maoJogador, movimentosInimigo, this.transformacao, this.barraEvolucao, this.modoSeninAtivo, this.modoKuramaAtivo);
                 }
                 insuficiente = false;
-
             }
             
-           
-            //no fim do turno as cartas da mão do jogador vao para a pilha de descarte
+            // no fim do turno as cartas da mão do jogador vão para a pilha de descarte
             for(int i = maoJogador.size()-1; i>=0; i--){
                 Carta cartaDescartada = maoJogador.remove(i);
                 pilhaDescarte.add(cartaDescartada);
             }
 
             inimigoEscolhido.zeraEscudo();
-            //inimigo ataca automaticamente no final de cada turno, mas só se ele estiver vivo
+            // inimigo ataca automaticamente no final de cada turno, mas só se estiver vivo
             if (inimigoEscolhido.getVida()>0) {
-                movimentosInimigo.get(0).usar_i(inimigoEscolhido, heroiEscolhido,this);
+                movimentosInimigo.get(0).usar_i(inimigoEscolhido, heroiEscolhido, this);
                 
                 System.out.println("\n[Pressione ENTER para seu próximo turno]");
                 entrada.nextLine();
-                
             }
 
-            //publisher avisando o fim do turno
+            // publisher avisando o fim do turno
             avisar(1);
-            
 
-            //escudo zerado depois de cada turno
+            // escudo zerado depois de cada turno
             heroiEscolhido.zeraEscudo();
-
         }
         
         App.limparTela();
@@ -290,6 +281,9 @@ public class Combate {
             App.exibirFinal(0);
             return ROXO+NEGRITO+"             --- DERROTA! O CICLO DE ÓDIO CONTINUA ---"+RESET;
         }
-
+    }
+    
+    public ArrayList<Efeito> getListaEfeitos() {
+        return this.listaEfeitosCombate;
     }
 }

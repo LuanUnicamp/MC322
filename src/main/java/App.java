@@ -145,8 +145,6 @@ public class App {
         String barraI = gerarBarraVida(i.getVida(), i.getVidaMax(), 12, VERMELHO);
     
         System.out.printf("  %-52s %s\n", barraH, barraI);
-        
-        //System.out.printf("  Vida: " + VERDE + "%-24d" + RESET + "      Vida: " + VERDE + "%d" + RESET + "  \n", h.getVida(), i.getVida());
             
         String escH = CIANO + h.getEscudo() + RESET;
         String escI = CIANO + i.getEscudo() + RESET;
@@ -158,6 +156,7 @@ public class App {
         String chakraBarra = "● ".repeat(chakra) + "○ ".repeat(4 - chakra);
         System.out.println("  Energia: " + AMARELO + chakra + "/4 Chakra [" + chakraBarra + "]" + RESET);
         System.out.println("  Próximo golpe do inimigo: " + VERMELHO + movimentosInimigo.get(0).getNome() + RESET);
+
         Carta c=movimentosInimigo.get(0);
 
         if(c instanceof CartaDano) {
@@ -214,7 +213,6 @@ public class App {
             } else if (modoKurama) {
                 System.out.println(VERMELHO + "║ 🦊 MANTO DA KYUUBI ATIVO: +10 Dano / +5 Regen             ║" + RESET);
             } else {
-                //Desenha a barra de progresso visual para a transformacao
                 String barraVisual = "█".repeat(barra / 10) + "░".repeat(10 - (barra / 10));
                 System.out.println(AMARELO + "║ ⚡ TRANSFORMAÇÃO: [" + barraVisual + "] " + barra + "%                     ║" + RESET);
             }
@@ -256,7 +254,7 @@ public class App {
         return inimigosDisponiveis;
     }
 
-    //gera deck baseado em qual inimigo for, cada um tem suas próprias habilidades (traz mais realidade pra historia)
+    //gera deck baseado em qual inimigo for, cada um tem suas próprias habilidades
     public static ArrayList<Carta> GeraDeckInimigo(Inimigo i){
         ArrayList<Carta> movimentos = new ArrayList<>();
 
@@ -293,26 +291,24 @@ public class App {
         return movimentos;
     }
 
-    //gera deck baseado em qual heroi for, cada um tem suas próprias habilidades (traz mais realidade pra historia)
+    //gera deck baseado em qual heroi for, cada um tem suas próprias habilidades
     public static ArrayList<Carta> GeraDeckHeroi(Heroi h){
         ArrayList<Carta> pilhaCompra = new ArrayList<>();
         
         //cartas universais
         pilhaCompra.add(new CartaEscudo("Jutsu de Substituição", "Defesa básica.", 1, 10));
 
-        //gera cartas do naruto
         if (h.getNome().contains("Naruto")) {
             pilhaCompra.add(new CartaDano("Rasengan", "Ataque espiral.", 1, 12));
             pilhaCompra.add(new CartaDanoVeneno("Kurama", "Chakra da Raposa.", 3, 20, 5));
             pilhaCompra.add(new CartaEscudoRegen("Clone das sombras", "Defesa em massa.", 2, 15, 3));
             pilhaCompra.add(new CartaDanoArea("Gamabunta: Banho de Óleo", "Invoca o Chefe dos Sapos.", 3, 35, 6, 40));
         } 
-        //gera cartas do naruto
         else if (h.getNome().contains("Sasuke")) {
             pilhaCompra.add(new CartaDano("Chidori", "Golpe dos mil pássaros.", 1, 12));
             pilhaCompra.add(new CartaDano("Sharingan", "Lê os movimentos.", 2, 20));
             pilhaCompra.add(new CartaEscudoEspinhos("Susano'o perfeito", "Defesa absoluta.", 3, 25, 7));
-            pilhaCompra.add(new CartaDano("Kirin", "Dragão de raios.", 0, 20));
+            pilhaCompra.add(new CartaDano("Kirin", "Dragão de raios.", 1, 20));
         }
 
         return pilhaCompra;
@@ -335,7 +331,6 @@ public class App {
             System.out.println(AMARELO + " [" + (j+1) + "] " + RESET + NEGRITO + c.getNome() + RESET);
             System.out.println("     " + c.getDescricao());
             System.out.println("     Custo: " + AMARELO + c.getCusto() + " Chakra" + RESET);
-            
             
             if(c instanceof CartaDano) {
                 System.out.println("     Dano: " + VERMELHO + c.getDano() + RESET);
@@ -403,7 +398,6 @@ public class App {
                     icone="✚";
                 }
                 
-                
                 System.out.println(corEfeito + "  [" + (j+1) + "] " + icone + " " + NEGRITO + e.getNome().toUpperCase() + RESET);
                 System.out.println("      Dono: " + NEGRITO + e.getEntidade().getNome() + RESET);
                 System.out.println(corEfeito +"      Acumulos: " + corEfeito + e.getAcumulos() + RESET);
@@ -417,23 +411,19 @@ public class App {
         leitura.next(); 
     }
 
-    //metodo que chama a func iniciar do modo historia (para melhor organizacao e nao ficar tudo no app)
     public static void modoHistoria(Scanner entrada) {
         limparTela();
-        Historia hist = new Historia();
-        hist.iniciar(entrada);
+        Historia jornada = new Historia();
+        jornada.iniciar(entrada);
     }
-
 
     public static void modoBatalha(Scanner entrada) {
         limparTela();
         int leitura;
         
-        //gerando personagens, cartas, movimentos do inimigo
         ArrayList<Heroi> heroisDisponiveis = GeraHeroisDisponiveis();
         ArrayList<Inimigo> inimigosDisponiveis = GeraInimigosDisponiveis();
 
-        //selecao do heroi
         System.out.println("\n" + CIANO + " [ SELEÇÃO DE HERÓI ] " + RESET);
         for(int i=0; i<heroisDisponiveis.size(); i++){
             System.out.println(AMARELO + " [" + (i+1) + "] " + RESET + heroisDisponiveis.get(i).getNome());
@@ -444,7 +434,6 @@ public class App {
 
         limparTela();
 
-        //selecao do inimigo
         System.out.println(VERMELHO + " [ SELEÇÃO DE ADVERSÁRIO ] " + RESET);
         for(int i=0; i<inimigosDisponiveis.size(); i++){
             System.out.println(AMARELO + " [" + (i+1) + "] " + RESET + inimigosDisponiveis.get(i).getNome());
@@ -456,26 +445,25 @@ public class App {
         ArrayList<Carta> pilhaCompra = GeraDeckHeroi(heroiEscolhido);
         ArrayList<Carta> movimentosInimigo = GeraDeckInimigo(inimigoEscolhido);
 
-        // Prepara a mesa do jogador
         Collections.shuffle(pilhaCompra);
         ArrayList<Carta> maoJogador = new ArrayList<>();
         ArrayList<Carta> pilhaDescarte = new ArrayList<>();
         
-        //inicia o combate
         Combate combate = new Combate();
-        System.out.println(combate.rodarCombate(heroiEscolhido, inimigoEscolhido, movimentosInimigo, pilhaCompra, maoJogador, pilhaDescarte));
-        //chama o metodo rodarCombate de combate que retorna o resultado do duelo
-        System.out.println(combate.rodarCombate(heroiEscolhido, inimigoEscolhido, movimentosInimigo, pilhaCompra, maoJogador, pilhaDescarte));
-
+        String resultado = combate.rodarCombate(heroiEscolhido, inimigoEscolhido, movimentosInimigo, 
+                                               pilhaCompra, maoJogador, pilhaDescarte, entrada);
+        
+        System.out.println(resultado);
+        
+        System.out.println("\n[Pressione ENTER para voltar ao menu]");
+        entrada.nextLine();
+        entrada.nextLine();
     }
-    
+
     public static void main(String[] args) throws Exception {
 
         Scanner entrada = new Scanner(System.in);
         limparTela();
-        
-        
-        //o usuario podera escolher se quer jogar o modo historia um um combate livre antes de iniciar o game
         
         int escolha = menuPrincipal(entrada);
 
@@ -496,7 +484,6 @@ public class App {
             }
 
             escolha = menuPrincipal(entrada);
-
         }
         entrada.close();
     }
