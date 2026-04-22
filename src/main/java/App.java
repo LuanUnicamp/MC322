@@ -224,6 +224,7 @@ public class App {
         System.out.print("  Escolha sua ação: ");
     }
 
+    //menu que aparece antes do jogo iniciar para escolher o modo de jogo
     public static int menuPrincipal(Scanner leitura){
         System.out.println(AMARELO + "╔════════════════════════════════════════════════════════════╗" + RESET);
         System.out.println(AMARELO + "║ " + NEGRITO + "           𖣘  SHINOBI LEGACY: O DUELO NINJA  𖣘          " + RESET + AMARELO + "   ║" + RESET);
