@@ -10,3 +10,6 @@ build /
 . gradle /
 # macOS metadata
 . DS_Store
+
+.gradle/
+build/
