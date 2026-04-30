@@ -8,7 +8,7 @@ Naruto: Shinobi Legacy é um jogo desenvolvido em Java como projeto da disciplin
 ## Modos de Jogo
 
 * **Combate Livre:** Escolha rápida de herói e vilão para um duelo direto, ideal para testar as mecânicas das cartas e os efeitos de batalha.
-* **Modo História (Shinobi Legacy):** Uma campanha imersiva onde o jogador toma decisões narrativas que ramificam a história. Durante a jornada, o jogador acumula *Shinobi Coins*, que podem ser trocadas no Mercado Shinobi por itens consumíveis (Bandagens, Shurikens e Bandanas). Antes das lutas contra os chefes, o jogador acessa a "Sala de Preparação" para organizar sua mochila e usar itens táticos.
+* **Modo História (Shinobi Legacy):** Uma campanha imersiva onde o jogador toma decisões narrativas que ramificam a história. A cada inimigo derrotado no modo história agora, o heroi também ganha uma carta nova para o seu deck como recompensa. Durante a jornada, o jogador acumula *Shinobi Coins*, que podem ser trocadas no Mercado Shinobi(loja) por itens consumíveis (Bandagens, Shurikens e Bandanas), os quais podem ser utilizados na "sala de preparação" antes das batalhas. Antes das lutas contra os chefes, o jogador acessa a "Sala de Preparação" para organizar sua mochila e usar itens táticos. Além disso, agora existe um evento "fogueira" antes do boss final, para o aliado escolher se ele deseja restaurar 30% do seu HP ou se ele deseja forjar uma carta (diminuir o custo dela em uma unidade).
 
 ---
 
@@ -43,6 +43,7 @@ Para suportar as lógicas do jogo, foram aplicados conceitos avançados de POO e
 * **Estrutura de Árvore:** O mapa do Modo História foi construído utilizando nós (`DefaultMutableTreeNode`), permitindo criar rotas, caminhos opcionais e bifurcações narrativas completas.
 * **Padrão Publisher-Subscriber:** A classe `Combate` gerencia ativamente as entidades em batalha, notificando os "Efeitos" inscritos no início e no fim de cada turno para que eles apliquem seus impactos (ex: deduzir dano de veneno) de forma automatizada.
 * **Interface rica no Terminal:** Utilização de formatação via código ANSI para renderizar menus interativos, mapa da campanha, coloração de status e artes dinâmicas de encerramento.
+* **Mapeamento de Eventos (Enunciado):** Foram criadas novas classes como pedido no enunciado, estruturando a jornada do jogador, mas com nomes adaptados ao jogo: `eventoBase` é o chamado Evento do enunciado, `eventoBatalha` é o Batalha do enunciado, e `eventoEscolha` é o Escolha do enunciado.
 
 ---
 
